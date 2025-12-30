@@ -2,14 +2,23 @@
 docs/plans/
 spec/
 
-# Generated TypeScript files (auto-generated from JSON Schema)
-schemas/v0.1/typescript/
-
 # Node modules
 node_modules/
 
 # Build output
 dist/
+
+# Generated TypeScript files (auto-generated from JSON Schema)
+v0.1/typescript/*.ts
+
+# Generated Zod files (committed manually, not ignored)
+v0.1/zod/*.ts
+!v0.1/zod/validators.ts
+!v0.1/zod/entities.ts
+!v0.1/zod/events.ts
+
+# Logs
+*.log
 
 # IDE
 .vscode/
