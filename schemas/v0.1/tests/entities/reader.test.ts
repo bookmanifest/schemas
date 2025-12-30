@@ -20,9 +20,9 @@ describe('Reader Schema', () => {
   it('should allow optional handle, display_name, avatar, preferences', () => {
     const withOptionals = {
       id: 'did:bds:reader:jorge',
-      handle: 'jorge.bds.pub',
+      handle: 'jorge.bookmanifest.org',
       display_name: 'Jorge',
-      avatar: 'https://cdn.bds.pub/avatars/jorge.jpg',
+      avatar: 'https://cdn.bookmanifest.org/avatars/jorge.jpg',
       created_at: '2025-01-15T10:00:00Z',
       updated_at: '2025-01-15T10:00:00Z',
       preferences: {

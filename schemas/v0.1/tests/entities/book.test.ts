@@ -38,7 +38,7 @@ describe('Book Schema', () => {
       language: 'es',
       latest_manifest_id: 'did:bds:manifest:abc1234',
       metadata: {
-        cover_image: 'https://cdn.bds.pub/covers/la-unica-verdad.jpg',
+        cover_image: 'https://cdn.bookmanifest.org/covers/la-unica-verdad.jpg',
         description: 'When reality breaks, truth becomes the only weapon.',
         genres: ['science-fiction', 'thriller'],
         tags: ['time-travel', 'dystopia'],

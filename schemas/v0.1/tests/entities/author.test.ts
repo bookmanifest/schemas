@@ -15,7 +15,7 @@ describe('Author Schema', () => {
   it('should require id, handle, name, created_at, updated_at', () => {
     const minimal = {
       id: 'did:bds:author:test',
-      handle: 'test.bds.pub',
+      handle: 'test.bookmanifest.org',
       name: 'Test Author',
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'
@@ -27,7 +27,7 @@ describe('Author Schema', () => {
   it('should allow optional bio, avatar, links', () => {
     const withOptionals = {
       id: 'did:bds:author:test',
-      handle: 'test.bds.pub',
+      handle: 'test.bookmanifest.org',
       name: 'Test Author',
       bio: 'A test bio',
       avatar: 'https://example.com/avatar.jpg',

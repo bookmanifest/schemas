@@ -1,0 +1,19 @@
+# Internal planning and work documents
+docs/plans/
+spec/
+
+# Generated TypeScript files (auto-generated from JSON Schema)
+schemas/v0.1/typescript/
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

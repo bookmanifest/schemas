@@ -26,7 +26,7 @@ describe('Series Schema', () => {
       title: 'La Única Saga',
       description: 'A science fiction trilogy exploring the nature of reality.',
       author_ids: ['did:bds:author:ray-garcia'],
-      cover_image: 'https://cdn.bds.pub/covers/series/la-unica-saga.jpg',
+      cover_image: 'https://cdn.bookmanifest.org/covers/series/la-unica-saga.jpg',
       genres: ['science-fiction', 'thriller'],
       status: 'ongoing',
       created_at: '2025-01-01T00:00:00Z',

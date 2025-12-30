@@ -10,7 +10,7 @@ describe('Publisher Schema', () => {
   it('should require id, handle, name, created_at, updated_at', () => {
     const minimal = {
       id: 'did:bds:publisher:planeta',
-      handle: 'planeta.bds.pub',
+      handle: 'planeta.bookmanifest.org',
       name: 'Editorial Planeta',
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'
@@ -22,9 +22,9 @@ describe('Publisher Schema', () => {
   it('should allow optional logo and website', () => {
     const withOptionals = {
       id: 'did:bds:publisher:planeta',
-      handle: 'planeta.bds.pub',
+      handle: 'planeta.bookmanifest.org',
       name: 'Editorial Planeta',
-      logo: 'https://cdn.bds.pub/logos/planeta.png',
+      logo: 'https://cdn.bookmanifest.org/logos/planeta.png',
       website: 'https://planeta.es',
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'
