@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/validators/did.json",
+  "title": "BDS DID",
+  "description": "Decentralized Identifier for BDS entities",
+  "type": "string",
+  "pattern": "^did:bds:(author|publisher|series|book|manifest|chapter|reader|library-entry|progress):[a-zA-Z0-9-_]+(:[a-zA-Z0-9.-]+)?$",
+  "examples": [
+    "did:bds:author:ray-garcia",
+    "did:bds:book:la-unica-verdad",
+    "did:bds:chapter:ch4:1.1.0"
+  ]
+}

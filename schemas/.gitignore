@@ -4,3 +4,4 @@ dist/
 .DS_Store
 v0.1/typescript/*.ts
 v0.1/zod/*.ts
+!v0.1/zod/validators.ts
