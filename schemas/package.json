@@ -1,0 +1,34 @@
+{
+  "name": "@bds/schemas",
+  "version": "0.1.0",
+  "description": "Formal schemas for BDS (Book Distribution Standard)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./json-schema": "./v0.1/json-schema/index.json",
+    "./zod": "./dist/zod/index.js"
+  },
+  "scripts": {
+    "build": "npm run generate && npm run compile",
+    "generate": "node scripts/generate-from-json-schema.js",
+    "compile": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "node scripts/validate-examples.js"
+  },
+  "keywords": ["bds", "book-distribution", "schema", "validation"],
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.10.2",
+    "vitest": "^2.1.8",
+    "json-schema-to-typescript": "^15.0.3",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}
