@@ -3,7 +3,7 @@ import { EventBatchSchema } from '../../zod/events'
 import { glob } from 'glob'
 import { readFile } from 'fs/promises'
 
-describe('BDS Event Compliance', () => {
+describe('Book Manifest Event Compliance', () => {
   it('should validate all valid event batches', async () => {
     const validFiles = await glob('./v0.1/examples/events/*-valid.json')
 

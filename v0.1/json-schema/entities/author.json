@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.1/entities/author.json",
   "title": "Author",
-  "description": "The creator of books in BDS",
+  "description": "The creator of books in Book Manifest",
   "type": "object",
   "required": ["id", "handle", "name", "created_at", "updated_at"],
   "properties": {
@@ -12,7 +12,7 @@
     },
     "handle": {
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]+\\.(bds\\.pub|[a-zA-Z0-9-]+\\.[a-z]{2,})$",
+      "pattern": "^[a-zA-Z0-9-]+\\.(bookmanifest\\.org|[a-zA-Z0-9-]+\\.[a-z]{2,})$",
       "description": "Human-readable handle (can use custom domain)",
       "examples": ["ray-garcia.bookmanifest.org", "author.example.com"]
     },

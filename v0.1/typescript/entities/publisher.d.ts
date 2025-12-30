@@ -3,7 +3,7 @@
 /**
  * Unique identifier for the publisher
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Publisher logo URL
  */
@@ -25,7 +25,7 @@ export type ISO8601DateTime1 = string;
  * Optional entity for traditional publishers or imprints
  */
 export interface Publisher {
-  id: BDSDID;
+  id: BookManifestDID;
   /**
    * Human-readable handle (can use custom domain)
    */

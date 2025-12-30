@@ -2,12 +2,12 @@ import { describe, it, expect } from 'vitest'
 import { didSchema, semverSchema } from '../zod/validators'
 
 describe('DID Validator', () => {
-  it('should validate valid BDS DIDs', () => {
+  it('should validate valid Book Manifest DIDs', () => {
     const valid = [
-      'did:bds:author:ray-garcia',
-      'did:bds:book:la-unica-verdad',
-      'did:bds:manifest:abc1234',
-      'did:bds:chapter:ch4:1.1.0',
+      'did:web:bookmanifest.org:author:ray-garcia',
+      'did:web:bookmanifest.org:book:la-unica-verdad',
+      'did:web:bookmanifest.org:manifest:abc1234',
+      'did:web:bookmanifest.org:chapter:ch4:1.1.0',
     ]
 
     valid.forEach(did => {
@@ -19,8 +19,8 @@ describe('DID Validator', () => {
     const invalid = [
       'not-a-did',
       'did:web:example.com',
-      'did:bds:',
-      'did:bds:invalid type:foo',
+      'did:web:bookmanifest.org:',
+      'did:web:bookmanifest.org:invalid type:foo',
     ]
 
     invalid.forEach(did => {

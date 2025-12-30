@@ -1,10 +1,10 @@
-# BDS Compliance Test Suite
+# Book Manifest Compliance Test Suite
 
-This test suite verifies that implementations correctly validate BDS data.
+This test suite verifies that implementations correctly validate Book Manifest data.
 
 ## Purpose
 
-Any BDS-compatible implementation (backend, reader app, etc.) should:
+Any Book Manifest-compatible implementation (backend, reader app, etc.) should:
 
 1. Accept all examples in `examples/entities/*-valid.json`
 2. Reject all examples in `examples/entities/*-invalid.json`

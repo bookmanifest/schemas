@@ -15,7 +15,7 @@ const SCHEMAS = {
   'library-entry': LibraryEntrySchema
 }
 
-describe('BDS Entity Compliance', () => {
+describe('Book Manifest Entity Compliance', () => {
   it('should validate all valid entity examples', async () => {
     const validFiles = await glob('./v0.1/examples/entities/*-valid.json')
 

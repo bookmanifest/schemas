@@ -6,12 +6,12 @@
 export type ChapterTransitionEvent = EventEnvelope & {
   type?: 'chapter_transition';
   payload?: {
-    from_chapter_id: BDSDID1;
+    from_chapter_id: BookManifestDID1;
     from_chapter_version: SemanticVersion1;
     /**
      * Chapter being entered (null if closing book)
      */
-    to_chapter_id?: BDSDID | null;
+    to_chapter_id?: BookManifestDID | null;
     /**
      * Version of chapter being entered
      */
@@ -36,24 +36,24 @@ export type ChapterTransitionEvent = EventEnvelope & {
  */
 export type ISO8601DateTime = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Semantic versioning string (major.minor.patch)
  */
 export type SemanticVersion = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID1 = string;
+export type BookManifestDID1 = string;
 /**
  * Semantic versioning string (major.minor.patch)
  */
 export type SemanticVersion1 = string;
 
 /**
- * Common structure for all BDS events
+ * Common structure for all Book Manifest events
  */
 export interface EventEnvelope {
   /**
@@ -70,11 +70,11 @@ export interface EventEnvelope {
    */
   session_id: string;
   context: {
-    reader_id: BDSDID;
-    book_id: BDSDID;
-    manifest_id: BDSDID;
+    reader_id: BookManifestDID;
+    book_id: BookManifestDID;
+    manifest_id: BookManifestDID;
     manifest_version: SemanticVersion;
-    chapter_id: BDSDID;
+    chapter_id: BookManifestDID;
     chapter_version: SemanticVersion;
     device_type: 'mobile' | 'tablet' | 'desktop';
     app_id: string;

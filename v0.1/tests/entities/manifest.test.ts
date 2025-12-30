@@ -9,13 +9,13 @@ describe('Manifest Schema', () => {
 
   it('should require id, book_id, version, published_at, toc, stats', () => {
     const minimal = {
-      id: 'did:bds:manifest:test123',
-      book_id: 'did:bds:book:test',
+      id: 'did:web:bookmanifest.org:manifest:test123',
+      book_id: 'did:web:bookmanifest.org:book:test',
       version: '1.0.0',
       published_at: '2025-01-01T00:00:00Z',
       toc: [
         {
-          chapter_id: 'did:bds:chapter:ch1',
+          chapter_id: 'did:web:bookmanifest.org:chapter:ch1',
           chapter_version: '1.0.0',
           order: 1,
           title: 'Chapter 1'
@@ -33,14 +33,14 @@ describe('Manifest Schema', () => {
 
   it('should allow optional changelog and section in toc', () => {
     const withOptionals = {
-      id: 'did:bds:manifest:abc1234',
-      book_id: 'did:bds:book:la-unica-verdad',
+      id: 'did:web:bookmanifest.org:manifest:abc1234',
+      book_id: 'did:web:bookmanifest.org:book:la-unica-verdad',
       version: '1.1.0',
       changelog: 'Rewrote chapter 4 to improve pacing',
       published_at: '2025-06-20T14:30:00Z',
       toc: [
         {
-          chapter_id: 'did:bds:chapter:ch1',
+          chapter_id: 'did:web:bookmanifest.org:chapter:ch1',
           chapter_version: '1.0.0',
           order: 1,
           title: 'El Comienzo',
@@ -59,13 +59,13 @@ describe('Manifest Schema', () => {
 
   it('should validate toc order is positive integer', () => {
     const manifest = {
-      id: 'did:bds:manifest:test',
-      book_id: 'did:bds:book:test',
+      id: 'did:web:bookmanifest.org:manifest:test',
+      book_id: 'did:web:bookmanifest.org:book:test',
       version: '1.0.0',
       published_at: '2025-01-01T00:00:00Z',
       toc: [
         {
-          chapter_id: 'did:bds:chapter:ch1',
+          chapter_id: 'did:web:bookmanifest.org:chapter:ch1',
           chapter_version: '1.0.0',
           order: 0,
           title: 'Chapter 1'

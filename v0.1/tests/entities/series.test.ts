@@ -9,9 +9,9 @@ describe('Series Schema', () => {
 
   it('should require id, title, author_ids, status, created_at, updated_at', () => {
     const minimal = {
-      id: 'did:bds:series:la-unica-saga',
+      id: 'did:web:bookmanifest.org:series:la-unica-saga',
       title: 'La Única Saga',
-      author_ids: ['did:bds:author:ray-garcia'],
+      author_ids: ['did:web:bookmanifest.org:author:ray-garcia'],
       status: 'ongoing',
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'
@@ -22,10 +22,10 @@ describe('Series Schema', () => {
 
   it('should allow optional description, cover_image, genres', () => {
     const withOptionals = {
-      id: 'did:bds:series:la-unica-saga',
+      id: 'did:web:bookmanifest.org:series:la-unica-saga',
       title: 'La Única Saga',
       description: 'A science fiction trilogy exploring the nature of reality.',
-      author_ids: ['did:bds:author:ray-garcia'],
+      author_ids: ['did:web:bookmanifest.org:author:ray-garcia'],
       cover_image: 'https://cdn.bookmanifest.org/covers/series/la-unica-saga.jpg',
       genres: ['science-fiction', 'thriller'],
       status: 'ongoing',
@@ -38,9 +38,9 @@ describe('Series Schema', () => {
 
   it('should validate status enum', () => {
     const series = {
-      id: 'did:bds:series:test',
+      id: 'did:web:bookmanifest.org:series:test',
       title: 'Test Series',
-      author_ids: ['did:bds:author:test'],
+      author_ids: ['did:web:bookmanifest.org:author:test'],
       status: 'completed',
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'

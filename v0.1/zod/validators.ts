@@ -1,10 +1,10 @@
 import { z } from 'zod'
 
-// DID pattern: did:bds:{entity_type}:{unique_id}[:{version}]
-const DID_PATTERN = /^did:bds:(author|publisher|series|book|manifest|chapter|reader|library-entry|progress):[a-zA-Z0-9-_]+(:[a-zA-Z0-9.-]+)?$/
+// DID pattern: did:web:bookmanifest.org:{entity_type}:{unique_id}[:{version}]
+const DID_PATTERN = /^did:web:bookmanifest\.org:(author|publisher|series|book|manifest|chapter|reader|library-entry|progress):[a-zA-Z0-9-_]+(:[a-zA-Z0-9.-]+)?$/
 
 export const didSchema = z.string().regex(DID_PATTERN, {
-  message: 'Invalid BDS DID format. Expected: did:bds:{type}:{id}[:{version}]'
+  message: 'Invalid Book Manifest DID format. Expected: did:web:bookmanifest.org:{type}:{id}[:{version}]'
 })
 
 // SemVer pattern: major.minor.patch (no pre-release or metadata)

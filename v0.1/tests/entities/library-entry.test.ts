@@ -9,10 +9,10 @@ describe('LibraryEntry Schema', () => {
 
   it('should require id, reader_id, book_id, manifest_id, status, added_at', () => {
     const minimal = {
-      id: 'did:bds:library-entry:test123',
-      reader_id: 'did:bds:reader:test',
-      book_id: 'did:bds:book:test',
-      manifest_id: 'did:bds:manifest:test',
+      id: 'did:web:bookmanifest.org:library-entry:test123',
+      reader_id: 'did:web:bookmanifest.org:reader:test',
+      book_id: 'did:web:bookmanifest.org:book:test',
+      manifest_id: 'did:web:bookmanifest.org:manifest:test',
       status: 'want-to-read',
       added_at: '2025-01-01T00:00:00Z'
     }
@@ -22,15 +22,15 @@ describe('LibraryEntry Schema', () => {
 
   it('should allow optional started_at, finished_at, current_chapter_id, etc.', () => {
     const withOptionals = {
-      id: 'did:bds:library-entry:abc123',
-      reader_id: 'did:bds:reader:jorge',
-      book_id: 'did:bds:book:la-unica-verdad',
-      manifest_id: 'did:bds:manifest:abc1234',
+      id: 'did:web:bookmanifest.org:library-entry:abc123',
+      reader_id: 'did:web:bookmanifest.org:reader:jorge',
+      book_id: 'did:web:bookmanifest.org:book:la-unica-verdad',
+      manifest_id: 'did:web:bookmanifest.org:manifest:abc1234',
       status: 'reading',
       added_at: '2025-03-10T10:00:00Z',
       started_at: '2025-03-12T20:00:00Z',
       finished_at: null,
-      current_chapter_id: 'did:bds:chapter:ch4',
+      current_chapter_id: 'did:web:bookmanifest.org:chapter:ch4',
       current_chapter_version: '1.1.0',
       current_position: 0.45,
       current_node_id: 'p-042'
@@ -41,10 +41,10 @@ describe('LibraryEntry Schema', () => {
 
   it('should validate status enum', () => {
     const entry = {
-      id: 'did:bds:library-entry:test',
-      reader_id: 'did:bds:reader:test',
-      book_id: 'did:bds:book:test',
-      manifest_id: 'did:bds:manifest:test',
+      id: 'did:web:bookmanifest.org:library-entry:test',
+      reader_id: 'did:web:bookmanifest.org:reader:test',
+      book_id: 'did:web:bookmanifest.org:book:test',
+      manifest_id: 'did:web:bookmanifest.org:manifest:test',
       status: 'reading',
       added_at: '2025-01-01T00:00:00Z'
     }
@@ -59,10 +59,10 @@ describe('LibraryEntry Schema', () => {
 
   it('should validate current_position is between 0 and 1', () => {
     const entry = {
-      id: 'did:bds:library-entry:test',
-      reader_id: 'did:bds:reader:test',
-      book_id: 'did:bds:book:test',
-      manifest_id: 'did:bds:manifest:test',
+      id: 'did:web:bookmanifest.org:library-entry:test',
+      reader_id: 'did:web:bookmanifest.org:reader:test',
+      book_id: 'did:web:bookmanifest.org:book:test',
+      manifest_id: 'did:web:bookmanifest.org:manifest:test',
       status: 'reading',
       added_at: '2025-01-01T00:00:00Z',
       current_position: 1.5

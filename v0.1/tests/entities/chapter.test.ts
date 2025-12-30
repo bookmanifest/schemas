@@ -9,9 +9,9 @@ describe('Chapter Schema', () => {
 
   it('should require id, chapter_id, book_id, version, title, slug, created_at, metadata, content', () => {
     const minimal = {
-      id: 'did:bds:chapter:ch1:1.0.0',
-      chapter_id: 'did:bds:chapter:ch1',
-      book_id: 'did:bds:book:test',
+      id: 'did:web:bookmanifest.org:chapter:ch1:1.0.0',
+      chapter_id: 'did:web:bookmanifest.org:chapter:ch1',
+      book_id: 'did:web:bookmanifest.org:book:test',
       version: '1.0.0',
       title: 'Chapter 1',
       slug: 'chapter-1',
@@ -39,9 +39,9 @@ describe('Chapter Schema', () => {
 
   it('should allow optional pov_character and tags in metadata', () => {
     const withOptionals = {
-      id: 'did:bds:chapter:ch4:1.1.0',
-      chapter_id: 'did:bds:chapter:ch4',
-      book_id: 'did:bds:book:la-unica-verdad',
+      id: 'did:web:bookmanifest.org:chapter:ch4:1.1.0',
+      chapter_id: 'did:web:bookmanifest.org:chapter:ch4',
+      book_id: 'did:web:bookmanifest.org:book:la-unica-verdad',
       version: '1.1.0',
       title: 'El Despertar',
       slug: 'el-despertar',
@@ -73,9 +73,9 @@ describe('Chapter Schema', () => {
 
   it('should validate ProseMirror content structure', () => {
     const chapter = {
-      id: 'did:bds:chapter:ch1:1.0.0',
-      chapter_id: 'did:bds:chapter:ch1',
-      book_id: 'did:bds:book:test',
+      id: 'did:web:bookmanifest.org:chapter:ch1:1.0.0',
+      chapter_id: 'did:web:bookmanifest.org:chapter:ch1',
+      book_id: 'did:web:bookmanifest.org:book:test',
       version: '1.0.0',
       title: 'Chapter 1',
       slug: 'chapter-1',

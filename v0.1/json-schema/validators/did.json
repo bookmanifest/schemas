@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.1/validators/did.json",
-  "title": "BDS DID",
-  "description": "Decentralized Identifier for BDS entities",
+  "title": "Book Manifest DID",
+  "description": "Decentralized Identifier for Book Manifest entities using did:web method",
   "type": "string",
-  "pattern": "^did:bds:(author|publisher|series|book|manifest|chapter|reader|library-entry|progress):[a-zA-Z0-9-_]+(:[a-zA-Z0-9.-]+)?$",
+  "pattern": "^did:web:bookmanifest\\.org:(author|publisher|series|book|manifest|chapter|reader|library-entry|progress):[a-zA-Z0-9-_]+(:[a-zA-Z0-9.-]+)?$",
   "examples": [
-    "did:bds:author:ray-garcia",
-    "did:bds:book:la-unica-verdad",
-    "did:bds:chapter:ch4:1.1.0"
+    "did:web:bookmanifest.org:author:ray-garcia",
+    "did:web:bookmanifest.org:book:la-unica-verdad",
+    "did:web:bookmanifest.org:chapter:ch4:1.1.0"
   ]
 }

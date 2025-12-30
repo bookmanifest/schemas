@@ -3,7 +3,7 @@
 /**
  * Unique identifier for the reader
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Profile image URL
  */
@@ -21,7 +21,7 @@ export type ISO8601DateTime1 = string;
  * The user who reads books. Owns their reading data.
  */
 export interface Reader {
-  id: BDSDID;
+  id: BookManifestDID;
   /**
    * Human-readable handle (optional for readers)
    */

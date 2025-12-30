@@ -1,9 +1,9 @@
 {
-  "id": "did:bds:author:ray-garcia",
-  "handle": "ray-garcia.bds.pub",
+  "id": "did:web:bookmanifest.org:author:ray-garcia",
+  "handle": "ray-garcia.bookmanifest.org",
   "name": "Ray García",
   "bio": "Science fiction writer. Author of La Única Verdad trilogy.",
-  "avatar": "https://cdn.bds.pub/avatars/ray-garcia.jpg",
+  "avatar": "https://cdn.bookmanifest.org/avatars/ray-garcia.jpg",
   "links": [
     { "type": "website", "url": "https://ray-garcia.fika.bar" },
     { "type": "bluesky", "url": "https://bsky.app/profile/ray-garcia.fika.bar" },

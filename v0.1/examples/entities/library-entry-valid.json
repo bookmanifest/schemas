@@ -1,13 +1,13 @@
 {
-  "id": "did:bds:library-entry:abc123",
-  "reader_id": "did:bds:reader:jorge",
-  "book_id": "did:bds:book:la-unica-verdad",
-  "manifest_id": "did:bds:manifest:abc1234",
+  "id": "did:web:bookmanifest.org:library-entry:abc123",
+  "reader_id": "did:web:bookmanifest.org:reader:jorge",
+  "book_id": "did:web:bookmanifest.org:book:la-unica-verdad",
+  "manifest_id": "did:web:bookmanifest.org:manifest:abc1234",
   "status": "reading",
   "added_at": "2025-03-10T10:00:00Z",
   "started_at": "2025-03-12T20:00:00Z",
   "finished_at": null,
-  "current_chapter_id": "did:bds:chapter:ch4",
+  "current_chapter_id": "did:web:bookmanifest.org:chapter:ch4",
   "current_chapter_version": "1.1.0",
   "current_position": 0.45,
   "current_node_id": "p-042"

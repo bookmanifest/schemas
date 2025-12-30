@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the BDS Schemas package will be documented in this file.
+All notable changes to the Book Manifest Schemas package will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of BDS schemas v0.1
+- Initial release of Book Manifest schemas v0.1
 - JSON Schema definitions for all entities:
   - Author: Creator of books with handle, bio, avatar, and external links
   - Publisher: Publishing entities with metadata
@@ -26,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Interaction: User interactions (highlights, annotations, etc.)
   - AppLifecycle: App state changes (open, background, etc.)
   - EventBatch: Batching support for 1-100 events
-- Custom validators for BDS-specific formats:
-  - DIDs (Decentralized Identifiers): `did:bds:{type}:{id}[:{version}]`
+- Custom validators for Book Manifest-specific formats:
+  - DIDs (Decentralized Identifiers): `did:web:bookmanifest.org:{type}:{id}[:{version}]`
   - SemVer: Semantic versioning (`major.minor.patch`)
   - ISO 8601: Date-time format
   - URL: HTTP/HTTPS URLs

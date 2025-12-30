@@ -5,7 +5,7 @@ import {
   BookLifecycleEventSchema,
   InteractionEventSchema,
   AppLifecycleEventSchema,
-  BDSEventSchema,
+  BookManifestEventSchema,
   EventBatchSchema
 } from '../../zod/events'
 import eventBatch from '../../examples/events/batch-valid.json'
@@ -61,7 +61,7 @@ describe('Event Schemas', () => {
 
   it('should validate discriminated union of events', () => {
     eventBatch.events.forEach(event => {
-      expect(() => BDSEventSchema.parse(event)).not.toThrow()
+      expect(() => BookManifestEventSchema.parse(event)).not.toThrow()
     })
   })
 })

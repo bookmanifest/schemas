@@ -1,7 +1,7 @@
 {
-  "id": "did:bds:chapter:ch4:1.1.0",
-  "chapter_id": "did:bds:chapter:ch4",
-  "book_id": "did:bds:book:la-unica-verdad",
+  "id": "did:web:bookmanifest.org:chapter:ch4:1.1.0",
+  "chapter_id": "did:web:bookmanifest.org:chapter:ch4",
+  "book_id": "did:web:bookmanifest.org:book:la-unica-verdad",
   "version": "1.1.0",
   "title": "El Despertar",
   "slug": "el-despertar",

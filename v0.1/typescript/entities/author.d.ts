@@ -3,7 +3,7 @@
 /**
  * Unique identifier for the author
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Profile image URL
  */
@@ -19,10 +19,10 @@ export type ISO8601DateTime = string;
 export type ISO8601DateTime1 = string;
 
 /**
- * The creator of books in BDS
+ * The creator of books in Book Manifest
  */
 export interface Author {
-  id: BDSDID;
+  id: BookManifestDID;
   /**
    * Human-readable handle (can use custom domain)
    */

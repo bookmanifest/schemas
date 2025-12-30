@@ -86,7 +86,7 @@ export const AppLifecycleEventSchema = BaseEventSchema.extend({
 }).strict()
 
 // Union type for any event (discriminated union by 'type')
-export const BDSEventSchema = z.discriminatedUnion('type', [
+export const BookManifestEventSchema = z.discriminatedUnion('type', [
   HeartbeatEventSchema,
   ChapterTransitionEventSchema,
   BookLifecycleEventSchema,
@@ -96,5 +96,5 @@ export const BDSEventSchema = z.discriminatedUnion('type', [
 
 // Event batch (what gets sent to the API)
 export const EventBatchSchema = z.object({
-  events: z.array(BDSEventSchema).min(1).max(100)
+  events: z.array(BookManifestEventSchema).min(1).max(100)
 }).strict()

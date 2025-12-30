@@ -1,13 +1,13 @@
-# BDS Schemas v0.1
+# Book Manifest Schemas v0.1
 
-Formal schemas for the Book Distribution Standard (BDS).
+Formal schemas for Book Manifest.
 
-This package provides JSON Schema definitions, TypeScript types, and Zod validators for all BDS entities and events. The JSON Schema serves as the source of truth, with TypeScript types and Zod validators auto-generated from it.
+This package provides JSON Schema definitions, TypeScript types, and Zod validators for all Book Manifest entities and events. The JSON Schema serves as the source of truth, with TypeScript types and Zod validators auto-generated from it.
 
 ## Installation
 
 ```bash
-npm install @bds/schemas
+npm install @bookmanifest/schemas
 ```
 
 ## Structure
@@ -26,26 +26,26 @@ npm install @bds/schemas
 ### Import Everything
 
 ```typescript
-import { BookSchema, AuthorSchema, BDSEventSchema } from '@bds/schemas'
+import { BookSchema, AuthorSchema, BookManifestEventSchema } from '@bookmanifest/schemas'
 ```
 
 ### Import by Category
 
 ```typescript
 // Entities only
-import { BookSchema, AuthorSchema, ChapterSchema } from '@bds/schemas/entities'
+import { BookSchema, AuthorSchema, ChapterSchema } from '@bookmanifest/schemas/entities'
 
 // Events only
-import { BDSEventSchema, EventBatchSchema } from '@bds/schemas/events'
+import { BookManifestEventSchema, EventBatchSchema } from '@bookmanifest/schemas/events'
 
 // Validators only
-import { didSchema, semverSchema, iso8601Schema } from '@bds/schemas/validators'
+import { didSchema, semverSchema, iso8601Schema } from '@bookmanifest/schemas/validators'
 ```
 
 ### Runtime Validation with Zod
 
 ```typescript
-import { BookSchema, AuthorSchema } from '@bds/schemas/entities'
+import { BookSchema, AuthorSchema } from '@bookmanifest/schemas/entities'
 
 // Validate and parse data
 try {
@@ -67,7 +67,7 @@ if (result.success) {
 ### TypeScript Types
 
 ```typescript
-import type { Book, Author, Manifest, Chapter } from '@bds/schemas'
+import type { Book, Author, Manifest, Chapter } from '@bookmanifest/schemas'
 
 function processBook(book: Book) {
   console.log(`Processing: ${book.title} by ${book.author_ids.join(', ')}`)
@@ -77,7 +77,7 @@ function processBook(book: Book) {
 ### Event Validation
 
 ```typescript
-import { BDSEventSchema, EventBatchSchema } from '@bds/schemas/events'
+import { BookManifestEventSchema, EventBatchSchema } from '@bookmanifest/schemas/events'
 
 // Validate a single event
 const event = {
@@ -89,7 +89,7 @@ const event = {
   payload: { /* ... */ }
 }
 
-const validEvent = BDSEventSchema.parse(event)
+const validEvent = BookManifestEventSchema.parse(event)
 
 // Validate a batch of events
 const batch = { events: [event] }
@@ -100,10 +100,10 @@ const validBatch = EventBatchSchema.parse(batch)
 
 ```javascript
 // Import JSON Schema files directly for use with any validator
-import authorSchema from '@bds/schemas/json-schema'
+import authorSchema from '@bookmanifest/schemas/json-schema'
 // Or import specific schemas
 import { readFileSync } from 'fs'
-const schema = JSON.parse(readFileSync('./node_modules/@bds/schemas/v0.1/json-schema/entities/author.json'))
+const schema = JSON.parse(readFileSync('./node_modules/@bookmanifest/schemas/v0.1/json-schema/entities/author.json'))
 ```
 
 ## Available Schemas
@@ -121,7 +121,7 @@ const schema = JSON.parse(readFileSync('./node_modules/@bds/schemas/v0.1/json-sc
 
 ### Events
 
-- `BDSEventSchema` - Discriminated union of all event types
+- `BookManifestEventSchema` - Discriminated union of all event types
 - `EventBatchSchema` - Batch of events (1-100 events)
 - `HeartbeatEventSchema` - Reading session heartbeat
 - `ChapterTransitionEventSchema` - Chapter navigation events
@@ -131,7 +131,7 @@ const schema = JSON.parse(readFileSync('./node_modules/@bds/schemas/v0.1/json-sc
 
 ### Validators
 
-- `didSchema` - BDS Decentralized Identifiers
+- `didSchema` - Book Manifest Decentralized Identifiers (using did:web)
 - `semverSchema` - Semantic versioning
 - `iso8601Schema` - ISO 8601 datetime strings
 - `urlSchema` - HTTP/HTTPS URLs

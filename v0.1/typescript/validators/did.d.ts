@@ -1,6 +1,6 @@
 /* Auto-generated from JSON Schema - DO NOT EDIT */
 
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID = string;
+export type BookManifestDID = string;

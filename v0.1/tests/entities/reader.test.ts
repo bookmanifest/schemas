@@ -9,7 +9,7 @@ describe('Reader Schema', () => {
 
   it('should require id, created_at, updated_at', () => {
     const minimal = {
-      id: 'did:bds:reader:test',
+      id: 'did:web:bookmanifest.org:reader:test',
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'
     }
@@ -19,7 +19,7 @@ describe('Reader Schema', () => {
 
   it('should allow optional handle, display_name, avatar, preferences', () => {
     const withOptionals = {
-      id: 'did:bds:reader:jorge',
+      id: 'did:web:bookmanifest.org:reader:jorge',
       handle: 'jorge.bookmanifest.org',
       display_name: 'Jorge',
       avatar: 'https://cdn.bookmanifest.org/avatars/jorge.jpg',

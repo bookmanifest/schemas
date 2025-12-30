@@ -3,15 +3,15 @@
 /**
  * Unique ID for this specific version (includes version in DID)
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Base chapter identifier (version-agnostic)
  */
-export type BDSDID1 = string;
+export type BookManifestDID1 = string;
 /**
  * Reference to parent Book
  */
-export type BDSDID2 = string;
+export type BookManifestDID2 = string;
 /**
  * Chapter version
  */
@@ -25,9 +25,9 @@ export type ISO8601DateTime = string;
  * The content of a specific version of a chapter. Each version is a separate, immutable document.
  */
 export interface Chapter {
-  id: BDSDID;
-  chapter_id: BDSDID1;
-  book_id: BDSDID2;
+  id: BookManifestDID;
+  chapter_id: BookManifestDID1;
+  book_id: BookManifestDID2;
   version: SemanticVersion;
   /**
    * Chapter title

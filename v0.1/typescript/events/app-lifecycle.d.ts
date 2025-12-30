@@ -26,16 +26,16 @@ export type AppLifecycleEvent = EventEnvelope & {
  */
 export type ISO8601DateTime = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Semantic versioning string (major.minor.patch)
  */
 export type SemanticVersion = string;
 
 /**
- * Common structure for all BDS events
+ * Common structure for all Book Manifest events
  */
 export interface EventEnvelope {
   /**
@@ -52,11 +52,11 @@ export interface EventEnvelope {
    */
   session_id: string;
   context: {
-    reader_id: BDSDID;
-    book_id: BDSDID;
-    manifest_id: BDSDID;
+    reader_id: BookManifestDID;
+    book_id: BookManifestDID;
+    manifest_id: BookManifestDID;
     manifest_version: SemanticVersion;
-    chapter_id: BDSDID;
+    chapter_id: BookManifestDID;
     chapter_version: SemanticVersion;
     device_type: 'mobile' | 'tablet' | 'desktop';
     app_id: string;

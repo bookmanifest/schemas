@@ -3,11 +3,11 @@
 /**
  * Unique identifier for this manifest
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
  * Reference to parent Book
  */
-export type BDSDID1 = string;
+export type BookManifestDID1 = string;
 /**
  * Version number (major.minor.patch)
  */
@@ -19,7 +19,7 @@ export type ISO8601DateTime = string;
 /**
  * Chapter reference
  */
-export type BDSDID2 = string;
+export type BookManifestDID2 = string;
 /**
  * Specific version of the chapter
  */
@@ -29,8 +29,8 @@ export type SemanticVersion1 = string;
  * An immutable snapshot of a book version. Created each time an author publishes changes.
  */
 export interface Manifest {
-  id: BDSDID;
-  book_id: BDSDID1;
+  id: BookManifestDID;
+  book_id: BookManifestDID1;
   version: SemanticVersion;
   /**
    * Description of changes in this version
@@ -45,7 +45,7 @@ export interface Manifest {
    */
   toc: [
     {
-      chapter_id: BDSDID2;
+      chapter_id: BookManifestDID2;
       chapter_version: SemanticVersion1;
       /**
        * Reading order position
@@ -61,7 +61,7 @@ export interface Manifest {
       section?: string;
     },
     ...{
-      chapter_id: BDSDID2;
+      chapter_id: BookManifestDID2;
       chapter_version: SemanticVersion1;
       /**
        * Reading order position

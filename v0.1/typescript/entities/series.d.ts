@@ -3,11 +3,11 @@
 /**
  * Unique identifier for the series
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID1 = string;
+export type BookManifestDID1 = string;
 /**
  * Series cover art URL
  */
@@ -25,7 +25,7 @@ export type ISO8601DateTime1 = string;
  * A collection of related books in reading order (trilogies, sagas, etc.)
  */
 export interface Series {
-  id: BDSDID;
+  id: BookManifestDID;
   /**
    * Series title
    */
@@ -40,7 +40,7 @@ export interface Series {
    * @minItems 1
    * @maxItems 50
    */
-  author_ids: [BDSDID1, ...BDSDID1[]];
+  author_ids: [BookManifestDID1, ...BookManifestDID1[]];
   cover_image?: URL;
   /**
    * Genre tags

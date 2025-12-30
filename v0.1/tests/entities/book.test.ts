@@ -9,12 +9,12 @@ describe('Book Schema', () => {
 
   it('should require id, title, slug, author_ids, language, latest_manifest_id, metadata, created_at, updated_at', () => {
     const minimal = {
-      id: 'did:bds:book:test',
+      id: 'did:web:bookmanifest.org:book:test',
       title: 'Test Book',
       slug: 'test-book',
-      author_ids: ['did:bds:author:test'],
+      author_ids: ['did:web:bookmanifest.org:author:test'],
       language: 'en',
-      latest_manifest_id: 'did:bds:manifest:test123',
+      latest_manifest_id: 'did:web:bookmanifest.org:manifest:test123',
       metadata: {
         description: 'A test book',
         genres: ['fiction']
@@ -28,15 +28,15 @@ describe('Book Schema', () => {
 
   it('should allow optional publisher_id, series_id, series_order, pricing', () => {
     const withOptionals = {
-      id: 'did:bds:book:la-unica-verdad',
+      id: 'did:web:bookmanifest.org:book:la-unica-verdad',
       title: 'La Única Verdad',
       slug: 'la-unica-verdad',
-      author_ids: ['did:bds:author:ray-garcia'],
-      publisher_id: 'did:bds:publisher:planeta',
-      series_id: 'did:bds:series:la-unica-saga',
+      author_ids: ['did:web:bookmanifest.org:author:ray-garcia'],
+      publisher_id: 'did:web:bookmanifest.org:publisher:planeta',
+      series_id: 'did:web:bookmanifest.org:series:la-unica-saga',
       series_order: 1,
       language: 'es',
-      latest_manifest_id: 'did:bds:manifest:abc1234',
+      latest_manifest_id: 'did:web:bookmanifest.org:manifest:abc1234',
       metadata: {
         cover_image: 'https://cdn.bookmanifest.org/covers/la-unica-verdad.jpg',
         description: 'When reality breaks, truth becomes the only weapon.',
@@ -59,12 +59,12 @@ describe('Book Schema', () => {
 
   it('should validate pricing models', () => {
     const book = {
-      id: 'did:bds:book:test',
+      id: 'did:web:bookmanifest.org:book:test',
       title: 'Test',
       slug: 'test',
-      author_ids: ['did:bds:author:test'],
+      author_ids: ['did:web:bookmanifest.org:author:test'],
       language: 'en',
-      latest_manifest_id: 'did:bds:manifest:test',
+      latest_manifest_id: 'did:web:bookmanifest.org:manifest:test',
       metadata: {},
       created_at: '2025-01-01T00:00:00Z',
       updated_at: '2025-01-01T00:00:00Z'

@@ -3,23 +3,23 @@
 /**
  * Unique identifier for the book
  */
-export type BDSDID = string;
+export type BookManifestDID = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID1 = string;
+export type BookManifestDID1 = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID2 = string;
+export type BookManifestDID2 = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID3 = string;
+export type BookManifestDID3 = string;
 /**
- * Decentralized Identifier for BDS entities
+ * Decentralized Identifier for Book Manifest entities using did:web method
  */
-export type BDSDID4 = string;
+export type BookManifestDID4 = string;
 /**
  * Cover art URL
  */
@@ -37,7 +37,7 @@ export type ISO8601DateTime1 = string;
  * The core entity representing a literary work. Contains stable metadata and points to the latest published version (Manifest).
  */
 export interface Book {
-  id: BDSDID;
+  id: BookManifestDID;
   /**
    * Book title
    */
@@ -52,9 +52,9 @@ export interface Book {
    * @minItems 1
    * @maxItems 50
    */
-  author_ids: [BDSDID1, ...BDSDID1[]];
-  publisher_id?: BDSDID2;
-  series_id?: BDSDID3;
+  author_ids: [BookManifestDID1, ...BookManifestDID1[]];
+  publisher_id?: BookManifestDID2;
+  series_id?: BookManifestDID3;
   /**
    * Position in series
    */
@@ -63,7 +63,7 @@ export interface Book {
    * Primary language code (ISO 639-1)
    */
   language: string;
-  latest_manifest_id: BDSDID4;
+  latest_manifest_id: BookManifestDID4;
   metadata: {
     cover_image?: URL;
     /**
