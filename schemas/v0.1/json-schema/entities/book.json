@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/entities/book.json",
+  "title": "Book",
+  "description": "The core entity representing a literary work. Contains stable metadata and points to the latest published version (Manifest).",
+  "type": "object",
+  "required": ["id", "title", "slug", "author_ids", "language", "created_at", "updated_at", "latest_manifest_id", "metadata"],
+  "properties": {
+    "id": {
+      "$ref": "../validators/did.json",
+      "description": "Unique identifier for the book"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "Book title"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "URL-friendly identifier"
+    },
+    "author_ids": {
+      "type": "array",
+      "description": "Authors (supports co-authorship)",
+      "items": {
+        "$ref": "../validators/did.json"
+      },
+      "minItems": 1,
+      "maxItems": 50
+    },
+    "publisher_id": {
+      "$ref": "../validators/did.json",
+      "description": "Publisher reference"
+    },
+    "series_id": {
+      "$ref": "../validators/did.json",
+      "description": "Series reference"
+    },
+    "series_order": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Position in series"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "Primary language code (ISO 639-1)"
+    },
+    "latest_manifest_id": {
+      "$ref": "../validators/did.json",
+      "description": "Pointer to current published version"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "cover_image": {
+          "$ref": "../validators/url.json",
+          "description": "Cover art URL"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 5000,
+          "description": "Book blurb/synopsis"
+        },
+        "genres": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "maxItems": 20,
+          "description": "Genre classifications"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "maxItems": 50,
+          "description": "Additional tags for discovery"
+        },
+        "content_warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "maxItems": 20,
+          "description": "Content advisories"
+        },
+        "isbn": {
+          "type": "string",
+          "pattern": "^(978|979)-?[0-9]{1,5}-?[0-9]{1,7}-?[0-9]{1,7}-?[0-9]$",
+          "description": "ISBN if traditionally published"
+        }
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "required": ["model"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": ["free", "paid", "pay-what-you-want", "subscription"],
+          "description": "Pricing model"
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price amount (if applicable)"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "Currency code (ISO 4217)"
+        }
+      }
+    },
+    "created_at": {
+      "$ref": "../validators/iso8601.json",
+      "description": "Creation timestamp"
+    },
+    "updated_at": {
+      "$ref": "../validators/iso8601.json",
+      "description": "Last update timestamp"
+    }
+  },
+  "additionalProperties": false
+}

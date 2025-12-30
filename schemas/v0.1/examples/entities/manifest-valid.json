@@ -1,0 +1,35 @@
+{
+  "id": "did:bds:manifest:abc1234",
+  "book_id": "did:bds:book:la-unica-verdad",
+  "version": "1.1.0",
+  "changelog": "Rewrote chapter 4 to improve pacing. Fixed typos in chapters 2, 7.",
+  "published_at": "2025-06-20T14:30:00Z",
+  "toc": [
+    {
+      "chapter_id": "did:bds:chapter:ch1",
+      "chapter_version": "1.0.0",
+      "order": 1,
+      "title": "El Comienzo",
+      "section": "Parte 1: El Inicio"
+    },
+    {
+      "chapter_id": "did:bds:chapter:ch2",
+      "chapter_version": "1.0.0",
+      "order": 2,
+      "title": "La Duda",
+      "section": "Parte 1: El Inicio"
+    },
+    {
+      "chapter_id": "did:bds:chapter:ch4",
+      "chapter_version": "1.1.0",
+      "order": 4,
+      "title": "El Despertar",
+      "section": "Parte 2: La Verdad"
+    }
+  ],
+  "stats": {
+    "total_chapters": 12,
+    "word_count": 85000,
+    "estimated_reading_time_minutes": 340
+  }
+}

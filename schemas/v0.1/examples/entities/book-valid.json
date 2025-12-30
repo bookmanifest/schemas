@@ -1,0 +1,26 @@
+{
+  "id": "did:bds:book:la-unica-verdad",
+  "title": "La Única Verdad",
+  "slug": "la-unica-verdad",
+  "author_ids": ["did:bds:author:ray-garcia"],
+  "publisher_id": "did:bds:publisher:planeta",
+  "series_id": "did:bds:series:la-unica-saga",
+  "series_order": 1,
+  "language": "es",
+  "latest_manifest_id": "did:bds:manifest:abc1234",
+  "metadata": {
+    "cover_image": "https://cdn.bds.pub/covers/la-unica-verdad.jpg",
+    "description": "When reality breaks, truth becomes the only weapon.",
+    "genres": ["science-fiction", "thriller"],
+    "tags": ["time-travel", "dystopia", "philosophical"],
+    "content_warnings": ["violence", "death"],
+    "isbn": "978-84-1234-567-8"
+  },
+  "pricing": {
+    "model": "paid",
+    "price": 9.99,
+    "currency": "EUR"
+  },
+  "created_at": "2025-01-15T10:00:00Z",
+  "updated_at": "2025-06-20T14:30:00Z"
+}
