@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/events/heartbeat.json",
+  "title": "Heartbeat Event",
+  "description": "Periodic reading activity tracking",
+  "allOf": [
+    { "$ref": "./envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "heartbeat" },
+        "payload": {
+          "type": "object",
+          "required": ["duration_seconds", "active_seconds", "start_node_id", "end_node_id", "focus_node_id", "progress_percentage"],
+          "properties": {
+            "duration_seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 600,
+              "description": "Time since last heartbeat"
+            },
+            "active_seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 600,
+              "description": "Time with detected user interaction"
+            },
+            "start_node_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "First visible paragraph"
+            },
+            "end_node_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Last visible paragraph"
+            },
+            "focus_node_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Center of viewport"
+            },
+            "progress_percentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Position in chapter (0-1)"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

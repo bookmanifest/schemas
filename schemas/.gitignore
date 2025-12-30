@@ -6,3 +6,4 @@ v0.1/typescript/*.ts
 v0.1/zod/*.ts
 !v0.1/zod/validators.ts
 !v0.1/zod/entities.ts
+!v0.1/zod/events.ts

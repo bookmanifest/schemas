@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/events/chapter-transition.json",
+  "title": "Chapter Transition Event",
+  "description": "Fired when the user moves between chapters",
+  "allOf": [
+    { "$ref": "./envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "chapter_transition" },
+        "payload": {
+          "type": "object",
+          "required": ["from_chapter_id", "from_chapter_version", "trigger", "time_in_chapter_seconds", "chapter_completion_percentage"],
+          "properties": {
+            "from_chapter_id": {
+              "$ref": "../validators/did.json",
+              "description": "Chapter being left"
+            },
+            "from_chapter_version": {
+              "$ref": "../validators/semver.json",
+              "description": "Version of chapter being left"
+            },
+            "to_chapter_id": {
+              "oneOf": [
+                { "$ref": "../validators/did.json" },
+                { "type": "null" }
+              ],
+              "description": "Chapter being entered (null if closing book)"
+            },
+            "to_chapter_version": {
+              "oneOf": [
+                { "$ref": "../validators/semver.json" },
+                { "type": "null" }
+              ],
+              "description": "Version of chapter being entered"
+            },
+            "trigger": {
+              "type": "string",
+              "enum": ["scroll_end", "next_button", "prev_button", "toc_jump", "link_internal", "book_close"],
+              "description": "How the transition happened"
+            },
+            "time_in_chapter_seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Total time spent in the chapter"
+            },
+            "chapter_completion_percentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "How much of the chapter was read"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

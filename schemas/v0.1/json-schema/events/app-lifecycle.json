@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/events/app-lifecycle.json",
+  "title": "App Lifecycle Event",
+  "description": "App state changes (open, background, foreground, close)",
+  "allOf": [
+    { "$ref": "./envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "app_lifecycle" },
+        "payload": {
+          "type": "object",
+          "required": ["action"],
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["open", "background", "foreground", "close"],
+              "description": "App lifecycle action"
+            },
+            "source": {
+              "type": "string",
+              "enum": ["direct", "notification", "deeplink", "widget"],
+              "description": "How the app was opened"
+            },
+            "time_since_last_session_seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Time since last session"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

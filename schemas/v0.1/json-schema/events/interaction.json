@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/events/interaction.json",
+  "title": "Interaction Event",
+  "description": "User interactions with content (highlights, annotations, etc.)",
+  "allOf": [
+    { "$ref": "./envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "interaction" },
+        "payload": {
+          "type": "object",
+          "required": ["action", "target_node_id", "target_node_type", "selection_length"],
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["highlight", "comment", "copy", "share", "bookmark", "search_definition", "link_click"],
+              "description": "Type of interaction"
+            },
+            "target_node_id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "ProseMirror node ID"
+            },
+            "target_node_type": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Type of node"
+            },
+            "text_selection": {
+              "type": "string",
+              "description": "Selected text (if applicable)"
+            },
+            "selection_length": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Length of selected text"
+            },
+            "annotation": {
+              "type": "string",
+              "description": "User annotation (if applicable)"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
