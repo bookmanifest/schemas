@@ -1,0 +1,14 @@
+{
+  "id": "did:bds:author:ray-garcia",
+  "handle": "ray-garcia.bds.pub",
+  "name": "Ray García",
+  "bio": "Science fiction writer. Author of La Única Verdad trilogy.",
+  "avatar": "https://cdn.bds.pub/avatars/ray-garcia.jpg",
+  "links": [
+    { "type": "website", "url": "https://ray-garcia.fika.bar" },
+    { "type": "bluesky", "url": "https://bsky.app/profile/ray-garcia.fika.bar" },
+    { "type": "twitter", "url": "https://twitter.com/raysjosele" }
+  ],
+  "created_at": "2025-01-15T10:00:00Z",
+  "updated_at": "2025-01-15T10:00:00Z"
+}

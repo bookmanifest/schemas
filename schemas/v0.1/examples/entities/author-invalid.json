@@ -1,0 +1,7 @@
+{
+  "id": "not-a-valid-did",
+  "handle": "invalid handle with spaces",
+  "name": "",
+  "created_at": "not-a-date",
+  "updated_at": "2025-01-15"
+}
