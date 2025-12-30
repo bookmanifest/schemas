@@ -42,10 +42,10 @@
   "author": "Ray García <ray@bookmanifest.org>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bookmanifest/bds-spec.git"
+    "url": "https://github.com/bookmanifest/schemas.git"
   },
   "bugs": {
-    "url": "https://github.com/bookmanifest/bds-spec/issues"
+    "url": "https://github.com/bookmanifest/schemas/issues"
   },
   "homepage": "https://bookmanifest.org",
   "files": [
