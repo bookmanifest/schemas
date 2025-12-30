@@ -32,7 +32,7 @@ async function validateExamples() {
 
   for (const exampleFile of entityExamples) {
     const entityName = path.basename(exampleFile).replace('-valid.json', '')
-    const schemaId = `https://bds.pub/schemas/v0.1/entities/${entityName}.json`
+    const schemaId = `https://bookmanifest.org/schemas/v0.1/entities/${entityName}.json`
 
     try {
       const example = JSON.parse(await readFile(exampleFile, 'utf-8'))
