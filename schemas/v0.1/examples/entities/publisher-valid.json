@@ -1,0 +1,9 @@
+{
+  "id": "did:bds:publisher:planeta",
+  "handle": "planeta.bds.pub",
+  "name": "Editorial Planeta",
+  "logo": "https://cdn.bds.pub/logos/planeta.png",
+  "website": "https://planeta.es",
+  "created_at": "2025-01-15T10:00:00Z",
+  "updated_at": "2025-01-15T10:00:00Z"
+}
