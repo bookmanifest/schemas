@@ -6,9 +6,23 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./json-schema": "./v0.1/json-schema/index.json",
-    "./zod": "./dist/zod/index.js"
+    "./entities": {
+      "types": "./dist/zod/entities.d.ts",
+      "default": "./dist/zod/entities.js"
+    },
+    "./events": {
+      "types": "./dist/zod/events.d.ts",
+      "default": "./dist/zod/events.js"
+    },
+    "./validators": {
+      "types": "./dist/zod/validators.d.ts",
+      "default": "./dist/zod/validators.js"
+    }
   },
   "scripts": {
     "build": "npm run generate && npm run compile",
@@ -18,17 +32,23 @@
     "test:watch": "vitest",
     "validate": "node scripts/validate-examples.js"
   },
-  "keywords": ["bds", "book-distribution", "schema", "validation"],
+  "keywords": [
+    "bds",
+    "book-distribution",
+    "schema",
+    "validation"
+  ],
   "license": "MIT",
   "dependencies": {
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
     "@types/node": "^22.10.2",
-    "vitest": "^2.1.8",
-    "json-schema-to-typescript": "^15.0.3",
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "glob": "^13.0.0",
+    "json-schema-to-typescript": "^15.0.3",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
   }
 }
