@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/library-entry.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/library-entry.json",
   "title": "LibraryEntry",
   "description": "A book in a reader's personal library. Tracks reading status.",
   "type": "object",

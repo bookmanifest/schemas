@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/validators/url.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/validators/url.json",
   "title": "URL",
   "type": "string",
   "format": "uri",

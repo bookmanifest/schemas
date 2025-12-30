@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/publisher.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/publisher.json",
   "title": "Publisher",
   "description": "Optional entity for traditional publishers or imprints",
   "type": "object",
@@ -14,7 +14,7 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9-]+\\.(bds\\.pub|[a-zA-Z0-9-]+\\.[a-z]{2,})$",
       "description": "Human-readable handle (can use custom domain)",
-      "examples": ["planeta.bds.pub", "publisher.example.com"]
+      "examples": ["planeta.bookmanifest.org", "publisher.example.com"]
     },
     "name": {
       "type": "string",

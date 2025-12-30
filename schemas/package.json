@@ -39,6 +39,24 @@
     "validation"
   ],
   "license": "MIT",
+  "author": "Ray García <ray@bookmanifest.org>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raygarcia/bds-spec.git",
+    "directory": "schemas"
+  },
+  "bugs": {
+    "url": "https://github.com/raygarcia/bds-spec/issues"
+  },
+  "homepage": "https://bookmanifest.org",
+  "files": [
+    "dist/",
+    "v0.1/json-schema/",
+    "v0.1/typescript/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "dependencies": {
     "zod": "^3.23.8"
   },

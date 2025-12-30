@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/author.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/author.json",
   "title": "Author",
   "description": "The creator of books in BDS",
   "type": "object",
@@ -14,7 +14,7 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9-]+\\.(bds\\.pub|[a-zA-Z0-9-]+\\.[a-z]{2,})$",
       "description": "Human-readable handle (can use custom domain)",
-      "examples": ["ray-garcia.bds.pub", "author.example.com"]
+      "examples": ["ray-garcia.bookmanifest.org", "author.example.com"]
     },
     "name": {
       "type": "string",

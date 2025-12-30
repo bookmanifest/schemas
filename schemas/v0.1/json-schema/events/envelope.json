@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/events/envelope.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/events/envelope.json",
   "title": "Event Envelope",
   "description": "Common structure for all BDS events",
   "type": "object",

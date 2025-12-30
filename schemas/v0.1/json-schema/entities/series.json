@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/series.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/series.json",
   "title": "Series",
   "description": "A collection of related books in reading order (trilogies, sagas, etc.)",
   "type": "object",

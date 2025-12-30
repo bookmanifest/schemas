@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/validators/did.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/validators/did.json",
   "title": "BDS DID",
   "description": "Decentralized Identifier for BDS entities",
   "type": "string",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/manifest.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/manifest.json",
   "title": "Manifest",
   "description": "An immutable snapshot of a book version. Created each time an author publishes changes.",
   "type": "object",

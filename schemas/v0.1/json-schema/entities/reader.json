@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/reader.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/reader.json",
   "title": "Reader",
   "description": "The user who reads books. Owns their reading data.",
   "type": "object",
@@ -14,7 +14,7 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9-]+\\.(bds\\.pub|[a-zA-Z0-9-]+\\.[a-z]{2,})$",
       "description": "Human-readable handle (optional for readers)",
-      "examples": ["jorge.bds.pub", "reader.example.com"]
+      "examples": ["jorge.bookmanifest.org", "reader.example.com"]
     },
     "display_name": {
       "type": "string",

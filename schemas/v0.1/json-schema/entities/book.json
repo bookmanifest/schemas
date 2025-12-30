@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/book.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/book.json",
   "title": "Book",
   "description": "The core entity representing a literary work. Contains stable metadata and points to the latest published version (Manifest).",
   "type": "object",

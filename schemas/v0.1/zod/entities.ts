@@ -9,7 +9,7 @@ const AuthorLinkSchema = z.object({
 export const AuthorSchema = z.object({
   id: didSchema,
   handle: z.string().regex(/^[a-zA-Z0-9-]+\.(bds\.pub|[a-zA-Z0-9-]+\.[a-z]{2,})$/, {
-    message: 'Invalid handle format. Expected: name.bds.pub or custom domain'
+    message: 'Invalid handle format. Expected: name.bookmanifest.org or custom domain'
   }),
   name: z.string().min(1).max(200),
   bio: z.string().max(5000).optional(),
@@ -22,7 +22,7 @@ export const AuthorSchema = z.object({
 export const PublisherSchema = z.object({
   id: didSchema,
   handle: z.string().regex(/^[a-zA-Z0-9-]+\.(bds\.pub|[a-zA-Z0-9-]+\.[a-z]{2,})$/, {
-    message: 'Invalid handle format. Expected: name.bds.pub or custom domain'
+    message: 'Invalid handle format. Expected: name.bookmanifest.org or custom domain'
   }),
   name: z.string().min(1).max(200),
   logo: urlSchema.optional(),
@@ -145,7 +145,7 @@ const ReaderPreferencesSchema = z.object({
 export const ReaderSchema = z.object({
   id: didSchema,
   handle: z.string().regex(/^[a-zA-Z0-9-]+\.(bds\.pub|[a-zA-Z0-9-]+\.[a-z]{2,})$/, {
-    message: 'Invalid handle format. Expected: name.bds.pub or custom domain'
+    message: 'Invalid handle format. Expected: name.bookmanifest.org or custom domain'
   }).optional(),
   display_name: z.string().min(1).max(200).optional(),
   avatar: urlSchema.optional(),

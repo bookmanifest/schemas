@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/events/book-lifecycle.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/events/book-lifecycle.json",
   "title": "Book Lifecycle Event",
   "description": "Major milestones in book reading (started, completed)",
   "allOf": [

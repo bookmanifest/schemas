@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/events/app-lifecycle.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/events/app-lifecycle.json",
   "title": "App Lifecycle Event",
   "description": "App state changes (open, background, foreground, close)",
   "allOf": [

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/entities/chapter.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/entities/chapter.json",
   "title": "Chapter",
   "description": "The content of a specific version of a chapter. Each version is a separate, immutable document.",
   "type": "object",

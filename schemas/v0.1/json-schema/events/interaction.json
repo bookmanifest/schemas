@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bds.pub/schemas/v0.1/events/interaction.json",
+  "$id": "https://bookmanifest.org/schemas/v0.1/events/interaction.json",
   "title": "Interaction Event",
   "description": "User interactions with content (highlights, annotations, etc.)",
   "allOf": [
