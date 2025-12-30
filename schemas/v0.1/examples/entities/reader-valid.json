@@ -1,0 +1,14 @@
+{
+  "id": "did:bds:reader:jorge",
+  "handle": "jorge.bds.pub",
+  "display_name": "Jorge",
+  "avatar": "https://cdn.bds.pub/avatars/jorge.jpg",
+  "created_at": "2025-01-15T10:00:00Z",
+  "updated_at": "2025-01-15T10:00:00Z",
+  "preferences": {
+    "theme": "dark",
+    "font_size": "medium",
+    "font_family": "serif",
+    "line_height": "relaxed"
+  }
+}

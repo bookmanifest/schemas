@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/entities/prosemirror.json",
+  "title": "ProseMirror Document",
+  "description": "ProseMirror JSON document structure for chapter content",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Node type"
+    },
+    "content": {
+      "type": "array",
+      "description": "Child nodes",
+      "items": {
+        "$ref": "#"
+      }
+    },
+    "attrs": {
+      "type": "object",
+      "description": "Node attributes"
+    },
+    "marks": {
+      "type": "array",
+      "description": "Text marks (for inline formatting)",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "attrs": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "text": {
+      "type": "string",
+      "description": "Text content (for text nodes)"
+    }
+  }
+}

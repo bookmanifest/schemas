@@ -101,3 +101,70 @@ export const ManifestSchema = z.object({
   toc: z.array(TocEntrySchema).min(1).max(1000),
   stats: ManifestStatsSchema
 }).strict()
+
+// ProseMirror JSON schema (recursive)
+const ProseMirrorNodeSchema: z.ZodType<any> = z.lazy(() => z.object({
+  type: z.string(),
+  content: z.array(ProseMirrorNodeSchema).optional(),
+  attrs: z.record(z.any()).optional(),
+  marks: z.array(z.object({
+    type: z.string(),
+    attrs: z.record(z.any()).optional()
+  })).optional(),
+  text: z.string().optional()
+}).passthrough())
+
+const ChapterMetadataSchema = z.object({
+  word_count: z.number().int().min(0),
+  estimated_reading_time_minutes: z.number().int().min(0),
+  pov_character: z.string().max(200).optional(),
+  tags: z.array(z.string().min(1).max(50)).max(20).optional()
+}).strict()
+
+export const ChapterSchema = z.object({
+  id: didSchema,
+  chapter_id: didSchema,
+  book_id: didSchema,
+  version: semverSchema,
+  title: z.string().min(1).max(500),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+    message: 'Invalid slug format. Use lowercase letters, numbers, and hyphens only'
+  }).min(1).max(200),
+  created_at: iso8601Schema,
+  metadata: ChapterMetadataSchema,
+  content: ProseMirrorNodeSchema
+}).strict()
+
+const ReaderPreferencesSchema = z.object({
+  theme: z.enum(['light', 'dark', 'sepia']).optional(),
+  font_size: z.enum(['small', 'medium', 'large', 'xlarge']).optional(),
+  font_family: z.enum(['serif', 'sans-serif', 'monospace']).optional(),
+  line_height: z.enum(['compact', 'normal', 'relaxed', 'loose']).optional()
+}).strict()
+
+export const ReaderSchema = z.object({
+  id: didSchema,
+  handle: z.string().regex(/^[a-zA-Z0-9-]+\.(bds\.pub|[a-zA-Z0-9-]+\.[a-z]{2,})$/, {
+    message: 'Invalid handle format. Expected: name.bds.pub or custom domain'
+  }).optional(),
+  display_name: z.string().min(1).max(200).optional(),
+  avatar: urlSchema.optional(),
+  created_at: iso8601Schema,
+  updated_at: iso8601Schema,
+  preferences: ReaderPreferencesSchema.optional()
+}).strict()
+
+export const LibraryEntrySchema = z.object({
+  id: didSchema,
+  reader_id: didSchema,
+  book_id: didSchema,
+  manifest_id: didSchema,
+  status: z.enum(['want-to-read', 'reading', 'finished', 'abandoned', 'paused']),
+  added_at: iso8601Schema,
+  started_at: iso8601Schema.nullable().optional(),
+  finished_at: iso8601Schema.nullable().optional(),
+  current_chapter_id: didSchema.optional(),
+  current_chapter_version: semverSchema.optional(),
+  current_position: z.number().min(0).max(1).optional(),
+  current_node_id: z.string().min(1).max(200).optional()
+}).strict()

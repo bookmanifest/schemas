@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bds.pub/schemas/v0.1/entities/library-entry.json",
+  "title": "LibraryEntry",
+  "description": "A book in a reader's personal library. Tracks reading status.",
+  "type": "object",
+  "required": ["id", "reader_id", "book_id", "manifest_id", "status", "added_at"],
+  "properties": {
+    "id": {
+      "$ref": "../validators/did.json",
+      "description": "Unique identifier for this library entry"
+    },
+    "reader_id": {
+      "$ref": "../validators/did.json",
+      "description": "Reader reference"
+    },
+    "book_id": {
+      "$ref": "../validators/did.json",
+      "description": "Book reference"
+    },
+    "manifest_id": {
+      "$ref": "../validators/did.json",
+      "description": "Which version the reader is on"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["want-to-read", "reading", "finished", "abandoned", "paused"],
+      "description": "Reading status"
+    },
+    "added_at": {
+      "$ref": "../validators/iso8601.json",
+      "description": "When added to library"
+    },
+    "started_at": {
+      "oneOf": [
+        { "$ref": "../validators/iso8601.json" },
+        { "type": "null" }
+      ],
+      "description": "When started reading"
+    },
+    "finished_at": {
+      "oneOf": [
+        { "$ref": "../validators/iso8601.json" },
+        { "type": "null" }
+      ],
+      "description": "When finished"
+    },
+    "current_chapter_id": {
+      "$ref": "../validators/did.json",
+      "description": "Current chapter"
+    },
+    "current_chapter_version": {
+      "$ref": "../validators/semver.json",
+      "description": "Version of current chapter"
+    },
+    "current_position": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Position in chapter (0-1)"
+    },
+    "current_node_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "ProseMirror node ID for precise position"
+    }
+  },
+  "additionalProperties": false
+}
