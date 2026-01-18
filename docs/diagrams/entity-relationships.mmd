@@ -1,0 +1,81 @@
+erDiagram
+    author {
+        string Author
+        any id
+        string handle
+        string name
+        optional string bio
+        optional any avatar
+        ... more ...
+    }
+    book {
+        string Book
+        any id
+        string title
+        string slug
+        array author_ids
+        optional any publisher_id
+        ... more ...
+    }
+    chapter {
+        string Chapter
+        any id
+        any chapter_id
+        any book_id
+        any version
+        string title
+        ... more ...
+    }
+    library-entry {
+        string LibraryEntry
+        any id
+        any reader_id
+        any book_id
+        any manifest_id
+        string status
+        ... more ...
+    }
+    manifest {
+        string Manifest
+        any id
+        any book_id
+        any version
+        optional string changelog
+        any published_at
+        ... more ...
+    }
+    prosemirror {
+        string ProseMirror Document
+        string type
+        optional array content
+        optional object attrs
+        optional array marks
+        optional string text
+    }
+    publisher {
+        string Publisher
+        any id
+        string handle
+        string name
+        optional any logo
+        optional any website
+        ... more ...
+    }
+    reader {
+        string Reader
+        any id
+        optional string handle
+        optional string display_name
+        optional any avatar
+        any created_at
+        ... more ...
+    }
+    series {
+        string Series
+        any id
+        string title
+        optional string description
+        array author_ids
+        optional any cover_image
+        ... more ...
+    }

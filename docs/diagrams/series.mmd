@@ -1,0 +1,14 @@
+classDiagram
+    class series {
+        <<Series>>
+        -- Properties --
+        +id ✗ : did
+        +title ✗ : string
+        +description : string
+        +author_ids ✗ : did[]
+        +cover_image : url
+        +genres : string[]
+        +status ✗ : enum: ongoing | completed | hiatus
+        +created_at ✗ : iso8601
+        +updated_at ✗ : iso8601
+    }

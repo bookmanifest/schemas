@@ -1,0 +1,12 @@
+classDiagram
+    class manifest {
+        <<Manifest>>
+        -- Properties --
+        +id ✗ : did
+        +book_id ✗ : did
+        +version ✗ : semver
+        +changelog : string
+        +published_at ✗ : iso8601
+        +toc ✗ : object[]
+        +stats ✗ : object
+    }

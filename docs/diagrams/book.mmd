@@ -1,0 +1,18 @@
+classDiagram
+    class book {
+        <<Book>>
+        -- Properties --
+        +id ✗ : did
+        +title ✗ : string
+        +slug ✗ : string
+        +author_ids ✗ : did[]
+        +publisher_id : did
+        +series_id : did
+        +series_order : number [1, ∞]
+        +language ✗ : string
+        +latest_manifest_id ✗ : did
+        +metadata ✗ : object
+        +pricing : object
+        +created_at ✗ : iso8601
+        +updated_at ✗ : iso8601
+    }

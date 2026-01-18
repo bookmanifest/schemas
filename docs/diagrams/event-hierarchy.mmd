@@ -1,0 +1,17 @@
+flowchart TD
+    %% Book Manifest Event Hierarchy
+
+    Envelope["Event Envelope\nCommon fields for all events"]
+
+    Envelope -->|"extends"| app_lifecycle["App Lifecycle Event\ntype: app_lifecycle"]
+    Envelope -->|"extends"| book_lifecycle["Book Lifecycle Event\ntype: book_lifecycle"]
+    Envelope -->|"extends"| chapter_transition["Chapter Transition Event\ntype: chapter_transition"]
+    Envelope -->|"extends"| heartbeat["Heartbeat Event\ntype: heartbeat"]
+    Envelope -->|"extends"| interaction["Interaction Event\ntype: interaction"]
+
+    %% Event Types
+    %% app-lifecycle: App state changes (open, background, foreground, close)
+    %% book-lifecycle: Major milestones in book reading (started, completed)
+    %% chapter-transition: Fired when the user moves between chapters
+    %% heartbeat: Periodic reading activity tracking
+    %% interaction: User interactions with content (highlights, annotations, etc.)

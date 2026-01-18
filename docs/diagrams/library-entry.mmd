@@ -1,0 +1,17 @@
+classDiagram
+    class library-entry {
+        <<LibraryEntry>>
+        -- Properties --
+        +id ✗ : did
+        +reader_id ✗ : did
+        +book_id ✗ : did
+        +manifest_id ✗ : did
+        +status ✗ : enum: want-to-read | reading | finished | abandoned | paused
+        +added_at ✗ : iso8601
+        +started_at : any
+        +finished_at : any
+        +current_chapter_id : did
+        +current_chapter_version : semver
+        +current_position : number [0, 1]
+        +current_node_id : string
+    }

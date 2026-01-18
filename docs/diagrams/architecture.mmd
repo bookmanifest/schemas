@@ -1,0 +1,20 @@
+flowchart LR
+    %% Book Manifest Architecture - DID-based References
+
+    author["Author\n(author)"]
+    book["Book\n(book)"]
+    chapter["Chapter\n(chapter)"]
+    library_entry["LibraryEntry\n(library-entry)"]
+    manifest["Manifest\n(manifest)"]
+    publisher["Publisher\n(publisher)"]
+    reader["Reader\n(reader)"]
+    series["Series\n(series)"]
+
+    %% Relationships via DIDs
+    book -->|"author_ids[]"| author
+    book -->|"publisher_id"| publisher
+    book -->|"series_id"| series
+    book -->|"latest_manifest_id"| manifest
+    manifest -->|"chapters[]"| chapter
+    library_entry -->|"reader_id"| reader
+    library_entry -->|"book_id"| book

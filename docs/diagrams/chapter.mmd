@@ -1,0 +1,14 @@
+classDiagram
+    class chapter {
+        <<Chapter>>
+        -- Properties --
+        +id ✗ : did
+        +chapter_id ✗ : did
+        +book_id ✗ : did
+        +version ✗ : semver
+        +title ✗ : string
+        +slug ✗ : string
+        +created_at ✗ : iso8601
+        +metadata ✗ : object
+        +content ✗ : prosemirror
+    }
