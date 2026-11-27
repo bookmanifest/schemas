@@ -29,6 +29,10 @@ export type SemanticVersion1 = string;
  * An immutable snapshot of a book version. Created each time an author publishes changes.
  */
 export interface Manifest {
+  /**
+   * Version of the Book Manifest format this document follows (not the book's version, which is `version`). A new format version changes this value.
+   */
+  book_manifest: '0.3';
   id: BookManifestDID;
   book_id: BookManifestDID1;
   version: SemanticVersion;

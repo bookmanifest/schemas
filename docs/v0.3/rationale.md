@@ -1,8 +1,8 @@
-# Why the narrative layer looks like this (v0.3)
+# Why the narrative layer looks like this
 
-> **Status: released in v0.3.0 (2026-11-27).** Every v0.1 document stays valid.
+> **Status: released in 0.3 (2026-11-27).** Companion to the [specification](spec.md); not normative.
 
-Each piece of the [narrative layer](narrative-layer.md) and each new [reading event](reading-events.md) comes from a concept that narrative theory or the psychology of reading has already defined, and exists because a feature for authors or readers needs it. This page links the two. The theory is used as a **lens, never a norm**: the layer says «Barthes would call this a catalysis», never «this could go».
+Each piece of the [narrative layer](spec.md#6-narrative-layer) and each [reading event](spec.md#54-the-reading-events) comes from a concept that narrative theory or the psychology of reading has already defined, and exists because a feature for authors or readers needs it. This page links the two. The theory is used as a **lens, never a norm**: the layer says «Barthes would call this a catalysis», never «this could go».
 
 ## A caveat that applies to everything below
 

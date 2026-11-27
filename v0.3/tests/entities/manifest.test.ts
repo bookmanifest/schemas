@@ -7,8 +7,9 @@ describe('Manifest Schema', () => {
     expect(() => ManifestSchema.parse(validManifest)).not.toThrow()
   })
 
-  it('should require id, book_id, version, published_at, toc, stats', () => {
+  it('should require book_manifest, id, book_id, version, published_at, toc, stats', () => {
     const minimal = {
+      book_manifest: '0.3',
       id: 'did:web:bookmanifest.org:manifest:test123',
       book_id: 'did:web:bookmanifest.org:book:test',
       version: '1.0.0',
@@ -33,6 +34,7 @@ describe('Manifest Schema', () => {
 
   it('should allow optional changelog and section in toc', () => {
     const withOptionals = {
+      book_manifest: '0.3',
       id: 'did:web:bookmanifest.org:manifest:abc1234',
       book_id: 'did:web:bookmanifest.org:book:la-unica-verdad',
       version: '1.1.0',
@@ -59,6 +61,7 @@ describe('Manifest Schema', () => {
 
   it('should validate toc order is positive integer', () => {
     const manifest = {
+      book_manifest: '0.3',
       id: 'did:web:bookmanifest.org:manifest:test',
       book_id: 'did:web:bookmanifest.org:book:test',
       version: '1.0.0',
@@ -79,5 +82,12 @@ describe('Manifest Schema', () => {
     }
 
     expect(() => ManifestSchema.parse(manifest)).toThrow()
+  })
+
+  it('should require the format version book_manifest, and only 0.3', () => {
+    const { book_manifest, ...withoutFormat } = validManifest
+    expect(book_manifest).toBe('0.3')
+    expect(ManifestSchema.safeParse(withoutFormat).success).toBe(false)
+    expect(ManifestSchema.safeParse({ ...validManifest, book_manifest: '0.1' }).success).toBe(false)
   })
 })

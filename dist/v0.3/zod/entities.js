@@ -82,7 +82,9 @@ const ManifestStatsSchema = z.object({
     word_count: z.number().int().min(0),
     estimated_reading_time_minutes: z.number().int().min(0)
 }).strict();
+// `book_manifest` is the format version; `version` is the book's.
 export const ManifestSchema = z.object({
+    book_manifest: z.literal('0.3'),
     id: didSchema,
     book_id: didSchema,
     version: semverSchema,

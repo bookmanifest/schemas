@@ -197,6 +197,7 @@ export declare const BookSchema: z.ZodObject<{
     } | undefined;
 }>;
 export declare const ManifestSchema: z.ZodObject<{
+    book_manifest: z.ZodLiteral<"0.3">;
     id: z.ZodString;
     book_id: z.ZodString;
     version: z.ZodString;
@@ -236,6 +237,7 @@ export declare const ManifestSchema: z.ZodObject<{
     }>;
 }, "strict", z.ZodTypeAny, {
     id: string;
+    book_manifest: "0.3";
     book_id: string;
     version: string;
     published_at: string;
@@ -254,6 +256,7 @@ export declare const ManifestSchema: z.ZodObject<{
     changelog?: string | undefined;
 }, {
     id: string;
+    book_manifest: "0.3";
     book_id: string;
     version: string;
     published_at: string;

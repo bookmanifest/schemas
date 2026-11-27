@@ -52,7 +52,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
 };
 /**
  * The spoiler-safe cut of a public layer for a reader at `position`: only what that reader may know, and no
- * address after `position` anywhere in it. Gates (docs/v0.3/narrative-layer.md, «Spoiler-safe use»): an entity
+ * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
  * at its revealed_at (each alias at its own); a scene and a focalization span at their start; a truth at its
  * revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's revealed_at; a story
  * event at `at`, with only the pickups already passed and its salience only once the first pickup is passed; a

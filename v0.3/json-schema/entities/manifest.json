@@ -4,8 +4,12 @@
   "title": "Manifest",
   "description": "An immutable snapshot of a book version. Created each time an author publishes changes.",
   "type": "object",
-  "required": ["id", "book_id", "version", "published_at", "toc", "stats"],
+  "required": ["book_manifest", "id", "book_id", "version", "published_at", "toc", "stats"],
   "properties": {
+    "book_manifest": {
+      "const": "0.3",
+      "description": "Version of the Book Manifest format this document follows (not the book's version, which is `version`). A new format version changes this value."
+    },
     "id": {
       "$ref": "../validators/did.json",
       "description": "Unique identifier for this manifest"
