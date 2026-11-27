@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/shared-entry.json",
-  "title": "Shared Entry Event (v0.3)",
+  "title": "Shared Entry Event",
   "description": "Entry into the book through a shared paragraph link, and whether that entry later leads to starting the book from its beginning. The device keeps the entry paragraph locally and joins arrival and start itself, so the server never links two events of one reader: it counts `arrived` and `began_from_start` per entry paragraph and divides. No reader id, session id, referrer, share token, sharer or channel is sent (anonymous envelope). Each stage is sent at most once per entry per device.",
   "allOf": [
     {

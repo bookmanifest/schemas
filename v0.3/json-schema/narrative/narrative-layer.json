@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/narrative/narrative-layer.json",
-  "title": "Narrative layer (v0.3)",
+  "title": "Narrative layer",
   "description": "An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.",
   "type": "object",
   "required": ["narrative_layer", "book_id", "manifest_id", "manifest_version", "language"],

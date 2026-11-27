@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/envelope-anonymous.json",
-  "title": "Anonymous Event Envelope (v0.3)",
+  "title": "Anonymous Event Envelope",
   "description": "Envelope for events that must not be linkable to a reader: no `reader_id` and no `session_id`. Used by `shared_entry`. Each such event is sent at most once per entry per device, so counts of events stand in for counts of readers.",
   "type": "object",
   "required": [

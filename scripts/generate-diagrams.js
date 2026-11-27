@@ -17,7 +17,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const ROOT_DIR = path.resolve(__dirname, '..')
-const SCHEMAS_DIR = path.join(ROOT_DIR, 'v0.1/json-schema')
+const SCHEMAS_DIR = path.join(ROOT_DIR, 'v0.3/json-schema')
 const ENTITIES_DIR = path.join(SCHEMAS_DIR, 'entities')
 const EVENTS_DIR = path.join(SCHEMAS_DIR, 'events')
 const OUTPUT_DIR = path.join(ROOT_DIR, 'docs/diagrams')

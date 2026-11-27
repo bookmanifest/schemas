@@ -1,5 +1,10 @@
 import { z } from 'zod';
-export { didSchema, semverSchema, iso8601Schema, languageCodeSchema } from '../../v0.1/zod/validators.js';
+export declare const didSchema: z.ZodString;
+export declare const semverSchema: z.ZodString;
+export declare const iso8601Schema: z.ZodString;
+export declare const languageCodeSchema: z.ZodString;
+export declare const currencyCodeSchema: z.ZodString;
+export declare const urlSchema: z.ZodString;
 export declare const PARAGRAPH_ADDRESS_PATTERN: RegExp;
 export declare const paragraphAddressSchema: z.ZodString;
 export declare const nodeIdSchema: z.ZodString;

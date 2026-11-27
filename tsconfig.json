@@ -12,6 +12,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["v0.1/**/*.ts", "v0.3/**/*.ts"],
-  "exclude": ["node_modules", "dist", "v0.1/tests/**", "v0.3/tests/**", "**/*.test.ts"]
+  "include": ["v0.3/**/*.ts"],
+  "exclude": ["node_modules", "dist", "v0.3/tests/**", "**/*.test.ts"]
 }

@@ -1,32 +1,26 @@
 import { describe, it, expect } from 'vitest'
 import { globSync } from 'glob'
 import { loadAjv, V03, readJson } from './ajv'
-import { EventBatchV03Schema } from '../zod/events'
-import { EventBatchSchema } from '../../v0.1/zod/events'
+import { EventBatchSchema } from '../zod/events'
 
 const ajv = loadAjv()
 const validateBatch = ajv.getSchema(`${V03}/events/batch.json`)!
 const NEW_EVENTS = ['reread', 'shared-entry', 'companion-open', 'recap-view', 'spoiler-warning']
 
-describe('reading events (v0.3)', () => {
+describe('reading events', () => {
   it('the example batch is valid in JSON Schema and Zod, and has every new type', () => {
     const batch = readJson('./v0.3/examples/events/batch-valid.json')
     expect(validateBatch(batch), JSON.stringify(validateBatch.errors, null, 2)).toBe(true)
-    const parsed = EventBatchV03Schema.safeParse(batch)
+    const parsed = EventBatchSchema.safeParse(batch)
     expect(parsed.success, JSON.stringify(parsed.error?.issues, null, 2)).toBe(true)
     const types = new Set(batch.events.map((e: { type: string }) => e.type))
     for (const t of ['reread', 'shared_entry', 'companion_open', 'recap_view', 'spoiler_warning']) expect(types).toContain(t)
   })
 
-  it('v0.1 batches stay valid under v0.3', () => {
-    const batch = readJson('./v0.1/examples/events/batch-valid.json')
-    expect(validateBatch(batch), JSON.stringify(validateBatch.errors, null, 2)).toBe(true)
-    expect(EventBatchV03Schema.safeParse(batch).success).toBe(true)
-  })
-
-  it('a v0.1 consumer rejects the new types instead of misreading them', () => {
+  it('the example batch also has every session event type', () => {
     const batch = readJson('./v0.3/examples/events/batch-valid.json')
-    expect(EventBatchSchema.safeParse(batch).success).toBe(false)
+    const types = new Set(batch.events.map((e: { type: string }) => e.type))
+    for (const t of ['heartbeat', 'chapter_transition', 'book_lifecycle', 'interaction', 'app_lifecycle']) expect(types).toContain(t)
   })
 
   const invalid = globSync('./v0.3/examples/events/*-invalid.json').sort()
@@ -34,7 +28,7 @@ describe('reading events (v0.3)', () => {
     it(`rejects ${file} in JSON Schema and Zod`, () => {
       const batch = readJson(file)
       expect(validateBatch(batch)).toBe(false)
-      expect(EventBatchV03Schema.safeParse(batch).success).toBe(false)
+      expect(EventBatchSchema.safeParse(batch).success).toBe(false)
     })
   }
 
