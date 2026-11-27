@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/envelope.json",
-  "title": "Event Envelope (v0.3)",
-  "description": "The v0.1 envelope, unchanged except that `type` also admits four v0.3 reading events (`shared_entry` has its own envelope without identity: envelope-anonymous.json). `reader_id` is the pseudonymous, random reader id of v0.1 (never derived from the device, deleted on opt-out); it is used only to count distinct readers for aggregation thresholds and is never shown to authors.",
+  "title": "Event Envelope",
+  "description": "Common structure of every event except `shared_entry`, which has its own envelope without identity (envelope-anonymous.json). `reader_id` is a pseudonymous, random reader id (never derived from the device, deleted on opt-out); it is used only to count distinct readers for aggregation thresholds and is never shown to authors.",
   "type": "object",
   "required": [
     "id",

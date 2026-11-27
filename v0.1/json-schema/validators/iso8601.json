@@ -1,8 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://bookmanifest.org/schemas/v0.1/validators/iso8601.json",
-  "title": "ISO 8601 DateTime",
-  "type": "string",
-  "format": "date-time",
-  "examples": ["2025-01-15T10:00:00Z", "2025-01-15T10:00:00+01:00"]
-}

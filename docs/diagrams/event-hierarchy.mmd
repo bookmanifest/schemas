@@ -1,17 +1,28 @@
 flowchart TD
     %% Book Manifest Event Hierarchy
 
-    Envelope["Event Envelope\nCommon fields for all events"]
+    Envelope["Event Envelope\nCommon fields of identified events"]
+    AnonymousEnvelope["Anonymous Event Envelope\nNo reader_id, no session_id"]
 
     Envelope -->|"extends"| app_lifecycle["App Lifecycle Event\ntype: app_lifecycle"]
     Envelope -->|"extends"| book_lifecycle["Book Lifecycle Event\ntype: book_lifecycle"]
     Envelope -->|"extends"| chapter_transition["Chapter Transition Event\ntype: chapter_transition"]
+    Envelope -->|"extends"| companion_open["Companion Open Event\ntype: companion_open"]
     Envelope -->|"extends"| heartbeat["Heartbeat Event\ntype: heartbeat"]
     Envelope -->|"extends"| interaction["Interaction Event\ntype: interaction"]
+    Envelope -->|"extends"| recap_view["Recap View Event\ntype: recap_view"]
+    Envelope -->|"extends"| reread["Re-read Event\ntype: reread"]
+    AnonymousEnvelope -->|"extends"| shared_entry["Shared Entry Event\ntype: shared_entry"]
+    Envelope -->|"extends"| spoiler_warning["Spoiler Warning Event\ntype: spoiler_warning"]
 
     %% Event Types
     %% app-lifecycle: App state changes (open, background, foreground, close)
     %% book-lifecycle: Major milestones in book reading (started, completed)
     %% chapter-transition: Fired when the user moves between chapters
+    %% companion-open: The reader opened a reading-companion surface (who is who, an entity card, the spoiler-safe map) at a position. Says where readers look for help and about whom; never what they typed or searched.
     %% heartbeat: Periodic reading activity tracking
     %% interaction: User interactions with content (highlights, annotations, etc.)
+    %% recap-view: The «what happened» recap (a few lines of the story up to where the reader stopped) was offered, viewed or dismissed. The gap since the last reading is sent as a coarse bucket.
+    %% reread: The reader went back to an earlier paragraph and stayed there: the destination of a backward jump. Carries two positions and how the reader got there, nothing else. The origin is the context chapter plus `from_node_id`; the destination may be in another chapter.
+    %% shared-entry: Entry into the book through a shared paragraph link, and whether that entry later leads to starting the book from its beginning. The device keeps the entry paragraph locally and joins arrival and start itself, so the server never links two events of one reader: it counts `arrived` and `began_from_start` per entry paragraph and divides. No reader id, session id, referrer, share token, sharer or channel is sent (anonymous envelope). Each stage is sent at most once per entry per device.
+    %% spoiler-warning: Before sharing or copying the link of a paragraph that is the reveal of a public key truth, the reader saw a warning and accepted or cancelled. Which truths it reveals is known from the narrative layer and is not sent.

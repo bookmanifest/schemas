@@ -1,33 +1,16 @@
 {
   "name": "@bookmanifest/schemas",
-  "version": "0.3.1",
-  "description": "Formal schemas for Book Manifest (v0.1, and v0.3 with the narrative layer and reading events)",
+  "version": "0.3.2",
+  "description": "Formal schemas for Book Manifest 0.3: the manifest and its entities, reading events and the narrative layer",
   "type": "module",
-  "main": "./dist/v0.1/index.js",
-  "types": "./dist/v0.1/index.d.ts",
+  "main": "./dist/v0.3/index.js",
+  "types": "./dist/v0.3/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/v0.1/index.d.ts",
-      "default": "./dist/v0.1/index.js"
+      "types": "./dist/v0.3/index.d.ts",
+      "default": "./dist/v0.3/index.js"
     },
-    "./v0.1": {
-      "types": "./dist/v0.1/index.d.ts",
-      "default": "./dist/v0.1/index.js"
-    },
-    "./entities": {
-      "types": "./dist/v0.1/zod/entities.d.ts",
-      "default": "./dist/v0.1/zod/entities.js"
-    },
-    "./events": {
-      "types": "./dist/v0.1/zod/events.d.ts",
-      "default": "./dist/v0.1/zod/events.js"
-    },
-    "./validators": {
-      "types": "./dist/v0.1/zod/validators.d.ts",
-      "default": "./dist/v0.1/zod/validators.js"
-    },
-    "./json-schema/*": "./v0.1/json-schema/*",
-    "./v0.1/json-schema/*": "./v0.1/json-schema/*",
+    "./json-schema/*": "./v0.3/json-schema/*",
     "./v0.3": {
       "types": "./dist/v0.3/index.d.ts",
       "default": "./dist/v0.3/index.js"
@@ -42,7 +25,7 @@
     "test:node": "node scripts/smoke-node-esm.mjs",
     "test:watch": "vitest",
     "validate": "node scripts/validate-examples.js",
-    "typecheck:v0.3": "tsc -p tsconfig.v0.3.json"
+    "typecheck": "tsc -p tsconfig.typecheck.json"
   },
   "keywords": [
     "bookmanifest",
@@ -62,9 +45,8 @@
   "homepage": "https://bookmanifest.org",
   "files": [
     "dist/",
-    "v0.1/json-schema/",
-    "v0.1/typescript/",
     "v0.3/json-schema/",
+    "v0.3/typescript/",
     "docs/v0.3/",
     "README.md",
     "LICENSE",

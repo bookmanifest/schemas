@@ -3,8 +3,8 @@ import { writeFile, mkdir } from 'fs/promises'
 import { glob } from 'glob'
 import path from 'path'
 
-const SCHEMA_DIR = './v0.1/json-schema'
-const OUTPUT_DIR = './v0.1/typescript'
+const SCHEMA_DIR = './v0.3/json-schema'
+const OUTPUT_DIR = './v0.3/typescript'
 
 async function generateTypes() {
   console.log('🔧 Generating TypeScript types from JSON Schema...')
@@ -33,4 +33,7 @@ async function generateTypes() {
   console.log('✅ TypeScript types generated successfully')
 }
 
-generateTypes().catch(console.error)
+generateTypes().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})

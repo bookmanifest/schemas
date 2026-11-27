@@ -1,18 +1,10 @@
 # Book Manifest Schemas
 
-Formal schemas for Book Manifest.
+Formal schemas for Book Manifest **0.3**, the only version of the format: the manifest and its entities, the reading events and the optional narrative layer.
 
-This package provides JSON Schema definitions, TypeScript types, and Zod validators for all Book Manifest entities and events. The JSON Schema serves as the source of truth, with TypeScript types and Zod validators auto-generated from it.
+The specification is one document: [`docs/v0.3/spec.md`](docs/v0.3/spec.md). Companions: the [rationale](docs/v0.3/rationale.md) and the [producer guide](docs/v0.3/producer-guide.md).
 
-## v0.3: narrative layer and reading events
-
-v0.3 adds, beside v0.1 and without changing it, an optional narrative layer (scenes, story duration, focalization, key truths and who knows them, event salience and coreference, with public and author-private visibility) and five new aggregate-only reading events. See [`docs/v0.3/`](docs/v0.3/): the [narrative layer](docs/v0.3/narrative-layer.md), the [reading events](docs/v0.3/reading-events.md), the [rationale](docs/v0.3/rationale.md) and the [producer guide](docs/v0.3/producer-guide.md). Schemas, Zod mirrors, examples and tests live in `v0.3/`.
-
-```typescript
-import { NarrativeLayerSchema, EventBatchV03Schema, validateNarrativeLayer, publicProjection, spoilerSafeCut } from '@bookmanifest/schemas/v0.3'
-```
-
-The JSON Schemas are published under `@bookmanifest/schemas/v0.3/json-schema/*` (for example `narrative/narrative-layer.json` and `events/batch.json`). Everything documented below for v0.1 is unchanged.
+This package provides JSON Schema definitions (the source of truth), TypeScript types generated from them, and Zod validators that mirror them.
 
 ## Installation
 
@@ -20,175 +12,89 @@ The JSON Schemas are published under `@bookmanifest/schemas/v0.3/json-schema/*` 
 npm install @bookmanifest/schemas
 ```
 
-## Structure
+The package is plain ESM that Node imports directly (no bundler needed), and TypeScript resolves its types with `moduleResolution` set to `NodeNext`, `Node16` or `Bundler`.
 
-- `v0.1/json-schema/` - JSON Schema definitions (source of truth)
-  - `entities/` - Core entities (Author, Book, Chapter, etc.)
-  - `events/` - Event schemas (heartbeat, interaction, etc.)
-  - `validators/` - Custom validators (DIDs, SemVer, etc.)
-- `v0.1/typescript/` - Auto-generated TypeScript types
-- `v0.1/zod/` - Zod validators for runtime validation
-- `v0.1/examples/` - Valid example data for all schemas
-- `v0.1/tests/` - Comprehensive test suite
+## Entry points
+
+| Specifier | What |
+|---|---|
+| `@bookmanifest/schemas` | Zod validators, the narrative-layer semantics and their types |
+| `@bookmanifest/schemas/v0.3` | The same module, named by its format version |
+| `@bookmanifest/schemas/json-schema/*` | The JSON Schemas, e.g. `json-schema/entities/manifest.json` |
+| `@bookmanifest/schemas/v0.3/json-schema/*` | The same files, named by their format version |
 
 ## Usage
 
-### Import Everything
+### Runtime validation with Zod
 
 ```typescript
-import { BookSchema, AuthorSchema, BookManifestEventSchema } from '@bookmanifest/schemas'
-// The same module, named by version:
-import * as v01 from '@bookmanifest/schemas/v0.1'
+import { ManifestSchema, BookSchema, EventBatchSchema, NarrativeLayerSchema } from '@bookmanifest/schemas'
+
+const manifest = ManifestSchema.parse(rawManifest) // manifest.book_manifest === '0.3'
+
+const result = BookSchema.safeParse(rawBook)
+if (!result.success) console.error(result.error)
+
+// A batch of 1 to 100 events of any of the ten types.
+EventBatchSchema.parse({ events })
 ```
 
-The package is plain ESM that Node imports directly (no bundler needed), and TypeScript resolves its types with `moduleResolution` set to `NodeNext`, `Node16` or `Bundler`.
+The namespaces `Entities`, `Events`, `Validators` and `Narrative` group the same exports.
 
-### Import by Category
+### Narrative layer
 
 ```typescript
-// Entities only
-import { BookSchema, AuthorSchema, ChapterSchema } from '@bookmanifest/schemas/entities'
+import { NarrativeLayerSchema, validateNarrativeLayer, publicProjection, spoilerSafeCut } from '@bookmanifest/schemas'
 
-// Events only
-import { BookManifestEventSchema, EventBatchSchema } from '@bookmanifest/schemas/events'
-
-// Validators only
-import { didSchema, semverSchema, iso8601Schema } from '@bookmanifest/schemas/validators'
+const layer = NarrativeLayerSchema.parse(raw)
+const issues = validateNarrativeLayer(layer, readingOrder) // the semantic rules a schema cannot express
+const published = publicProjection(layer)                  // only what may leave the author's workspace
+const view = spoilerSafeCut(published, 'capitulo-08#p-005', readingOrder)
 ```
 
-### Runtime Validation with Zod
-
-```typescript
-import { BookSchema, AuthorSchema } from '@bookmanifest/schemas/entities'
-
-// Validate and parse data
-try {
-  const book = BookSchema.parse(rawData)
-  console.log('Valid book:', book)
-} catch (error) {
-  console.error('Validation failed:', error.errors)
-}
-
-// Safe parse (returns result object instead of throwing)
-const result = AuthorSchema.safeParse(rawData)
-if (result.success) {
-  console.log('Valid author:', result.data)
-} else {
-  console.error('Validation failed:', result.error)
-}
-```
-
-### TypeScript Types
-
-```typescript
-import type { Book, Author, Manifest, Chapter } from '@bookmanifest/schemas'
-
-function processBook(book: Book) {
-  console.log(`Processing: ${book.title} by ${book.author_ids.join(', ')}`)
-}
-```
-
-### Event Validation
-
-```typescript
-import { BookManifestEventSchema, EventBatchSchema } from '@bookmanifest/schemas/events'
-
-// Validate a single event
-const event = {
-  id: '550e8400-e29b-41d4-a716-446655440000',
-  timestamp: '2025-12-30T12:00:00Z',
-  session_id: '550e8400-e29b-41d4-a716-446655440001',
-  type: 'heartbeat',
-  context: { /* ... */ },
-  payload: { /* ... */ }
-}
-
-const validEvent = BookManifestEventSchema.parse(event)
-
-// Validate a batch of events
-const batch = { events: [event] }
-const validBatch = EventBatchSchema.parse(batch)
-```
-
-### JSON Schema (Language Agnostic)
+### JSON Schema (language agnostic)
 
 ```javascript
-// Import JSON Schema files directly for use with any validator (Node needs the JSON import attribute)
-import authorSchema from '@bookmanifest/schemas/v0.1/json-schema/entities/author.json' with { type: 'json' }
-// `@bookmanifest/schemas/json-schema/*` is the same v0.1 directory; v0.3 is under `@bookmanifest/schemas/v0.3/json-schema/*`
-// Or read the files from disk
+// Node needs the JSON import attribute.
+import manifestSchema from '@bookmanifest/schemas/json-schema/entities/manifest.json' with { type: 'json' }
+
+// Or read the files from disk.
 import { readFileSync } from 'fs'
-const schema = JSON.parse(readFileSync('./node_modules/@bookmanifest/schemas/v0.1/json-schema/entities/author.json', 'utf-8'))
+const schema = JSON.parse(readFileSync('./node_modules/@bookmanifest/schemas/v0.3/json-schema/entities/manifest.json', 'utf-8'))
 ```
 
-## Available Schemas
+Every schema's `$id` is `https://bookmanifest.org/schemas/v0.3/<path>` and refers to the others by relative path, so a draft 2020-12 validator (for example `ajv/dist/2020`) resolves the whole set once every file is added.
 
-### Entities
+## Structure
 
-- `AuthorSchema` - Author entity
-- `PublisherSchema` - Publisher entity
-- `SeriesSchema` - Book series entity
-- `BookSchema` - Book entity with metadata and pricing
-- `ManifestSchema` - Manifest entity (table of contents)
-- `ChapterSchema` - Chapter entity with ProseMirror content
-- `ReaderSchema` - Reader entity with preferences
-- `LibraryEntrySchema` - Library entry entity with reading progress
-
-### Events
-
-- `BookManifestEventSchema` - Discriminated union of all event types
-- `EventBatchSchema` - Batch of events (1-100 events)
-- `HeartbeatEventSchema` - Reading session heartbeat
-- `ChapterTransitionEventSchema` - Chapter navigation events
-- `BookLifecycleEventSchema` - Book start/complete events
-- `InteractionEventSchema` - User content interactions
-- `AppLifecycleEventSchema` - App state changes
-
-### Validators
-
-- `didSchema` - Book Manifest Decentralized Identifiers (using did:web)
-- `semverSchema` - Semantic versioning
-- `iso8601Schema` - ISO 8601 datetime strings
-- `urlSchema` - HTTP/HTTPS URLs
-- `languageCodeSchema` - ISO 639-1 language codes
-- `currencyCodeSchema` - ISO 4217 currency codes
+- `v0.3/json-schema/` - JSON Schema definitions (source of truth)
+  - `entities/` - Manifest, chapter, book, author, publisher, series, reader, library entry
+  - `events/` - The envelopes, the ten events and the batch
+  - `narrative/` - The narrative layer and its pieces
+  - `validators/` - DIDs, semantic versions, date-times, URLs, paragraph addresses, entity ids
+- `v0.3/typescript/` - TypeScript types generated from the JSON Schemas
+- `v0.3/zod/` - Zod validators
+- `v0.3/narrative/` - Semantic validation, public projection and spoiler-safe cut of a narrative layer
+- `v0.3/examples/` - Valid and invalid examples
+- `v0.3/tests/` - Test suite
 
 ## Development
 
-### Setup
-
 ```bash
 npm install
+npm run build       # Generate TypeScript types and compile to dist/
+npm test            # Vitest suite, then the plain-Node ESM smoke test of the packed package
+npm run typecheck   # Type-check sources and tests
+npm run validate    # Validate every example against the JSON Schemas (invalid ones must fail)
 ```
-
-### Build
-
-```bash
-npm run build       # Generate TypeScript types and compile
-npm run generate    # Generate TypeScript types only
-npm run compile     # Compile TypeScript only
-```
-
-### Testing
-
-```bash
-npm test            # Run test suite
-npm run test:watch  # Run tests in watch mode
-npm run validate    # Validate all example files
-```
-
-### Scripts
-
-- `generate-from-json-schema.js` - Auto-generates TypeScript types from JSON Schema
-- `validate-examples.js` - Validates example files against schemas
 
 ## Contributing
 
-1. JSON Schema is the source of truth - always edit JSON Schema files first
-2. After editing JSON Schema, run `npm run generate` to update TypeScript types
-3. Update Zod validators in `v0.1/zod/` to match JSON Schema changes
-4. Add tests for any new schemas or validators
-5. Run `npm test` and `npm run validate` to ensure all tests pass
+1. JSON Schema is the source of truth: edit the JSON Schema files first.
+2. Run `npm run generate` to update the TypeScript types.
+3. Update the Zod validators in `v0.3/zod/` to match.
+4. Add examples and tests for any new schema or rule.
+5. Run `npm run build`, `npm test`, `npm run typecheck` and `npm run validate`. CI also checks that the committed `dist/` matches a fresh build.
 
 ## License
 

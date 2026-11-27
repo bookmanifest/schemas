@@ -1,8 +1,8 @@
-# Producing a narrative layer and the new reading events (v0.3)
+# Producing a narrative layer and the reading events
 
-> **Status: released in v0.3.0 (2026-11-27).** Every v0.1 document stays valid.
+> **Status: released in 0.3 (2026-11-27).** Companion to the [specification](spec.md); not normative.
 
-What a program that reads a book (a *producer*) must emit to write a v0.3 [narrative layer](narrative-layer.md), and what a reader app must send to support the v0.3 [reading events](reading-events.md). It assumes the producer already reads paragraph by paragraph, cites paragraph addresses and knows, for each fact, the first paragraph after which a reader may know it.
+What a program that reads a book (a *producer*) must emit to write a [narrative layer](spec.md#6-narrative-layer), and what a reader app must send to support the [reading events](spec.md#54-the-reading-events). It assumes the producer already reads paragraph by paragraph, cites paragraph addresses and knows, for each fact, the first paragraph after which a reader may know it.
 
 ## 1. Habits the layer expects
 
@@ -39,7 +39,7 @@ A producer that cannot produce a piece leaves it out; the layer stays valid.
 
 ## 4. What a reader app sends
 
-It keeps sending the v0.1 events unchanged and MAY add:
+It keeps sending the session events and MAY add:
 
 | Event | When |
 |---|---|

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/entities/publisher.json",
+  "title": "Publisher",
+  "description": "Optional entity for traditional publishers or imprints",
+  "type": "object",
+  "required": ["id", "handle", "name", "created_at", "updated_at"],
+  "properties": {
+    "id": {
+      "$ref": "../validators/did.json",
+      "description": "Unique identifier for the publisher"
+    },
+    "handle": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]+\\.(bds\\.pub|[a-zA-Z0-9-]+\\.[a-z]{2,})$",
+      "description": "Human-readable handle (can use custom domain)",
+      "examples": ["planeta.bookmanifest.org", "publisher.example.com"]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Publisher name"
+    },
+    "logo": {
+      "$ref": "../validators/url.json",
+      "description": "Publisher logo URL"
+    },
+    "website": {
+      "$ref": "../validators/url.json",
+      "description": "Official website URL"
+    },
+    "created_at": {
+      "$ref": "../validators/iso8601.json",
+      "description": "Creation timestamp"
+    },
+    "updated_at": {
+      "$ref": "../validators/iso8601.json",
+      "description": "Last update timestamp"
+    }
+  },
+  "additionalProperties": false
+}

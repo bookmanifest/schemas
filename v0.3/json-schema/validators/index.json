@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/validators/index.json",
+  "title": "Book Manifest validators",
+  "$defs": {
+    "did": {
+      "$ref": "./did.json"
+    },
+    "semver": {
+      "$ref": "./semver.json"
+    }
+  }
+}

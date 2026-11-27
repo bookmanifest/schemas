@@ -17,7 +17,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const ROOT_DIR = path.resolve(__dirname, '..')
-const SCHEMAS_DIR = path.join(ROOT_DIR, 'v0.1/json-schema')
+const SCHEMAS_DIR = path.join(ROOT_DIR, 'v0.3/json-schema')
 const ENTITIES_DIR = path.join(SCHEMAS_DIR, 'entities')
 const EVENTS_DIR = path.join(SCHEMAS_DIR, 'events')
 const OUTPUT_DIR = path.join(ROOT_DIR, 'docs/diagrams')
@@ -254,17 +254,19 @@ function extractEventType(name, schema) {
 function generateEventDiagram(events) {
   let diagram = `flowchart TD\n`
   diagram += `    %% Book Manifest Event Hierarchy\n\n`
-  diagram += `    Envelope[\"Event Envelope\\nCommon fields for all events\"]\n\n`
+  diagram += `    Envelope[\"Event Envelope\\nCommon fields of identified events\"]\n`
+  diagram += `    AnonymousEnvelope[\"Anonymous Event Envelope\\nNo reader_id, no session_id\"]\n\n`
 
   const eventTypes = []
 
   for (const [name, schema] of Object.entries(events)) {
-    if (name === 'envelope') continue
+    if (name.startsWith('envelope') || name === 'batch') continue
 
     const eventInfo = extractEventType(name, schema)
     if (eventInfo) {
       eventTypes.push(eventInfo)
-      diagram += `    Envelope -->|"extends\"| ${name.replace(/-/g, '_')}[\"${eventInfo.title}\\ntype: ${eventInfo.type}\"]\n`
+      const parent = schema.allOf?.[0]?.$ref === './envelope-anonymous.json' ? 'AnonymousEnvelope' : 'Envelope'
+      diagram += `    ${parent} -->|"extends\"| ${name.replace(/-/g, '_')}[\"${eventInfo.title}\\ntype: ${eventInfo.type}\"]\n`
     }
   }
 

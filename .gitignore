@@ -5,15 +5,6 @@ spec/
 # Node modules
 node_modules/
 
-# Generated TypeScript files (auto-generated from JSON Schema)
-v0.1/typescript/*.ts
-
-# Generated Zod files (committed manually, not ignored)
-v0.1/zod/*.ts
-!v0.1/zod/validators.ts
-!v0.1/zod/entities.ts
-!v0.1/zod/events.ts
-
 # Logs
 *.log
 

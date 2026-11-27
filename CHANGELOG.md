@@ -5,6 +5,30 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2026-11-27
+
+One format version: **v0.1 is folded into 0.3**. Book Manifest 0.1 existed only as a draft and nobody uses the format yet, so 0.3, the first public version, now holds the manifest and its entities, the session events, the reading events and the narrative layer together. The format stays at 0.3.
+
+### Changed
+
+- The manifest, chapter, book, author, publisher, series, reader and library-entry schemas, the five session events and the URL validator move from `v0.1/json-schema/` to `v0.3/json-schema/`, with `$id`s under `https://bookmanifest.org/schemas/v0.3/`. Every schema refers to the others by relative path; the event batch no longer points into v0.1. The session events use the 0.3 envelope.
+- **The manifest has a required format field, `book_manifest: "0.3"`**, as the narrative layer has `narrative_layer: "0.3"`. A manifest without it, or with another value, is invalid. The manifest's `version` is still the book's version.
+- One Zod module set in `v0.3/zod/`. `EventBatchSchema` and `BookManifestEventSchema` cover all ten events; the five reading events are `ReadingEventSchema`. `EventBatchV03Schema`, `BookManifestEventV03Schema` and `ReadingEventV03Schema` are gone, as are their `*V03` types (now `BookManifestEvent`, `ReadingEvent`, `EventBatch`).
+- Package exports: `.` and its alias `./v0.3` are the 0.3 module (`dist/v0.3/index.js`), `./json-schema/*` and its alias `./v0.3/json-schema/*` the 0.3 JSON Schemas. `main` and `types` point into `dist/v0.3/`. The plain-Node ESM build of 0.3.1 is kept.
+- One spec document, [`docs/v0.3/spec.md`](docs/v0.3/spec.md), with a «Historia» note; it replaces `docs/v0.3/narrative-layer.md` and `docs/v0.3/reading-events.md`.
+- `npm run validate` checks every example (entities, events, narrative layer) with a strict draft 2020-12 validator; it used to check the entities with a lax validator and skip the event batch. `npm run generate` exits non-zero on failure. `npm run typecheck:v0.3` is now `npm run typecheck` (`tsconfig.typecheck.json`). `scripts/generate-diagrams.js` reads the 0.3 schemas and draws `shared_entry` from the anonymous envelope; the diagrams in `docs/diagrams/` are regenerated.
+
+### Removed
+
+- `v0.1/` (schemas, types, Zod sources, examples, tests) and `dist/v0.1/`.
+- Package exports `./v0.1`, `./v0.1/json-schema/*`, `./entities`, `./events` and `./validators`. Import from `@bookmanifest/schemas` instead; the `Entities`, `Events` and `Validators` namespaces are still exported.
+- The v0.1 copies of the DID, semver and date-time validators; 0.3 has one of each.
+
+### Added
+
+- `v0.3/examples/entities/manifest-invalid.json` (a manifest without `book_manifest`), and a test that the manifest requires `book_manifest: "0.3"`.
+- The smoke test checks that the removed entry points fail with `ERR_PACKAGE_PATH_NOT_EXPORTED`, that the tarball has no `v0.1` path, and that `./json-schema/*` and `./v0.3/json-schema/*` serve the same files.
+
 ## [0.3.1] - 2026-11-27
 
 Packaging only: no schema, type, Zod validator or example changes.
