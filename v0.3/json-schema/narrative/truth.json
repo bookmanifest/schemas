@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/truth.json",
+  "title": "Key truth",
+  "description": "One of the few revelations that matter in the book: a fact the reader does not know at first and learns at a precise point. A book has a handful, not hundreds. `evidence` cites the paragraphs of the reveal.",
+  "type": "object",
+  "required": ["id", "text", "revealed_at"],
+  "allOf": [{ "$ref": "common.json#/$defs/support" }],
+  "properties": {
+    "id": { "type": "string", "pattern": "^t-[0-9]{3,}$" },
+    "text": {
+      "description": "The truth as one self-contained sentence in the book's language: full names, an explicit verb, one fact.",
+      "type": "string", "minLength": 1, "maxLength": 500
+    },
+    "subjects": {
+      "description": "Entities the truth is about.",
+      "type": "array", "items": { "$ref": "../validators/entity-id.json" }, "uniqueItems": true, "maxItems": 20
+    },
+    "revealed_at": {
+      "$ref": "../validators/paragraph-address.json",
+      "description": "First paragraph after which a reader may know the truth. Never before the earliest evidence. Spoiler-safe features show the truth only to a reader past this point; a paragraph that is `revealed_at` of a truth is a spoiler for anyone who has not reached it."
+    },
+    "clues": {
+      "description": "Earlier paragraphs that hint at the truth before it is revealed (planted clues). All before `revealed_at`.",
+      "$ref": "common.json#/$defs/addressList"
+    },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false
+}

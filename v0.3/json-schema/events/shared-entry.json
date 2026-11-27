@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/events/shared-entry.json",
+  "title": "Shared Entry Event (v0.3)",
+  "description": "Entry into the book through a shared paragraph link, and whether that entry later leads to starting the book from its beginning. The device keeps the entry paragraph locally and joins arrival and start itself, so the server never links two events of one reader: it counts `arrived` and `began_from_start` per entry paragraph and divides. No reader id, session id, referrer, share token, sharer or channel is sent (anonymous envelope). Each stage is sent at most once per entry per device.",
+  "allOf": [
+    {
+      "$ref": "./envelope-anonymous.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "shared_entry"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "stage",
+            "entry_chapter_id",
+            "entry_chapter_version",
+            "entry_node_id"
+          ],
+          "properties": {
+            "stage": {
+              "type": "string",
+              "enum": [
+                "arrived",
+                "continued_from_entry",
+                "began_from_start"
+              ],
+              "description": "`arrived`: the shared paragraph was opened. `continued_from_entry`: the visitor chose to keep reading from it. `began_from_start`: after this entry, the device reached the first paragraph of the book (at most once per entry)."
+            },
+            "entry_chapter_id": {
+              "$ref": "../validators/did.json"
+            },
+            "entry_chapter_version": {
+              "$ref": "../validators/semver.json"
+            },
+            "entry_node_id": {
+              "type": "string",
+              "pattern": "^p-[0-9]{3,}$",
+              "description": "The shared paragraph."
+            },
+            "days_since_entry": {
+              "type": "string",
+              "enum": [
+                "0",
+                "1-7",
+                "8-30",
+                "31-90"
+              ],
+              "description": "Only for `began_from_start`: coarse delay since the arrival. The device forgets the entry after 90 days or on opt-out."
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "stage": {
+                    "const": "began_from_start"
+                  }
+                },
+                "required": [
+                  "stage"
+                ]
+              },
+              "then": {
+                "required": [
+                  "days_since_entry"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "days_since_entry"
+                  ]
+                }
+              }
+            }
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

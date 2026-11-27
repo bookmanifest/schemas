@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/events/reread.json",
+  "title": "Re-read Event (v0.3)",
+  "description": "The reader went back to an earlier paragraph and stayed there: the destination of a backward jump. Carries two positions and how the reader got there, nothing else. The origin is the context chapter plus `from_node_id`; the destination may be in another chapter.",
+  "allOf": [
+    {
+      "$ref": "./envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "reread"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "from_node_id",
+            "to_chapter_id",
+            "to_chapter_version",
+            "to_node_id",
+            "method"
+          ],
+          "properties": {
+            "from_node_id": {
+              "type": "string",
+              "pattern": "^p-[0-9]{3,}$",
+              "description": "Paragraph the reader was on, in the context chapter."
+            },
+            "to_chapter_id": {
+              "$ref": "../validators/did.json",
+              "description": "Chapter of the paragraph returned to (equal to the context chapter for a jump within it)."
+            },
+            "to_chapter_version": {
+              "$ref": "../validators/semver.json"
+            },
+            "to_node_id": {
+              "type": "string",
+              "pattern": "^p-[0-9]{3,}$",
+              "description": "Paragraph returned to."
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "scroll",
+                "toc_jump",
+                "link_internal",
+                "search",
+                "companion"
+              ],
+              "description": "How the reader went back."
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

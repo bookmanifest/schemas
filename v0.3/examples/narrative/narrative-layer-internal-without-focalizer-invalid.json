@@ -1,0 +1,50 @@
+{
+  "narrative_layer": "0.3",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "entities": [
+    {
+      "id": "e:don-quijote",
+      "kind": "character",
+      "name": "don Quijote",
+      "revealed_at": "capitulo-01#p-008",
+      "aliases": [
+        {
+          "name": "señor Quijana",
+          "revealed_at": "capitulo-05#p-007"
+        }
+      ],
+      "visibility": "public"
+    },
+    {
+      "id": "e:sancho-panza",
+      "kind": "character",
+      "name": "Sancho Panza",
+      "revealed_at": "capitulo-07#p-021",
+      "visibility": "public"
+    },
+    {
+      "id": "e:campo-de-los-molinos",
+      "kind": "place",
+      "name": "el campo de los molinos de viento",
+      "revealed_at": "capitulo-08#p-001",
+      "visibility": "public"
+    }
+  ],
+  "focalization": [
+    {
+      "id": "fz-001",
+      "start": "capitulo-02#p-010",
+      "mode": "internal",
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-02#p-010"
+      ],
+      "quote": "luego que vio la venta, se le representó que era un castillo",
+      "status": "verified",
+      "visibility": "public"
+    }
+  ]
+}

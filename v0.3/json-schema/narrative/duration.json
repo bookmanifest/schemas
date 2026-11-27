@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/duration.json",
+  "title": "Story duration",
+  "description": "How much story time a stretch of text covers (Genette's duration). Approximate by design: a magnitude in one unit, a range, zero (a pause: text, but the story does not advance), or explicitly unknown. Absent means the producer stayed silent.",
+  "type": "object",
+  "allOf": [{ "$ref": "common.json#/$defs/support" }],
+  "properties": {
+    "unit": { "type": "string", "enum": ["second", "minute", "hour", "day", "week", "month", "year"] },
+    "value": { "description": "Approximate magnitude in `unit`. 0 marks a pause.", "type": "number", "minimum": 0 },
+    "min": { "type": "number", "minimum": 0 },
+    "max": { "type": "number", "minimum": 0 },
+    "unknown": {
+      "description": "True when the text gives no way to tell how much time passes. Then no unit or magnitude.",
+      "const": true
+    }
+  },
+  "oneOf": [
+    { "required": ["unit", "value"], "not": { "anyOf": [{ "required": ["min"] }, { "required": ["max"] }, { "required": ["unknown"] }] } },
+    { "required": ["unit", "min", "max"], "not": { "anyOf": [{ "required": ["value"] }, { "required": ["unknown"] }] } },
+    { "required": ["unknown"], "not": { "anyOf": [{ "required": ["unit"] }, { "required": ["value"] }, { "required": ["min"] }, { "required": ["max"] }] } }
+  ],
+  "unevaluatedProperties": false
+}

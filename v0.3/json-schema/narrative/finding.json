@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/finding.json",
+  "title": "Finding",
+  "description": "Something the author may not know about their own book: a continuity slip, a long absence, an imbalance of voices, a divergence between reading and story order, an open question. Always private to the author: a finding can never be public.",
+  "type": "object",
+  "required": ["id", "kind", "text", "evidence", "visibility"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^fd-[0-9]{3,}$" },
+    "kind": { "type": "string", "enum": ["continuity", "absence", "voice_balance", "reading_vs_story_order", "open_question"] },
+    "text": { "description": "What was found, described and never judged.", "type": "string", "minLength": 1, "maxLength": 2000 },
+    "refs": {
+      "description": "Ids of other layer items the finding is about.",
+      "type": "array", "items": { "type": "string", "pattern": "^(e:[a-z0-9]+(?:-[a-z0-9]+)*|(s|fz|t|k|ev|co)-[0-9]{3,})$" }, "uniqueItems": true
+    },
+    "evidence": { "$ref": "common.json#/$defs/addressList" },
+    "visibility": { "const": "author" }
+  },
+  "additionalProperties": false
+}

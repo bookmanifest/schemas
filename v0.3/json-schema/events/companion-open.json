@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/events/companion-open.json",
+  "title": "Companion Open Event (v0.3)",
+  "description": "The reader opened a reading-companion surface (who is who, an entity card, the spoiler-safe map) at a position. Says where readers look for help and about whom; never what they typed or searched.",
+  "allOf": [
+    {
+      "$ref": "./envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "companion_open"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "surface",
+            "at_node_id"
+          ],
+          "properties": {
+            "surface": {
+              "type": "string",
+              "enum": [
+                "who_is_who",
+                "entity_card",
+                "map"
+              ],
+              "description": "Which companion surface was opened."
+            },
+            "entity_id": {
+              "$ref": "../validators/entity-id.json",
+              "description": "The narrative-layer entity shown, when the surface is about one entity. Required for `entity_card`."
+            },
+            "at_node_id": {
+              "type": "string",
+              "pattern": "^p-[0-9]{3,}$",
+              "description": "Paragraph in focus when the companion was opened (context chapter); the companion is cut at this point."
+            },
+            "trigger": {
+              "type": "string",
+              "enum": [
+                "name_tap",
+                "menu"
+              ],
+              "description": "Tapping a name in the text, or the reader menu."
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "surface": {
+                    "const": "entity_card"
+                  }
+                },
+                "required": [
+                  "surface"
+                ]
+              },
+              "then": {
+                "required": [
+                  "entity_id"
+                ]
+              }
+            }
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

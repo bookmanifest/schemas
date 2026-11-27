@@ -1,0 +1,86 @@
+{
+  "book": "Don Quijote de la Mancha, Primera parte, capítulos 1–20",
+  "source": "Project Gutenberg eBook #2000 (public domain); paragraph ids as split by the Book Manifest reader bank",
+  "chapters": [
+    {
+      "slug": "capitulo-01",
+      "paragraphs": 11
+    },
+    {
+      "slug": "capitulo-02",
+      "paragraphs": 29
+    },
+    {
+      "slug": "capitulo-03",
+      "paragraphs": 22
+    },
+    {
+      "slug": "capitulo-04",
+      "paragraphs": 43
+    },
+    {
+      "slug": "capitulo-05",
+      "paragraphs": 25
+    },
+    {
+      "slug": "capitulo-06",
+      "paragraphs": 65
+    },
+    {
+      "slug": "capitulo-07",
+      "paragraphs": 31
+    },
+    {
+      "slug": "capitulo-08",
+      "paragraphs": 51
+    },
+    {
+      "slug": "capitulo-09",
+      "paragraphs": 17
+    },
+    {
+      "slug": "capitulo-10",
+      "paragraphs": 32
+    },
+    {
+      "slug": "capitulo-11",
+      "paragraphs": 22
+    },
+    {
+      "slug": "capitulo-12",
+      "paragraphs": 27
+    },
+    {
+      "slug": "capitulo-13",
+      "paragraphs": 44
+    },
+    {
+      "slug": "capitulo-14",
+      "paragraphs": 23
+    },
+    {
+      "slug": "capitulo-15",
+      "paragraphs": 38
+    },
+    {
+      "slug": "capitulo-16",
+      "paragraphs": 34
+    },
+    {
+      "slug": "capitulo-17",
+      "paragraphs": 48
+    },
+    {
+      "slug": "capitulo-18",
+      "paragraphs": 53
+    },
+    {
+      "slug": "capitulo-19",
+      "paragraphs": 40
+    },
+    {
+      "slug": "capitulo-20",
+      "paragraphs": 61
+    }
+  ]
+}

@@ -1,8 +1,18 @@
-# Book Manifest Schemas v0.1
+# Book Manifest Schemas
 
 Formal schemas for Book Manifest.
 
 This package provides JSON Schema definitions, TypeScript types, and Zod validators for all Book Manifest entities and events. The JSON Schema serves as the source of truth, with TypeScript types and Zod validators auto-generated from it.
+
+## v0.3: narrative layer and reading events
+
+v0.3 adds, beside v0.1 and without changing it, an optional narrative layer (scenes, story duration, focalization, key truths and who knows them, event salience and coreference, with public and author-private visibility) and five new aggregate-only reading events. See [`docs/v0.3/`](docs/v0.3/): the [narrative layer](docs/v0.3/narrative-layer.md), the [reading events](docs/v0.3/reading-events.md), the [rationale](docs/v0.3/rationale.md) and the [producer guide](docs/v0.3/producer-guide.md). Schemas, Zod mirrors, examples and tests live in `v0.3/`.
+
+```typescript
+import { NarrativeLayerSchema, EventBatchV03Schema, validateNarrativeLayer, publicProjection, spoilerSafeCut } from '@bookmanifest/schemas/v0.3'
+```
+
+The JSON Schemas are published under `@bookmanifest/schemas/v0.3/json-schema/*` (for example `narrative/narrative-layer.json` and `events/batch.json`). Everything documented below for v0.1 is unchanged.
 
 ## Installation
 

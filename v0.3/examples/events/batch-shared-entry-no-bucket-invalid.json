@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": "5b2e9f10-0000-4000-8000-000000000013",
+      "timestamp": "2026-11-30T09:00:00Z",
+      "type": "shared_entry",
+      "context": {
+        "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+        "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+        "manifest_version": "1.0.0",
+        "chapter_id": "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-01",
+        "chapter_version": "1.0.0",
+        "device_type": "mobile",
+        "app_id": "bookmanifest-reader-web",
+        "app_version": "1.0.0"
+      },
+      "payload": {
+        "stage": "began_from_start",
+        "entry_chapter_id": "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-08",
+        "entry_chapter_version": "1.0.0",
+        "entry_node_id": "p-005"
+      }
+    }
+  ]
+}

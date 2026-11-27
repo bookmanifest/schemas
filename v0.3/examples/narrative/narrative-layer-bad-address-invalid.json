@@ -1,0 +1,25 @@
+{
+  "narrative_layer": "0.3",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "truths": [
+    {
+      "id": "t-001",
+      "text": "El cura y el barbero mandan tapiar el aposento de los libros de don Quijote; no se lo lleva ningún encantador.",
+      "subjects": [
+        "e:cura",
+        "e:barbero",
+        "e:don-quijote"
+      ],
+      "revealed_at": "capitulo-07-p-010",
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-07#p-010"
+      ],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ]
+}

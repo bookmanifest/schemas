@@ -1,0 +1,27 @@
+{
+  "narrative_layer": "0.3",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "coreference": [
+    {
+      "id": "co-001",
+      "event": "ev-004",
+      "tellings": [
+        {
+          "at": "capitulo-08#p-050"
+        }
+      ],
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-08#p-050",
+        "capitulo-09#p-001",
+        "capitulo-09#p-010"
+      ],
+      "quote": "puestos en la mesma postura que la historia cuenta",
+      "status": "verified",
+      "visibility": "public"
+    }
+  ]
+}
