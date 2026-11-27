@@ -169,6 +169,13 @@ export function validateNarrativeLayer(layer, order) {
     layer.knowledge?.forEach((k, i) => {
         const path = `knowledge[${i}]`;
         checkRevealAfterEvidence(k, path);
+        if (k.until) {
+            checkRevealAfterEvidence(k.until, `${path}.until`);
+            const c = k.since === 'before_text' ? null : cmp(k.since, k.until.at);
+            if (c !== null && c >= 0) {
+                add('range_reversed', `${path}.until.at`, `until.at ${k.until.at} does not come after since ${k.since}`);
+            }
+        }
         ref(k, k.truth, `${path}.truth`);
         ref(k, k.knower, `${path}.knower`, ['character', 'org']);
     });
@@ -226,7 +233,7 @@ export function publicProjection(layer) {
  * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
  * at its revealed_at (each alias at its own); a scene, a focalization span and a setting span at their start; a
  * truth at its revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's
- * revealed_at; a story event at `at`, with only the pickups already passed and its salience only once the first
+ * revealed_at, and its until only once both until.at and until.revealed_at are passed; a story event at `at`, with only the pickups already passed and its salience only once the first
  * pickup is passed; a coreference once its second telling is passed. In every item shown, quotes are dropped and
  * evidence is cut to what the reader has passed; a scene shows its end and duration only once it is over, and
  * never its story order; a span shows its end only once passed; a scene's setting is shown with the scene.
@@ -305,7 +312,13 @@ export function spoilerSafeCut(layer, position, order) {
         passed(k.revealed_at) &&
         (k.since === 'before_text' || passed(k.since)) &&
         met.has(k.knower))
-        .map(cite);
+        .map((k) => {
+        const { until, ...rest } = cite(k);
+        const out = { ...rest };
+        if (until && passed(until.at) && passed(until.revealed_at))
+            out.until = cite(until);
+        return out;
+    });
     const events = pub.events
         ?.filter((e) => passed(e.at))
         .map((e) => {

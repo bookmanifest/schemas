@@ -958,6 +958,52 @@ export declare const KnowledgeSchema: z.ZodEffects<z.ZodObject<{
     holds: z.ZodBoolean;
     since: z.ZodUnion<[z.ZodString, z.ZodLiteral<"before_text">]>;
     revealed_at: z.ZodString;
+    until: z.ZodOptional<z.ZodEffects<z.ZodObject<{
+        at: z.ZodString;
+        revealed_at: z.ZodString;
+        basis: z.ZodEnum<["asserted", "inferred"]>;
+        evidence: z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
+        quote: z.ZodOptional<z.ZodString>;
+        confidence: z.ZodOptional<z.ZodNumber>;
+        status: z.ZodOptional<z.ZodEnum<["verified", "doubtful", "review"]>>;
+        verified_by: z.ZodOptional<z.ZodEffects<z.ZodArray<z.ZodEnum<["producer", "author"]>, "many">, ("author" | "producer")[], ("author" | "producer")[]>>;
+    }, "strict", z.ZodTypeAny, {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    }, {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    }>, {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    }, {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    }>>;
     visibility: z.ZodOptional<z.ZodEnum<["public", "author"]>>;
     basis: z.ZodEnum<["asserted", "inferred"]>;
     evidence: z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
@@ -980,6 +1026,16 @@ export declare const KnowledgeSchema: z.ZodEffects<z.ZodObject<{
     verified_by?: ("author" | "producer")[] | undefined;
     visibility?: "public" | "author" | undefined;
     confidence?: number | undefined;
+    until?: {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    } | undefined;
 }, {
     id: string;
     revealed_at: string;
@@ -995,6 +1051,16 @@ export declare const KnowledgeSchema: z.ZodEffects<z.ZodObject<{
     verified_by?: ("author" | "producer")[] | undefined;
     visibility?: "public" | "author" | undefined;
     confidence?: number | undefined;
+    until?: {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    } | undefined;
 }>, {
     id: string;
     revealed_at: string;
@@ -1010,6 +1076,16 @@ export declare const KnowledgeSchema: z.ZodEffects<z.ZodObject<{
     verified_by?: ("author" | "producer")[] | undefined;
     visibility?: "public" | "author" | undefined;
     confidence?: number | undefined;
+    until?: {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    } | undefined;
 }, {
     id: string;
     revealed_at: string;
@@ -1025,6 +1101,16 @@ export declare const KnowledgeSchema: z.ZodEffects<z.ZodObject<{
     verified_by?: ("author" | "producer")[] | undefined;
     visibility?: "public" | "author" | undefined;
     confidence?: number | undefined;
+    until?: {
+        at: string;
+        revealed_at: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        confidence?: number | undefined;
+    } | undefined;
 }>;
 export declare const StoryEventSchema: z.ZodEffects<z.ZodObject<{
     id: z.ZodString;
@@ -1994,6 +2080,52 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         holds: z.ZodBoolean;
         since: z.ZodUnion<[z.ZodString, z.ZodLiteral<"before_text">]>;
         revealed_at: z.ZodString;
+        until: z.ZodOptional<z.ZodEffects<z.ZodObject<{
+            at: z.ZodString;
+            revealed_at: z.ZodString;
+            basis: z.ZodEnum<["asserted", "inferred"]>;
+            evidence: z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
+            quote: z.ZodOptional<z.ZodString>;
+            confidence: z.ZodOptional<z.ZodNumber>;
+            status: z.ZodOptional<z.ZodEnum<["verified", "doubtful", "review"]>>;
+            verified_by: z.ZodOptional<z.ZodEffects<z.ZodArray<z.ZodEnum<["producer", "author"]>, "many">, ("author" | "producer")[], ("author" | "producer")[]>>;
+        }, "strict", z.ZodTypeAny, {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        }, {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        }>, {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        }, {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        }>>;
         visibility: z.ZodOptional<z.ZodEnum<["public", "author"]>>;
         basis: z.ZodEnum<["asserted", "inferred"]>;
         evidence: z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
@@ -2016,6 +2148,16 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         verified_by?: ("author" | "producer")[] | undefined;
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
+        until?: {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        } | undefined;
     }, {
         id: string;
         revealed_at: string;
@@ -2031,6 +2173,16 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         verified_by?: ("author" | "producer")[] | undefined;
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
+        until?: {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        } | undefined;
     }>, {
         id: string;
         revealed_at: string;
@@ -2046,6 +2198,16 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         verified_by?: ("author" | "producer")[] | undefined;
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
+        until?: {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        } | undefined;
     }, {
         id: string;
         revealed_at: string;
@@ -2061,6 +2223,16 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         verified_by?: ("author" | "producer")[] | undefined;
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
+        until?: {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        } | undefined;
     }>, "many">>;
     events: z.ZodOptional<z.ZodArray<z.ZodEffects<z.ZodObject<{
         id: z.ZodString;
@@ -2395,6 +2567,16 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         verified_by?: ("author" | "producer")[] | undefined;
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
+        until?: {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        } | undefined;
     }[] | undefined;
     coreference?: {
         id: string;
@@ -2587,6 +2769,16 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         verified_by?: ("author" | "producer")[] | undefined;
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
+        until?: {
+            at: string;
+            revealed_at: string;
+            basis: "asserted" | "inferred";
+            evidence: string[];
+            status?: "verified" | "doubtful" | "review" | undefined;
+            quote?: string | undefined;
+            verified_by?: ("author" | "producer")[] | undefined;
+            confidence?: number | undefined;
+        } | undefined;
     }[] | undefined;
     coreference?: {
         id: string;

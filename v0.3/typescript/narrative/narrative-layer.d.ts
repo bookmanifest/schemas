@@ -452,7 +452,7 @@ export type ParagraphAddress7 = string;
  */
 export type AddressList1 = [ParagraphAddress1, ...ParagraphAddress1[]];
 /**
- * What one character knows or believes about one key truth, and from where. Two positions are kept apart: `since`, from which paragraph the character holds it (the character's knowing), and `revealed_at`, from which paragraph a reader may be shown that the character holds it. Both are distinct from the truth's own `revealed_at` (the reader's knowing of the truth). Beliefs may be false.
+ * What one character knows or believes about one key truth, and from where. Two positions are kept apart: `since`, from which paragraph the character holds it (the character's knowing), and `revealed_at`, from which paragraph a reader may be shown that the character holds it. Both are distinct from the truth's own `revealed_at` (the reader's knowing of the truth). Beliefs may be false. An optional `until` says when the character stops holding it.
  */
 export type KnowledgeLink = Support & {
   [k: string]: unknown;
@@ -473,6 +473,10 @@ export type KnowledgeLink = Support & {
    */
   since: ParagraphAddress1 | 'before_text';
   revealed_at: ParagraphAddress8;
+  /**
+   * When the character stops holding it (a false belief corrected, a suspicion dropped, a secret forgotten, a death), with its own support. Absent: the text does not say the character stops holding it.
+   */
+  until?: Support;
   /**
    * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
    */

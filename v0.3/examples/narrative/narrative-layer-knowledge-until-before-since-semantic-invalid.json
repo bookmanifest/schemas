@@ -1,0 +1,59 @@
+{
+  "narrative_layer": "0.3",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "entities": [
+    {
+      "id": "e:don-quijote",
+      "kind": "character",
+      "name": "don Quijote",
+      "revealed_at": "capitulo-01#p-008",
+      "visibility": "public"
+    }
+  ],
+  "truths": [
+    {
+      "id": "t-002",
+      "text": "Los gigantes que ve don Quijote son molinos de viento.",
+      "subjects": [
+        "e:don-quijote"
+      ],
+      "revealed_at": "capitulo-08#p-001",
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-08#p-001",
+        "capitulo-08#p-005"
+      ],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "k-005",
+      "truth": "t-002",
+      "knower": "e:don-quijote",
+      "stance": "believes",
+      "holds": false,
+      "since": "capitulo-08#p-002",
+      "revealed_at": "capitulo-08#p-002",
+      "until": {
+        "at": "capitulo-08#p-001",
+        "revealed_at": "capitulo-08#p-001",
+        "basis": "asserted",
+        "evidence": [
+          "capitulo-08#p-001"
+        ]
+      },
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-08#p-002",
+        "capitulo-08#p-013"
+      ],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ]
+}

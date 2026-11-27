@@ -5,6 +5,19 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.6] - 2026-11-28
+
+A knowledge link may say **when the character stops holding** its truth. Additive: every 0.3.5 layer is still valid, and `narrative_layer` stays `"0.3"`.
+
+### Added
+
+- `until` on the knowledge link ([`knowledge.json`](v0.3/json-schema/narrative/knowledge.json)): a nested assertion with its own support, as a scene's `time` and `duration` are. `at` is the paragraph from which the character no longer holds it (a false belief corrected, a suspicion dropped, a secret forgotten, a death); `revealed_at` is the first paragraph after which a reader may know that.
+- Zod: `until` in `KnowledgeSchema`, strict, with the support's rules; the generated types gain the optional field.
+- Semantics: `until.at` must come after `since` unless `since` is `before_text` (`range_reversed`), and `until.revealed_at` must not come before `until`'s earliest evidence (`revealed_before_evidence`); its addresses go through `unknown_address`. `publicProjection` keeps the field. `spoilerSafeCut` shows a link's `until` only once the reader has passed both `until.at` and `until.revealed_at`, with the quote dropped and evidence cut; before that it is left out. New type `KnowledgeView`.
+- Examples: `narrative-layer-knowledge-until-before-since-semantic-invalid.json`, which passes the schema and fails the semantic rules. The Quijote example carries no `until`: in the fixture paragraphs don Quijote never gives up either false belief (`capitulo-08#p-013`, where he says Frestón turned the giants into windmills, is evidence that he still holds them).
+- Tests: the schema in JSON Schema and Zod (including `verified_by` on `until`), both semantic rules, the projection, and the cut before, between and after `until.at` and `until.revealed_at`.
+- Docs: spec section 6.5.7 defines `until`, the gates table in 6.6 and rules 5 and 6 in 6.7 cover it; a producer-guide line.
+
 ## [0.3.5] - 2026-11-27
 
 A sixth **reading event**, `access_gate`. It is additive: every 0.3.4 batch is still valid.

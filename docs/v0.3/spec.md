@@ -365,6 +365,8 @@ The layer does not describe emotion or tone; that belongs to another layer. In t
 
 Both differ from the truth's own `revealed_at`, which is when the **reader** may know the truth. `stance` is `knows`, `believes` or `suspects`; `holds` is `true` when the character holds the truth as stated and `false` when the character holds its contrary. **A belief may be false**: `knows` requires `holds: true`, the other stances do not.
 
+A link MAY say when the character **stops holding it** (a false belief corrected, a suspicion dropped, a secret forgotten, a death): `until`, an object with its own support, like a scene's `time`. `until.at` is the paragraph from which the character no longer holds it and MUST come after `since` (unless `since` is `before_text`); `until.revealed_at` is the first paragraph after which a reader may know that the character stopped holding it, and MUST NOT come before the earliest of `until`'s own evidence. Without `until`, the text does not say that the character stops holding it.
+
 With truths and knowledge links a consumer can tell, at any paragraph, who is in the dark: the reader knows the truth (its `revealed_at` is passed), a character is present (in the scene's cast), and that character holds no true link to it yet. In the example, the reader learns at `capitulo-07#p-010` that the priest and the barber walled up the library; the housekeeper and the niece know (`k-001`, `k-002`); don Quijote believes, wrongly, that an enchanter took it (`k-003`, `holds: false`), and still believes it in chapter 8.
 
 #### 6.5.8. Event salience ([`story-event.json`](../../v0.3/json-schema/narrative/story-event.json))
@@ -395,7 +397,7 @@ Public items are shown to a reader only once that reader has passed the item's *
 | Focalization span | `start` | only if its focalizer is already shown; `end` only once passed |
 | Setting span | `start` | `place` only if already shown; `end` only once passed |
 | Truth | `revealed_at` | only subjects already shown |
-| Knowledge link | the latest of its `revealed_at`, its `since` and its truth's `revealed_at` | only if its knower is already shown |
+| Knowledge link | the latest of its `revealed_at`, its `since` and its truth's `revealed_at` | only if its knower is already shown; its `until` only once both `until.at` and `until.revealed_at` are passed (before that it is left out entirely) |
 | Story event | `at` | pickups only once passed; the label `kernel` only from the first pickup (before it, saying "kernel" announces that the book comes back) |
 | Coreference | its second telling | tellings only once passed |
 
@@ -413,8 +415,8 @@ A layer is valid when it passes the JSON Schema **and** these semantic rules, wh
 2. Every reference resolves: places (of scenes, scene settings and setting spans), cast, focalizers, knowers, subjects, truths, events, tellers, `continues`, finding `refs`.
 3. Kinds match: a `place` is an entity of kind `place`; cast and focalizers are characters; knowers and tellers are characters or organisations.
 4. Every address exists in the manifest version.
-5. Ranges do not end before they start; scenes do not overlap; focalization spans do not overlap; setting spans do not overlap.
-6. `revealed_at` (truths, knowledge links) does not come before the earliest evidence.
+5. Ranges do not end before they start; a knowledge link's `until.at` comes after its `since`; scenes do not overlap; focalization spans do not overlap; setting spans do not overlap.
+6. `revealed_at` (truths, knowledge links and their `until`) does not come before the earliest evidence.
 7. Clues come before the truth's `revealed_at`; pickups come after the event's `at`; a scene `continues` one that ends before it starts.
 8. No public item references a non-public item.
 
