@@ -110,6 +110,15 @@ describe('public projection', () => {
     expect(projected.setting!.map((st) => st.id)).toEqual(['st-001', 'st-002', 'st-003', 'st-004', 'st-005', 'st-006', 'st-008'])
   })
 
+  it('keeps who verified each item', () => {
+    const projected = publicProjection(fresh())
+    expect(projected.scenes!.find((s) => s.id === 's-001')!.verified_by).toEqual(['producer'])
+    expect(projected.knowledge!.find((k) => k.id === 'k-003')!.verified_by).toEqual(['author'])
+    const view = spoilerSafeCut(fresh(), 'capitulo-08#p-013', order)
+    expect(view.scenes!.find((s) => s.id === 's-001')!.verified_by).toEqual(['producer'])
+    expect(view.knowledge!.find((k) => k.id === 'k-003')!.verified_by).toEqual(['author'])
+  })
+
   it('drops the setting piece when no span is public', () => {
     const layer = fresh()
     layer.setting!.forEach((st) => (st.visibility = 'author'))

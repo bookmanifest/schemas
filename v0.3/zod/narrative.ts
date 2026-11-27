@@ -24,14 +24,24 @@ const supportShape = {
   evidence: addressList,
   quote: z.string().min(1).max(1000).optional(),
   confidence: z.number().min(0).max(1).optional(),
-  status: z.enum(['verified', 'doubtful', 'review']).optional()
+  status: z.enum(['verified', 'doubtful', 'review']).optional(),
+  verified_by: z
+    .array(z.enum(['producer', 'author']))
+    .min(1)
+    .max(2)
+    .refine((items) => new Set(items).size === items.length, { message: 'verified_by must be unique' })
+    .optional()
 }
 
-type Supported = { basis: 'asserted' | 'inferred'; quote?: string }
+type Supported = { basis: 'asserted' | 'inferred'; quote?: string; status?: string; verified_by?: string[] }
 
-function requireQuoteWhenInferred(item: Supported, ctx: z.RefinementCtx) {
+// The support's own rules: an inferred item quotes; only a verified item says who verified it.
+function checkSupport(item: Supported, ctx: z.RefinementCtx) {
   if (item.basis === 'inferred' && item.quote === undefined) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['quote'], message: 'An inferred item must carry a quote' })
+  }
+  if (item.verified_by !== undefined && item.status !== 'verified') {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['verified_by'], message: 'Only a verified item has verified_by' })
   }
 }
 
@@ -60,7 +70,7 @@ export const DurationSchema = z
   })
   .strict()
   .superRefine((d, ctx) => {
-    requireQuoteWhenInferred(d, ctx)
+    checkSupport(d, ctx)
     const point = d.unit !== undefined && d.value !== undefined && d.min === undefined && d.max === undefined && !d.unknown
     const range = d.unit !== undefined && d.min !== undefined && d.max !== undefined && d.value === undefined && !d.unknown
     const unknown = d.unknown === true && d.unit === undefined && d.value === undefined && d.min === undefined && d.max === undefined
@@ -80,7 +90,7 @@ const SceneTimeSchema = z
   })
   .strict()
   .superRefine((t, ctx) => {
-    requireQuoteWhenInferred(t, ctx)
+    checkSupport(t, ctx)
     if (t.label === undefined && t.date === undefined) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'A scene time needs a label or a date' })
     }
@@ -118,7 +128,7 @@ const SETTING_SLOTS = Object.keys(settingSlots).filter((k) => k !== 'plane_level
 type Frame = Supported & { [K in keyof typeof settingSlots]?: unknown }
 
 function checkFrame(f: Frame, ctx: z.RefinementCtx) {
-  requireQuoteWhenInferred(f, ctx)
+  checkSupport(f, ctx)
   if (!SETTING_SLOTS.some((k) => f[k] !== undefined)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'A setting needs at least one slot' })
   }
@@ -173,7 +183,7 @@ export const SceneSchema = z
     visibility: VisibilitySchema.optional()
   })
   .strict()
-  .superRefine(requireQuoteWhenInferred)
+  .superRefine(checkSupport)
 
 export const FocalizationSchema = z
   .object({
@@ -187,7 +197,7 @@ export const FocalizationSchema = z
   })
   .strict()
   .superRefine((f, ctx) => {
-    requireQuoteWhenInferred(f, ctx)
+    checkSupport(f, ctx)
     if (f.mode === 'internal' && f.focalizer === undefined) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['focalizer'], message: 'Internal focalization needs a focalizer' })
     }
@@ -211,7 +221,7 @@ export const TruthSchema = z
     visibility: VisibilitySchema.optional()
   })
   .strict()
-  .superRefine(requireQuoteWhenInferred)
+  .superRefine(checkSupport)
 
 export const KnowledgeSchema = z
   .object({
@@ -227,7 +237,7 @@ export const KnowledgeSchema = z
   })
   .strict()
   .superRefine((k, ctx) => {
-    requireQuoteWhenInferred(k, ctx)
+    checkSupport(k, ctx)
     if (k.stance === 'knows' && !k.holds) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['holds'], message: 'A character who knows a truth holds it' })
     }
@@ -245,7 +255,7 @@ export const StoryEventSchema = z
   })
   .strict()
   .superRefine((e, ctx) => {
-    requireQuoteWhenInferred(e, ctx)
+    checkSupport(e, ctx)
     if (e.salience === 'kernel' && e.picked_up_at === undefined) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['picked_up_at'], message: 'A kernel lists where the book picks it up' })
     }
@@ -266,7 +276,7 @@ export const CoreferenceSchema = z
     visibility: VisibilitySchema.optional()
   })
   .strict()
-  .superRefine(requireQuoteWhenInferred)
+  .superRefine(checkSupport)
 
 export const FindingSchema = z
   .object({

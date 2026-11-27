@@ -148,6 +148,9 @@
       ],
       "quote": "De allí a dos días se levantó don Quijote",
       "status": "verified",
+      "verified_by": [
+        "producer"
+      ],
       "visibility": "public"
     },
     {
@@ -574,6 +577,9 @@
       ],
       "quote": "aquel sabio Frestón que me robó el aposento y los libros",
       "status": "verified",
+      "verified_by": [
+        "author"
+      ],
       "visibility": "public"
     },
     {

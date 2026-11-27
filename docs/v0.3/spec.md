@@ -1,6 +1,6 @@
 # Book Manifest 0.3
 
-> **Status: released (package 0.3.3, 2026-11-27).** This is the only version of the format.
+> **Status: released (package 0.3.4, 2026-11-27).** This is the only version of the format.
 
 Book Manifest is an open format for books that are published in versions and read on screen: who wrote a book, what each published version contains, what happens while people read it, and, optionally, how the book is told. This document specifies all of it:
 
@@ -242,6 +242,7 @@ Every item except entities and findings carries a **support** ([`common.json#/$d
 - `evidence`: one or more distinct addresses whose text supports the item.
 - `quote`: the literal words, copied from one of the evidence paragraphs, that justify the item. **Required when `basis` is `inferred`.**
 - `confidence` (0–1, informative) and `status` (`verified`, `doubtful`, `review`; absent means not verified) MAY be given.
+- `verified_by` MAY say who verified the item, and is allowed only when `status` is `verified`: a list of one or both of `producer` (the program that wrote the layer checked the item against its cited paragraphs) and `author` (the book's author confirmed it by hand, typically an item the producer left `doubtful`). Absent says nothing about who verified the item.
 
 Nested assertions carry their own support: a scene's `time`, `duration` and `setting` are cited separately from the scene's boundaries.
 
@@ -261,7 +262,7 @@ A public item MUST NOT reference a non-public item: a public scene may only cast
 
 **The public projection** is mechanical: drop every item whose `visibility` is not `public`, drop `findings`, keep the header. A layer that passes validation projects without dangling references. The projection of the example is [`narrative-layer-public.json`](../../v0.3/examples/narrative/narrative-layer-public.json). Only the public projection may leave the author's workspace.
 
-Producers SHOULD mark public only items whose `status` is `verified`.
+Producers SHOULD mark public only items whose `status` is `verified`, whatever the source (`verified_by`).
 
 ### 6.5. The pieces
 
