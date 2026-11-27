@@ -259,9 +259,19 @@ export type SpoilerWarningEvent = EventEnvelope & {
   };
   [k: string]: unknown;
 };
+/**
+ * The reader reached a chapter they cannot read yet, and the app showed the way in instead of its text: buy the book, subscribe, or wait. The chapter is the context chapter. It is not reading: the chapter was not opened, so no chapter_transition or heartbeat follows from it.
+ */
+export type AccessGateEvent = EventEnvelope & {
+  type?: 'access_gate';
+  payload?: {
+    [k: string]: unknown;
+  };
+  [k: string]: unknown;
+};
 
 /**
- * A batch of 1 to 100 events: the five session events (heartbeat, chapter_transition, book_lifecycle, interaction, app_lifecycle) and the five reading events (reread, shared_entry, companion_open, recap_view, spoiler_warning).
+ * A batch of 1 to 100 events: the five session events (heartbeat, chapter_transition, book_lifecycle, interaction, app_lifecycle) and the six reading events (reread, shared_entry, companion_open, recap_view, spoiler_warning, access_gate).
  */
 export interface EventBatch {
   /**
@@ -280,6 +290,7 @@ export interface EventBatch {
       | CompanionOpenEvent
       | RecapViewEvent
       | SpoilerWarningEvent
+      | AccessGateEvent
     ),
     ...(
       | HeartbeatEvent
@@ -292,6 +303,7 @@ export interface EventBatch {
       | CompanionOpenEvent
       | RecapViewEvent
       | SpoilerWarningEvent
+      | AccessGateEvent
     )[]
   ];
 }
@@ -316,7 +328,8 @@ export interface EventEnvelope {
     | 'reread'
     | 'companion_open'
     | 'recap_view'
-    | 'spoiler_warning';
+    | 'spoiler_warning'
+    | 'access_gate';
   /**
    * Groups events from one reading session
    */

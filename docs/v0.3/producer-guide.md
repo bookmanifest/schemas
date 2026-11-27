@@ -50,5 +50,6 @@ It keeps sending the session events and MAY add:
 | `companion_open` | opening who-is-who, an entity card or the map |
 | `recap_view` | offering, viewing or dismissing the recap |
 | `spoiler_warning` | showing the warning before sharing or copying the link of a paragraph that reveals a public key truth, and the reader's answer |
+| `access_gate` | showing a gate (buy, subscribe or wait) in place of a chapter the reader cannot read yet. It replaces the chapter's `chapter_transition` and `heartbeat`: a gated chapter is never entered |
 
 Any reader-facing companion shows the layer only through the spoiler-safe cut (`spoilerSafeCut`), for the reader's current paragraph.

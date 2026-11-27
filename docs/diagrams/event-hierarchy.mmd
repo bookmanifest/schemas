@@ -4,6 +4,7 @@ flowchart TD
     Envelope["Event Envelope\nCommon fields of identified events"]
     AnonymousEnvelope["Anonymous Event Envelope\nNo reader_id, no session_id"]
 
+    Envelope -->|"extends"| access_gate["Access Gate Event\ntype: access_gate"]
     Envelope -->|"extends"| app_lifecycle["App Lifecycle Event\ntype: app_lifecycle"]
     Envelope -->|"extends"| book_lifecycle["Book Lifecycle Event\ntype: book_lifecycle"]
     Envelope -->|"extends"| chapter_transition["Chapter Transition Event\ntype: chapter_transition"]
@@ -16,6 +17,7 @@ flowchart TD
     Envelope -->|"extends"| spoiler_warning["Spoiler Warning Event\ntype: spoiler_warning"]
 
     %% Event Types
+    %% access-gate: The reader reached a chapter they cannot read yet, and the app showed the way in instead of its text: buy the book, subscribe, or wait. The chapter is the context chapter. It is not reading: the chapter was not opened, so no chapter_transition or heartbeat follows from it.
     %% app-lifecycle: App state changes (open, background, foreground, close)
     %% book-lifecycle: Major milestones in book reading (started, completed)
     %% chapter-transition: Fired when the user moves between chapters

@@ -1038,6 +1038,107 @@ export declare const SpoilerWarningEventSchema: z.ZodObject<{
         surface: "share" | "copy_link";
     };
 }>;
+export declare const AccessGateEventSchema: z.ZodObject<{
+    id: z.ZodString;
+    timestamp: z.ZodString;
+    session_id: z.ZodString;
+    context: z.ZodObject<{
+        reader_id: z.ZodString;
+        book_id: z.ZodString;
+        manifest_id: z.ZodString;
+        manifest_version: z.ZodString;
+        chapter_id: z.ZodString;
+        chapter_version: z.ZodString;
+        device_type: z.ZodEnum<["mobile", "tablet", "desktop"]>;
+        app_id: z.ZodString;
+        app_version: z.ZodString;
+    }, "strict", z.ZodTypeAny, {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    }, {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    }>;
+} & {
+    type: z.ZodLiteral<"access_gate">;
+    payload: z.ZodEffects<z.ZodObject<{
+        gate: z.ZodEnum<["purchase", "subscription", "wait"]>;
+        signed_in: z.ZodBoolean;
+        unlocks_at: z.ZodOptional<z.ZodString>;
+    }, "strict", z.ZodTypeAny, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }>, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }>;
+}, "strict", z.ZodTypeAny, {
+    type: "access_gate";
+    id: string;
+    timestamp: string;
+    session_id: string;
+    context: {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    };
+    payload: {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    };
+}, {
+    type: "access_gate";
+    id: string;
+    timestamp: string;
+    session_id: string;
+    context: {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    };
+    payload: {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    };
+}>;
 export declare const ReadingEventSchema: z.ZodDiscriminatedUnion<"type", [z.ZodObject<{
     id: z.ZodString;
     timestamp: z.ZodString;
@@ -1541,6 +1642,106 @@ export declare const ReadingEventSchema: z.ZodDiscriminatedUnion<"type", [z.ZodO
         action: "shown" | "accepted" | "cancelled";
         target_node_id: string;
         surface: "share" | "copy_link";
+    };
+}>, z.ZodObject<{
+    id: z.ZodString;
+    timestamp: z.ZodString;
+    session_id: z.ZodString;
+    context: z.ZodObject<{
+        reader_id: z.ZodString;
+        book_id: z.ZodString;
+        manifest_id: z.ZodString;
+        manifest_version: z.ZodString;
+        chapter_id: z.ZodString;
+        chapter_version: z.ZodString;
+        device_type: z.ZodEnum<["mobile", "tablet", "desktop"]>;
+        app_id: z.ZodString;
+        app_version: z.ZodString;
+    }, "strict", z.ZodTypeAny, {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    }, {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    }>;
+} & {
+    type: z.ZodLiteral<"access_gate">;
+    payload: z.ZodEffects<z.ZodObject<{
+        gate: z.ZodEnum<["purchase", "subscription", "wait"]>;
+        signed_in: z.ZodBoolean;
+        unlocks_at: z.ZodOptional<z.ZodString>;
+    }, "strict", z.ZodTypeAny, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }>, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }>;
+}, "strict", z.ZodTypeAny, {
+    type: "access_gate";
+    id: string;
+    timestamp: string;
+    session_id: string;
+    context: {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    };
+    payload: {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    };
+}, {
+    type: "access_gate";
+    id: string;
+    timestamp: string;
+    session_id: string;
+    context: {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    };
+    payload: {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
     };
 }>]>;
 export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z.ZodObject<{
@@ -2571,6 +2772,106 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         action: "shown" | "accepted" | "cancelled";
         target_node_id: string;
         surface: "share" | "copy_link";
+    };
+}>, z.ZodObject<{
+    id: z.ZodString;
+    timestamp: z.ZodString;
+    session_id: z.ZodString;
+    context: z.ZodObject<{
+        reader_id: z.ZodString;
+        book_id: z.ZodString;
+        manifest_id: z.ZodString;
+        manifest_version: z.ZodString;
+        chapter_id: z.ZodString;
+        chapter_version: z.ZodString;
+        device_type: z.ZodEnum<["mobile", "tablet", "desktop"]>;
+        app_id: z.ZodString;
+        app_version: z.ZodString;
+    }, "strict", z.ZodTypeAny, {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    }, {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    }>;
+} & {
+    type: z.ZodLiteral<"access_gate">;
+    payload: z.ZodEffects<z.ZodObject<{
+        gate: z.ZodEnum<["purchase", "subscription", "wait"]>;
+        signed_in: z.ZodBoolean;
+        unlocks_at: z.ZodOptional<z.ZodString>;
+    }, "strict", z.ZodTypeAny, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }>, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }, {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    }>;
+}, "strict", z.ZodTypeAny, {
+    type: "access_gate";
+    id: string;
+    timestamp: string;
+    session_id: string;
+    context: {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    };
+    payload: {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
+    };
+}, {
+    type: "access_gate";
+    id: string;
+    timestamp: string;
+    session_id: string;
+    context: {
+        chapter_id: string;
+        chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
+        device_type: "mobile" | "tablet" | "desktop";
+        app_id: string;
+        app_version: string;
+    };
+    payload: {
+        gate: "subscription" | "purchase" | "wait";
+        signed_in: boolean;
+        unlocks_at?: string | undefined;
     };
 }>]>;
 export declare const EventBatchSchema: z.ZodObject<{
@@ -3603,6 +3904,106 @@ export declare const EventBatchSchema: z.ZodObject<{
             target_node_id: string;
             surface: "share" | "copy_link";
         };
+    }>, z.ZodObject<{
+        id: z.ZodString;
+        timestamp: z.ZodString;
+        session_id: z.ZodString;
+        context: z.ZodObject<{
+            reader_id: z.ZodString;
+            book_id: z.ZodString;
+            manifest_id: z.ZodString;
+            manifest_version: z.ZodString;
+            chapter_id: z.ZodString;
+            chapter_version: z.ZodString;
+            device_type: z.ZodEnum<["mobile", "tablet", "desktop"]>;
+            app_id: z.ZodString;
+            app_version: z.ZodString;
+        }, "strict", z.ZodTypeAny, {
+            chapter_id: string;
+            chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
+            device_type: "mobile" | "tablet" | "desktop";
+            app_id: string;
+            app_version: string;
+        }, {
+            chapter_id: string;
+            chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
+            device_type: "mobile" | "tablet" | "desktop";
+            app_id: string;
+            app_version: string;
+        }>;
+    } & {
+        type: z.ZodLiteral<"access_gate">;
+        payload: z.ZodEffects<z.ZodObject<{
+            gate: z.ZodEnum<["purchase", "subscription", "wait"]>;
+            signed_in: z.ZodBoolean;
+            unlocks_at: z.ZodOptional<z.ZodString>;
+        }, "strict", z.ZodTypeAny, {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        }, {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        }>, {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        }, {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        }>;
+    }, "strict", z.ZodTypeAny, {
+        type: "access_gate";
+        id: string;
+        timestamp: string;
+        session_id: string;
+        context: {
+            chapter_id: string;
+            chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
+            device_type: "mobile" | "tablet" | "desktop";
+            app_id: string;
+            app_version: string;
+        };
+        payload: {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        };
+    }, {
+        type: "access_gate";
+        id: string;
+        timestamp: string;
+        session_id: string;
+        context: {
+            chapter_id: string;
+            chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
+            device_type: "mobile" | "tablet" | "desktop";
+            app_id: string;
+            app_version: string;
+        };
+        payload: {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        };
     }>]>, "many">;
 }, "strict", z.ZodTypeAny, {
     events: ({
@@ -3832,6 +4233,27 @@ export declare const EventBatchSchema: z.ZodObject<{
             target_node_id: string;
             surface: "share" | "copy_link";
         };
+    } | {
+        type: "access_gate";
+        id: string;
+        timestamp: string;
+        session_id: string;
+        context: {
+            chapter_id: string;
+            chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
+            device_type: "mobile" | "tablet" | "desktop";
+            app_id: string;
+            app_version: string;
+        };
+        payload: {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
+        };
     })[];
 }, {
     events: ({
@@ -4060,6 +4482,27 @@ export declare const EventBatchSchema: z.ZodObject<{
             action: "shown" | "accepted" | "cancelled";
             target_node_id: string;
             surface: "share" | "copy_link";
+        };
+    } | {
+        type: "access_gate";
+        id: string;
+        timestamp: string;
+        session_id: string;
+        context: {
+            chapter_id: string;
+            chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
+            device_type: "mobile" | "tablet" | "desktop";
+            app_id: string;
+            app_version: string;
+        };
+        payload: {
+            gate: "subscription" | "purchase" | "wait";
+            signed_in: boolean;
+            unlocks_at?: string | undefined;
         };
     })[];
 }>;

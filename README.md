@@ -35,7 +35,7 @@ const manifest = ManifestSchema.parse(rawManifest) // manifest.book_manifest ===
 const result = BookSchema.safeParse(rawBook)
 if (!result.success) console.error(result.error)
 
-// A batch of 1 to 100 events of any of the ten types.
+// A batch of 1 to 100 events of any of the eleven types.
 EventBatchSchema.parse({ events })
 ```
 
@@ -69,7 +69,7 @@ Every schema's `$id` is `https://bookmanifest.org/schemas/v0.3/<path>` and refer
 
 - `v0.3/json-schema/` - JSON Schema definitions (source of truth)
   - `entities/` - Manifest, chapter, book, author, publisher, series, reader, library entry
-  - `events/` - The envelopes, the ten events and the batch
+  - `events/` - The envelopes, the eleven events and the batch
   - `narrative/` - The narrative layer and its pieces
   - `validators/` - DIDs, semantic versions, date-times, URLs, paragraph addresses, entity ids
 - `v0.3/typescript/` - TypeScript types generated from the JSON Schemas

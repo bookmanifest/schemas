@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/batch.json",
   "title": "Event Batch",
-  "description": "A batch of 1 to 100 events: the five session events (heartbeat, chapter_transition, book_lifecycle, interaction, app_lifecycle) and the five reading events (reread, shared_entry, companion_open, recap_view, spoiler_warning).",
+  "description": "A batch of 1 to 100 events: the five session events (heartbeat, chapter_transition, book_lifecycle, interaction, app_lifecycle) and the six reading events (reread, shared_entry, companion_open, recap_view, spoiler_warning, access_gate).",
   "type": "object",
   "required": [
     "events"
@@ -43,6 +43,9 @@
           },
           {
             "$ref": "./spoiler-warning.json"
+          },
+          {
+            "$ref": "./access-gate.json"
           }
         ]
       }

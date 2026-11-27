@@ -49,7 +49,8 @@ export interface EventEnvelope {
     | 'reread'
     | 'companion_open'
     | 'recap_view'
-    | 'spoiler_warning';
+    | 'spoiler_warning'
+    | 'access_gate';
   /**
    * Groups events from one reading session
    */

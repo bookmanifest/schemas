@@ -1,5 +1,5 @@
 // Book Manifest 0.3 events: the five session events (heartbeat, chapter_transition, book_lifecycle, interaction,
-// app_lifecycle) and the five reading events (reread, shared_entry, companion_open, recap_view, spoiler_warning).
+// app_lifecycle) and the six reading events (reread, shared_entry, companion_open, recap_view, spoiler_warning, access_gate).
 // Reading-event payloads are closed (.strict()): positions, ids and enums only; no text, no free strings, no exact
 // durations, nothing that identifies a person. See docs/v0.3/spec.md.
 import { z } from 'zod';
@@ -157,13 +157,29 @@ export const SpoilerWarningEventSchema = BaseEventSchema.extend({
     })
         .strict()
 }).strict();
-// The five reading events.
+export const AccessGateEventSchema = BaseEventSchema.extend({
+    type: z.literal('access_gate'),
+    payload: z
+        .object({
+        gate: z.enum(['purchase', 'subscription', 'wait']),
+        signed_in: z.boolean(),
+        unlocks_at: iso8601Schema.optional()
+    })
+        .strict()
+        .superRefine((p, ctx) => {
+        if (p.gate !== 'wait' && p.unlocks_at !== undefined) {
+            ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['unlocks_at'], message: 'unlocks_at is only for the wait gate' });
+        }
+    })
+}).strict();
+// The six reading events.
 export const ReadingEventSchema = z.discriminatedUnion('type', [
     RereadEventSchema,
     SharedEntryEventSchema,
     CompanionOpenEventSchema,
     RecapViewEventSchema,
-    SpoilerWarningEventSchema
+    SpoilerWarningEventSchema,
+    AccessGateEventSchema
 ]);
 // Any event (discriminated union by 'type').
 export const BookManifestEventSchema = z.discriminatedUnion('type', [
@@ -176,7 +192,8 @@ export const BookManifestEventSchema = z.discriminatedUnion('type', [
     SharedEntryEventSchema,
     CompanionOpenEventSchema,
     RecapViewEventSchema,
-    SpoilerWarningEventSchema
+    SpoilerWarningEventSchema,
+    AccessGateEventSchema
 ]);
 // Event batch (what gets sent to the API): 1 to 100 events.
 export const EventBatchSchema = z
