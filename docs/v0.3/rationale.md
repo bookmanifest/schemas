@@ -37,6 +37,7 @@ The setting has **no emotion or tone**. What a passage feels like is a reading, 
 | `companion_open` | The situation model is updated with each new character (Zwaan and Radvansky); a large cast loads it. | Where readers need help with who is who, and about whom. |
 | `recap_view` | The same: after a long pause the situation model has to be rebuilt. | Which pauses and which points make readers want a recap. |
 | `spoiler_warning` | Same as `shared_entry`. | How often a reveal is about to be shared, and how often readers hold back. |
+| `access_gate` | Not a finding about reading: a book sold by the chapter, or opened by waiting, needs to know where readers meet the gate. It is kept apart from `chapter_transition` so that a chapter nobody could read is never counted as read. | For each chapter, how many readers met the gate and of which kind, to be read next to purchases and to the chapters opened afterwards. |
 
 ## Sources
 

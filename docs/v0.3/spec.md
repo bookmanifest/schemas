@@ -14,7 +14,7 @@ The key words MUST, MUST NOT, SHOULD and MAY are to be read as in RFC 2119.
 
 ## 1. Historia
 
-Version 0.1 existed only as a draft: the manifest, the entities and the five session events, never published as a stable version. 0.2 was never a version of the format (the number was used by a private program's output contract). **0.3 is the first public version.** It contains everything 0.1 had, folded in unchanged except for the manifest's new `book_manifest` field, plus the narrative layer and five reading events. The v0.1 schemas are no longer part of this repository or the package; a manifest written against them becomes a 0.3 manifest by adding `book_manifest: "0.3"`.
+Version 0.1 existed only as a draft: the manifest, the entities and the five session events, never published as a stable version. 0.2 was never a version of the format (the number was used by a private program's output contract). **0.3 is the first public version.** It contains everything 0.1 had, folded in unchanged except for the manifest's new `book_manifest` field, plus the narrative layer and six reading events. The v0.1 schemas are no longer part of this repository or the package; a manifest written against them becomes a 0.3 manifest by adding `book_manifest: "0.3"`.
 
 ## 2. Versions
 
@@ -88,7 +88,7 @@ The stable record of a work: `id`, `title`, `slug`, `author_ids` (co-authorship 
 
 ## 5. Events
 
-Schemas: [`v0.3/json-schema/events/`](../../v0.3/json-schema/events/). A reader app sends events in a [batch](../../v0.3/json-schema/events/batch.json) of 1 to 100. Example: [`batch-valid.json`](../../v0.3/examples/events/batch-valid.json). There are ten event types: five **session events** (section 5.3) and five **reading events** (section 5.4).
+Schemas: [`v0.3/json-schema/events/`](../../v0.3/json-schema/events/). A reader app sends events in a [batch](../../v0.3/json-schema/events/batch.json) of 1 to 100. Example: [`batch-valid.json`](../../v0.3/examples/events/batch-valid.json). There are eleven event types: five **session events** (section 5.3) and six **reading events** (section 5.4).
 
 ### 5.1. Privacy rules
 
@@ -98,11 +98,11 @@ These rules apply to every event:
 - Events carry positions and enumerated values, never text: no selected text, no annotation. The `interaction` schema still defines optional `text_selection` and `annotation` fields; a reader app SHOULD NOT send them.
 - What an author sees is aggregated: no figure about fewer than a minimum number of readers, and nothing about one reader.
 
-The five reading events add these rules, enforced by their schemas:
+The six reading events add these rules, enforced by their schemas:
 
 1. **Closed payloads.** Every payload has `additionalProperties: false`. A field that was not designed in cannot be sent.
-2. **No free-form strings.** Every payload field is an enum, a pattern-checked id (paragraph node id, chapter DID, entity id) or a semantic version. A test checks this for every reading event.
-3. **Coarse time.** Gaps are sent as buckets (`dormancy`, `days_since_entry`), never as exact seconds.
+2. **No free-form strings.** Every payload field is an enum, a pattern-checked id (paragraph node id, chapter DID, entity id), a semantic version, a boolean or a timestamp. A test checks this for every reading event.
+3. **Coarse time.** Gaps are sent as buckets (`dormancy`, `days_since_entry`), never as exact seconds. The one timestamp, `unlocks_at` of `access_gate`, is a point the app set for a chapter, not a measure of the reader.
 4. **No joins across events.** Each event is meaningful alone and is counted as it comes: per paragraph, per entity, per outcome. When a question needs two moments of one reader (arrival through a shared link, then starting the book), the **device** joins them and sends the result. The server never has to link two events of the same reader.
 5. **No identity where the question is about a door, not a reader.** `shared_entry` uses an anonymous envelope with **no `reader_id` and no `session_id`**, and each of its stages is sent at most once per entry per device, so counting events stands in for counting readers.
 
@@ -126,7 +126,7 @@ Five events describe a reading session. Each uses the identified envelope and ha
 
 ### 5.4. The reading events
 
-Five events a reader app MAY send. They tell an author **where** readers go back, enter, look for help and hesitate to share, so that it can be set against **what** the book is doing at that point (the [narrative layer](#6-narrative-layer)). They do not tell anyone who did it.
+Six events a reader app MAY send. They tell an author **where** readers go back, enter, look for help and hesitate to share, so that it can be set against **what** the book is doing at that point (the [narrative layer](#6-narrative-layer)). They do not tell anyone who did it.
 
 #### 5.4.1. `reread`
 
@@ -199,6 +199,20 @@ Never what the reader typed or searched.
 Which truths the paragraph reveals is known from the narrative layer and is not sent.
 
 **Aggregates to:** how often each reveal is about to be shared, and how often readers hold back.
+
+#### 5.4.6. `access_gate`
+
+**When:** the reader reaches a chapter they cannot read yet, and the app shows the way in (buy, subscribe or wait) instead of the chapter's text. One event each time the gate is shown for a chapter. The chapter is the context chapter.
+
+| Field | |
+|---|---|
+| `gate` | `purchase` (the book has to be bought), `subscription` (a subscription is needed) or `wait` (the chapter opens by itself after a delay) |
+| `signed_in` | `true` when the reader had an account signed in |
+| `unlocks_at` | only with `wait`: when the chapter opens by itself (optional) |
+
+**A gate is not reading.** The chapter was not opened, so a reader app MUST NOT send a `chapter_transition` into it, a `heartbeat` for it or a `book_lifecycle` that counts it as started, and a consumer MUST NOT count an `access_gate` as a chapter open, a view or reading time. It is a commercial signal, not a reading one: where readers meet a gate and what they do next is read from the events that follow (the chapter being opened once it is unlocked, or not).
+
+**Aggregates to:** for each chapter, how many readers met the gate, by kind of gate and whether signed in.
 
 ### 5.5. What no reading event carries
 

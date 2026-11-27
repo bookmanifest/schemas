@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/events/access-gate.json",
+  "title": "Access Gate Event",
+  "description": "The reader reached a chapter they cannot read yet, and the app showed the way in instead of its text: buy the book, subscribe, or wait. The chapter is the context chapter. It is not reading: the chapter was not opened, so no chapter_transition or heartbeat follows from it.",
+  "allOf": [
+    {
+      "$ref": "./envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "access_gate"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "gate",
+            "signed_in"
+          ],
+          "properties": {
+            "gate": {
+              "type": "string",
+              "enum": [
+                "purchase",
+                "subscription",
+                "wait"
+              ],
+              "description": "What stands between the reader and the chapter. `purchase`: the book has to be bought. `subscription`: a subscription is needed. `wait`: the chapter opens by itself after a delay."
+            },
+            "signed_in": {
+              "type": "boolean",
+              "description": "Whether the reader had an account signed in when the gate was shown."
+            },
+            "unlocks_at": {
+              "$ref": "../validators/iso8601.json",
+              "description": "Only for `wait`: when the chapter opens by itself."
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "gate": {
+                    "const": "wait"
+                  }
+                },
+                "required": [
+                  "gate"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "unlocks_at"
+                  ]
+                }
+              }
+            }
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

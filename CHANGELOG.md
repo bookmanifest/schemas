@@ -5,6 +5,17 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.5] - 2026-11-27
+
+A sixth **reading event**, `access_gate`. It is additive: every 0.3.3 batch is still valid.
+
+### Added
+
+- **`access_gate`** ([`v0.3/json-schema/events/access-gate.json`](v0.3/json-schema/events/access-gate.json)): the reader reached a chapter they cannot read yet and the app showed the way in instead of its text. Identified envelope; payload `gate` (`purchase`, `subscription`, `wait`), `signed_in` (boolean) and, only with `wait`, `unlocks_at` (when the chapter opens by itself). The chapter is the context chapter. A gate is not reading: the chapter was never opened, so no `chapter_transition`, `heartbeat` or `book_lifecycle` follows from it, and a consumer must not count it as a chapter open.
+- Zod: `AccessGateEventSchema`, in `ReadingEventSchema`, `BookManifestEventSchema` and `EventBatchSchema`. The batch and envelope schemas list the new type.
+- Examples: two `access_gate` events in `batch-valid.json`; invalid examples for `unlocks_at` on a gate that is not `wait` and for a free-form field.
+- Docs: spec section 5.4.6 (the eleven event types, the privacy rules now cover six reading events), a producer-guide row and a rationale row. The privacy test accepts a boolean field.
+
 ## [0.3.4] - 2026-11-27
 
 A support may say **who verified** its item. Additive: every 0.3.3 layer is still valid, and `narrative_layer` stays `"0.3"`.

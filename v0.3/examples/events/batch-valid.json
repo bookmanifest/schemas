@@ -298,6 +298,49 @@
         "entry_node_id": "p-005",
         "days_since_entry": "1-7"
       }
+    },
+    {
+      "id": "5b2e9f10-0000-4000-8000-000000000014",
+      "timestamp": "2026-11-30T09:10:00Z",
+      "type": "access_gate",
+      "session_id": "7a1d2c3e-0000-4000-8000-000000000001",
+      "context": {
+        "reader_id": "did:web:bookmanifest.org:reader:3f6c1a52-8d0e-4b7a-9c41-2e5d7f9a0b13",
+        "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+        "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+        "manifest_version": "1.0.0",
+        "chapter_id": "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-09",
+        "chapter_version": "1.0.0",
+        "device_type": "mobile",
+        "app_id": "bookmanifest-reader-web",
+        "app_version": "1.0.0"
+      },
+      "payload": {
+        "gate": "purchase",
+        "signed_in": false
+      }
+    },
+    {
+      "id": "5b2e9f10-0000-4000-8000-000000000015",
+      "timestamp": "2026-11-30T09:12:00Z",
+      "type": "access_gate",
+      "session_id": "7a1d2c3e-0000-4000-8000-000000000001",
+      "context": {
+        "reader_id": "did:web:bookmanifest.org:reader:3f6c1a52-8d0e-4b7a-9c41-2e5d7f9a0b13",
+        "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+        "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+        "manifest_version": "1.0.0",
+        "chapter_id": "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-09",
+        "chapter_version": "1.0.0",
+        "device_type": "mobile",
+        "app_id": "bookmanifest-reader-web",
+        "app_version": "1.0.0"
+      },
+      "payload": {
+        "gate": "wait",
+        "signed_in": true,
+        "unlocks_at": "2026-12-01T09:12:00Z"
+      }
     }
   ]
 }
