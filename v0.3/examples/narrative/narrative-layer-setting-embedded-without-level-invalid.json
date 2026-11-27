@@ -1,0 +1,21 @@
+{
+  "narrative_layer": "0.3",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "setting": [
+    {
+      "id": "st-001",
+      "start": "capitulo-08#p-001",
+      "plane": "embedded",
+      "voice": "character_telling",
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-08#p-001"
+      ],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ]
+}

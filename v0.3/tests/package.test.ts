@@ -11,7 +11,7 @@ const pkg = readJson('./package.json')
 const code = { types: './dist/v0.3/index.d.ts', default: './dist/v0.3/index.js' }
 
 describe('package', () => {
-  it('is version 0.3.2', () => expect(pkg.version).toBe('0.3.2'))
+  it('is version 0.3.3', () => expect(pkg.version).toBe('0.3.3'))
 
   it('exports 0.3 and nothing else', () => {
     expect(pkg.main).toBe(code.default)

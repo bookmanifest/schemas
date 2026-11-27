@@ -51,7 +51,23 @@ describe('semantic validation (v0.3)', () => {
     ['a public knowledge link on a private truth', (l) => (l.truths![0].visibility = 'author'), 'public_references_private'],
     ['a public scene casting a private entity', (l) => delete l.entities![1].visibility, 'public_references_private'],
     ['a duration range whose min exceeds its max', (l) => Object.assign(l.scenes![2].duration!, { min: 40 }), 'range_reversed'],
-    ['the same paragraph listed twice as a telling', (l) => l.coreference![0].tellings.push({ at: 'capitulo-09#p-001' }), 'duplicate_telling']
+    ['the same paragraph listed twice as a telling', (l) => l.coreference![0].tellings.push({ at: 'capitulo-09#p-001' }), 'duplicate_telling'],
+    ['overlapping setting spans', (l) => (l.setting![2].end = 'capitulo-07#p-012'), 'overlap'],
+    ['a setting span that ends before it starts', (l) => (l.setting![3].end = 'capitulo-07#p-011'), 'range_reversed'],
+    ['a setting span in a place that is a character', (l) => (l.setting![0].place = 'e:ventero'), 'wrong_entity_kind'],
+    ['a setting span in an unknown place', (l) => (l.setting![0].place = 'e:toboso'), 'unknown_reference'],
+    ['a scene setting in a place that is a character', (l) => (l.scenes![2].setting!.place = 'e:sancho-panza'), 'wrong_entity_kind'],
+    ['a setting span past the end of the chapter', (l) => (l.setting![7].end = 'capitulo-09#p-018'), 'unknown_address'],
+    ['two setting spans with the same id', (l) => (l.setting![0].id = 'st-002'), 'duplicate_id'],
+    ['a public setting span in a private place', (l) => delete l.entities![11].visibility, 'public_references_private'],
+    [
+      'a public scene whose setting is in a private place',
+      (l) => {
+        l.entities!.push({ id: 'e:molino', kind: 'place', name: 'el primero molino', revealed_at: 'capitulo-08#p-011' })
+        l.scenes![2].setting!.place = 'e:molino'
+      },
+      'public_references_private'
+    ]
   ]
   for (const [name, mutate, code] of cases) {
     it(`reports ${code}: ${name}`, () => {
@@ -62,12 +78,42 @@ describe('semantic validation (v0.3)', () => {
   }
 })
 
+describe('setting spans: semantic rules', () => {
+  it('the overlapping-spans example passes the schema and fails only for overlap', () => {
+    const layer = readJson('./v0.3/examples/narrative/narrative-layer-setting-overlap-semantic-invalid.json')
+    const issues = validateNarrativeLayer(layer, order)
+    expect(issues.map((i) => i.code)).toEqual(['overlap'])
+    expect(issues[0].path).toBe('setting[1]')
+  })
+
+  it('spans that touch without sharing a paragraph do not overlap, and spans need not cover every paragraph', () => {
+    const layer = fresh()
+    layer.setting![1].end = 'capitulo-07#p-010'
+    layer.setting![2].end = 'capitulo-07#p-011'
+    expect(codes(layer)).toEqual([])
+  })
+
+  it('a span across a chapter boundary overlaps the next chapter\'s span only with the reading order', () => {
+    const layer = fresh()
+    layer.setting![5].end = 'capitulo-09#p-001'
+    expect(codes(layer)).toContain('overlap')
+    expect(validateNarrativeLayer(layer).map((i) => i.code)).not.toContain('overlap')
+  })
+})
+
 describe('public projection', () => {
   it('keeps public items only and never findings', () => {
     const projected = publicProjection(fresh())
     expect(projected).toEqual(readJson('./v0.3/examples/narrative/narrative-layer-public.json'))
     expect(projected.findings).toBeUndefined()
     expect(projected.focalization!.map((f) => f.id)).not.toContain('fz-003')
+    expect(projected.setting!.map((st) => st.id)).toEqual(['st-001', 'st-002', 'st-003', 'st-004', 'st-005', 'st-006', 'st-008'])
+  })
+
+  it('drops the setting piece when no span is public', () => {
+    const layer = fresh()
+    layer.setting!.forEach((st) => (st.visibility = 'author'))
+    expect('setting' in publicProjection(layer)).toBe(false)
   })
 
   it('leaves no dangling reference', () => {
@@ -126,9 +172,44 @@ describe('spoiler-safe cut', () => {
     expect(after.duration).toMatchObject({ unit: 'minute', min: 5, max: 30 })
   })
 
+  it('shows a setting span from its start and its end only once passed', () => {
+    expect(spoilerSafeCut(fresh(), 'capitulo-07#p-011', order).setting!.map((st) => st.id)).toEqual(['st-001', 'st-002', 'st-003'])
+    const during = spoilerSafeCut(fresh(), 'capitulo-07#p-012', order).setting!.find((st) => st.id === 'st-004')!
+    expect(during).toMatchObject({ start: 'capitulo-07#p-012', mode: 'dialogue', company: 'group', evidence: ['capitulo-07#p-012'] })
+    expect(during.end).toBeUndefined()
+    expect('quote' in during).toBe(false)
+    const after = spoilerSafeCut(fresh(), 'capitulo-07#p-014', order).setting!.find((st) => st.id === 'st-004')!
+    expect(after.end).toBe('capitulo-07#p-014')
+    expect(after.evidence).toEqual(['capitulo-07#p-012', 'capitulo-07#p-013', 'capitulo-07#p-014'])
+  })
+
+  it('shows a setting span\'s place only once the place is shown', () => {
+    const layer = fresh()
+    layer.entities!.find((e) => e.id === 'e:venta')!.revealed_at = 'capitulo-02#p-011'
+    const before = spoilerSafeCut(layer, 'capitulo-02#p-010', order).setting!.find((st) => st.id === 'st-001')!
+    expect(before.place).toBeUndefined()
+    expect(before.enclosure).toBe('exterior')
+    const after = spoilerSafeCut(layer, 'capitulo-02#p-011', order).setting!.find((st) => st.id === 'st-001')!
+    expect(after.place).toBe('e:venta')
+  })
+
+  it('shows a scene\'s setting with the scene, without its quote, with evidence cut and the place only once shown', () => {
+    const during = spoilerSafeCut(fresh(), 'capitulo-08#p-005', order).scenes!.find((s) => s.id === 's-003')!
+    expect(during.setting).toEqual({
+      enclosure: 'exterior', place: 'e:campo-de-los-molinos', surroundings: 'nature', plane: 'main', voice: 'outside_narrator',
+      company: 'two', basis: 'inferred', evidence: ['capitulo-08#p-001'], status: 'verified'
+    })
+    const layer = fresh()
+    layer.entities!.find((e) => e.id === 'e:campo-de-los-molinos')!.revealed_at = 'capitulo-08#p-002'
+    const unmet = spoilerSafeCut(layer, 'capitulo-08#p-001', order).scenes!.find((s) => s.id === 's-003')!
+    expect(unmet.setting!.place).toBeUndefined()
+    expect(unmet.setting!.enclosure).toBe('exterior')
+  })
+
   it('never contains author-private items', () => {
     const view = spoilerSafeCut(fresh(), 'capitulo-20#p-001', order)
     expect(JSON.stringify(view)).not.toContain('fz-003')
+    expect(JSON.stringify(view)).not.toContain('st-007')
     expect('findings' in view).toBe(false)
   })
 })

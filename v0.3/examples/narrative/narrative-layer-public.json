@@ -197,6 +197,21 @@
         ],
         "quote": "arremetió a todo el galope de Rocinante y embistió con el primero molino que estaba delante"
       },
+      "setting": {
+        "enclosure": "exterior",
+        "place": "e:campo-de-los-molinos",
+        "surroundings": "nature",
+        "plane": "main",
+        "voice": "outside_narrator",
+        "company": "two",
+        "basis": "inferred",
+        "evidence": [
+          "capitulo-08#p-001",
+          "capitulo-08#p-007"
+        ],
+        "quote": "descubrieron treinta o cuarenta molinos de viento que hay en aquel campo",
+        "status": "verified"
+      },
       "basis": "asserted",
       "evidence": [
         "capitulo-08#p-001"
@@ -334,6 +349,125 @@
         "capitulo-08#p-001"
       ],
       "quote": "descubrieron treinta o cuarenta molinos de viento",
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "setting": [
+    {
+      "id": "st-001",
+      "start": "capitulo-02#p-010",
+      "enclosure": "exterior",
+      "place": "e:venta",
+      "plane": "main",
+      "voice": "outside_narrator",
+      "mode": "scene",
+      "company": "group",
+      "animals": true,
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-02#p-010"
+      ],
+      "quote": "se llegó a la puerta de la venta, y vio a las dos destraídas mozas que allí estaban",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "st-002",
+      "start": "capitulo-07#p-010",
+      "place": "e:casa-de-don-quijote",
+      "date_or_reference": "De allí a dos días",
+      "plane": "main",
+      "voice": "outside_narrator",
+      "mode": "summary",
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-07#p-010"
+      ],
+      "quote": "De allí a dos días se levantó don Quijote",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "st-003",
+      "start": "capitulo-07#p-011",
+      "enclosure": "interior",
+      "place": "e:casa-de-don-quijote",
+      "plane": "main",
+      "voice": "outside_narrator",
+      "mode": "scene",
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-07#p-011"
+      ],
+      "quote": "Llegaba adonde solía tener la puerta, y tentábala con las manos",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "st-004",
+      "start": "capitulo-07#p-012",
+      "end": "capitulo-07#p-014",
+      "enclosure": "interior",
+      "place": "e:casa-de-don-quijote",
+      "plane": "main",
+      "voice": "outside_narrator",
+      "mode": "dialogue",
+      "company": "group",
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-07#p-012",
+        "capitulo-07#p-013",
+        "capitulo-07#p-014"
+      ],
+      "quote": "replicó la sobrina",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "st-005",
+      "start": "capitulo-08#p-001",
+      "enclosure": "exterior",
+      "place": "e:campo-de-los-molinos",
+      "surroundings": "nature",
+      "plane": "main",
+      "voice": "outside_narrator",
+      "mode": "scene",
+      "company": "two",
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-08#p-001"
+      ],
+      "quote": "descubrieron treinta o cuarenta molinos de viento que hay en aquel campo",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "st-006",
+      "start": "capitulo-08#p-021",
+      "enclosure": "exterior",
+      "surroundings": "nature",
+      "plane": "main",
+      "voice": "outside_narrator",
+      "mode": "summary",
+      "company": "two",
+      "basis": "inferred",
+      "evidence": [
+        "capitulo-08#p-021"
+      ],
+      "quote": "aquella noche la pasaron entre unos árboles",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "st-008",
+      "start": "capitulo-09#p-006",
+      "place": "e:alcana-de-toledo",
+      "date_or_reference": "un día",
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-09#p-006"
+      ],
       "status": "verified",
       "visibility": "public"
     }

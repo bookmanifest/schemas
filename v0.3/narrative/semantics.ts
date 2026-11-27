@@ -7,6 +7,8 @@ import type {
   Scene,
   Duration,
   Focalization,
+  Setting,
+  SettingSummary,
   Truth,
   Knowledge,
   StoryEvent,
@@ -88,6 +90,7 @@ export function validateNarrativeLayer(layer: NarrativeLayer, order?: ReadingOrd
     ['entities', layer.entities],
     ['scenes', layer.scenes],
     ['focalization', layer.focalization],
+    ['setting', layer.setting],
     ['truths', layer.truths],
     ['knowledge', layer.knowledge],
     ['events', layer.events],
@@ -176,6 +179,7 @@ export function validateNarrativeLayer(layer: NarrativeLayer, order?: ReadingOrd
       add('range_reversed', `${path}.duration`, `Duration min ${s.duration.min} is greater than max ${s.duration.max}`)
     }
     ref(s, s.place, `${path}.place`, ['place'])
+    ref(s, s.setting?.place, `${path}.setting.place`, ['place'])
     s.cast?.forEach((c, j) => ref(s, c, `${path}.cast[${j}]`, ['character']))
     if (s.continues !== undefined) {
       ref(s, s.continues, `${path}.continues`)
@@ -194,6 +198,13 @@ export function validateNarrativeLayer(layer: NarrativeLayer, order?: ReadingOrd
     ref(f, f.focalizer, `${path}.focalizer`, ['character'])
   })
   if (layer.focalization) checkNoOverlap(layer.focalization, 'focalization')
+
+  layer.setting?.forEach((st: Setting, i) => {
+    const path = `setting[${i}]`
+    checkRange(st.start, st.end, path)
+    ref(st, st.place, `${path}.place`, ['place'])
+  })
+  if (layer.setting) checkNoOverlap(layer.setting, 'setting')
 
   layer.truths?.forEach((t: Truth, i) => {
     const path = `truths[${i}]`
@@ -251,6 +262,7 @@ export function publicProjection(layer: NarrativeLayer): NarrativeLayer {
     entities: keep(layer.entities),
     scenes: keep(layer.scenes),
     focalization: keep(layer.focalization),
+    setting: keep(layer.setting),
     truths: keep(layer.truths),
     knowledge: keep(layer.knowledge),
     events: keep(layer.events),
@@ -266,10 +278,11 @@ export function publicProjection(layer: NarrativeLayer): NarrativeLayer {
 export type Cited<T> = Omit<T, 'quote' | 'evidence'> & { evidence?: string[] }
 
 /** A scene in the cut: `end` and `duration` only once the scene is over; `story_order` never. */
-export type SceneView = Omit<Cited<Scene>, 'end' | 'duration' | 'time' | 'story_order'> & {
+export type SceneView = Omit<Cited<Scene>, 'end' | 'duration' | 'time' | 'setting' | 'story_order'> & {
   end?: string
   time?: Cited<NonNullable<Scene['time']>>
   duration?: Cited<Duration>
+  setting?: Cited<SettingSummary>
 }
 
 /** A spoiler-safe view: a public layer cut at a position. Not a layer document. */
@@ -277,6 +290,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
   entities?: Entity[]
   scenes?: SceneView[]
   focalization?: Cited<Focalization>[]
+  setting?: Cited<Setting>[]
   truths?: Cited<Truth>[]
   knowledge?: Cited<Knowledge>[]
   events?: Array<Omit<Cited<StoryEvent>, 'salience'> & { salience?: StoryEvent['salience'] }>
@@ -286,13 +300,13 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
 /**
  * The spoiler-safe cut of a public layer for a reader at `position`: only what that reader may know, and no
  * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
- * at its revealed_at (each alias at its own); a scene and a focalization span at their start; a truth at its
- * revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's revealed_at; a story
- * event at `at`, with only the pickups already passed and its salience only once the first pickup is passed; a
- * coreference once its second telling is passed. In every item shown, quotes are dropped and evidence is cut to
- * what the reader has passed; a scene shows its end and duration only once it is over, and never its story
- * order; a span shows its end only once passed. References to entities the reader has not met are dropped.
- * Items whose position cannot be ordered are left out.
+ * at its revealed_at (each alias at its own); a scene, a focalization span and a setting span at their start; a
+ * truth at its revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's
+ * revealed_at; a story event at `at`, with only the pickups already passed and its salience only once the first
+ * pickup is passed; a coreference once its second telling is passed. In every item shown, quotes are dropped and
+ * evidence is cut to what the reader has passed; a scene shows its end and duration only once it is over, and
+ * never its story order; a span shows its end only once passed; a scene's setting is shown with the scene.
+ * References to entities the reader has not met are dropped. Items whose position cannot be ordered are left out.
  */
 export function spoilerSafeCut(layer: NarrativeLayer, position: string, order: ReadingOrder): SpoilerSafeView {
   const passed = (address: string) => {
@@ -324,13 +338,17 @@ export function spoilerSafeCut(layer: NarrativeLayer, position: string, order: R
   const scenes = pub.scenes
     ?.filter((s) => passed(s.start))
     .map((s) => {
-      const { end, duration, time, story_order: _order, ...rest } = cite(s)
+      const { end, duration, time, setting, story_order: _order, ...rest } = cite(s)
       const out: SceneView = { ...rest }
       if (passed(end)) {
         out.end = end
         if (duration) out.duration = cite(duration)
       }
       if (time) out.time = cite(time)
+      if (setting) {
+        out.setting = cite(setting)
+        if (out.setting.place !== undefined && !met.has(out.setting.place)) delete out.setting.place
+      }
       if (out.place !== undefined && !met.has(out.place)) delete out.place
       if (out.cast) out.cast = out.cast.filter((c) => met.has(c))
       return out
@@ -340,6 +358,14 @@ export function spoilerSafeCut(layer: NarrativeLayer, position: string, order: R
     .map((f) => {
       const out = cite(f)
       if (out.end !== undefined && !passed(out.end)) delete out.end
+      return out
+    })
+  const setting = pub.setting
+    ?.filter((st) => passed(st.start))
+    .map((st) => {
+      const out = cite(st)
+      if (out.end !== undefined && !passed(out.end)) delete out.end
+      if (out.place !== undefined && !met.has(out.place)) delete out.place
       return out
     })
   const knowledge = pub.knowledge
@@ -369,8 +395,19 @@ export function spoilerSafeCut(layer: NarrativeLayer, position: string, order: R
     }))
     .filter((co) => co.tellings.length >= 2)
 
-  const { findings: _findings, entities: _e, scenes: _s, focalization: _f, truths: _t, knowledge: _k, events: _ev, coreference: _c, ...header } = pub
-  const cut: SpoilerSafeView = { ...header, entities, scenes, focalization, truths, knowledge, events, coreference }
+  const {
+    findings: _findings,
+    entities: _e,
+    scenes: _s,
+    focalization: _f,
+    setting: _st,
+    truths: _t,
+    knowledge: _k,
+    events: _ev,
+    coreference: _c,
+    ...header
+  } = pub
+  const cut: SpoilerSafeView = { ...header, entities, scenes, focalization, setting, truths, knowledge, events, coreference }
   for (const key of Object.keys(cut) as Array<keyof SpoilerSafeView>) {
     const value = cut[key]
     if (value === undefined || (Array.isArray(value) && value.length === 0)) delete cut[key]

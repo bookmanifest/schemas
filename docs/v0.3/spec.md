@@ -1,6 +1,6 @@
 # Book Manifest 0.3
 
-> **Status: released (package 0.3.2, 2026-11-27).** This is the only version of the format.
+> **Status: released (package 0.3.3, 2026-11-27).** This is the only version of the format.
 
 Book Manifest is an open format for books that are published in versions and read on screen: who wrote a book, what each published version contains, what happens while people read it, and, optionally, how the book is told. This document specifies all of it:
 
@@ -206,7 +206,7 @@ Text of the book or of the reader, names, search terms, URLs, referrers, share t
 
 ## 6. Narrative layer
 
-The narrative layer describes **how a book is told**: where its scenes begin and end and how much story time they cover, who perceives each passage, which few revelations matter and who knows them, which events the book comes back to, and which events it tells more than once. It is optional and sits beside the manifest: a book without a narrative layer is complete.
+The narrative layer describes **how a book is told**: where its scenes begin and end and how much story time they cover, who perceives each passage, the frame each passage is told in (where, when, in whose voice, how), which few revelations matter and who knows them, which events the book comes back to, and which events it tells more than once. It is optional and sits beside the manifest: a book without a narrative layer is complete.
 
 Schemas: [`v0.3/json-schema/narrative/`](../../v0.3/json-schema/narrative/). Example: [`narrative-layer-valid.json`](../../v0.3/examples/narrative/narrative-layer-valid.json) (Cervantes, *Don Quijote*, part I, chapters 1–20, public domain).
 
@@ -221,7 +221,7 @@ A narrative layer is a JSON document, separate from the manifest, bound to **one
 | `manifest_version` | yes | The manifest version every address resolves against. |
 | `language` | yes | ISO 639-1 language of every text field. |
 | `generated_at`, `generator` | no | When and by which program (name and version only, no personal data). |
-| `entities`, `scenes`, `focalization`, `truths`, `knowledge`, `events`, `coreference`, `findings` | no | The pieces. Any subset may be present. |
+| `entities`, `scenes`, `focalization`, `setting`, `truths`, `knowledge`, `events`, `coreference`, `findings` | no | The pieces. Any subset may be present. |
 
 Manifests are immutable and closed (`additionalProperties: false`), so the layer points at the manifest, not the other way round. A new manifest version needs a new layer; a layer may be produced, corrected or withdrawn without touching the manifest.
 
@@ -243,7 +243,7 @@ Every item except entities and findings carries a **support** ([`common.json#/$d
 - `quote`: the literal words, copied from one of the evidence paragraphs, that justify the item. **Required when `basis` is `inferred`.**
 - `confidence` (0–1, informative) and `status` (`verified`, `doubtful`, `review`; absent means not verified) MAY be given.
 
-Nested assertions carry their own support: a scene's `time` and `duration` are cited separately from the scene's boundaries.
+Nested assertions carry their own support: a scene's `time`, `duration` and `setting` are cited separately from the scene's boundaries.
 
 A producer MAY stay silent: an absent piece or field means "not stated", never "none". A producer MUST NOT guess: an item it cannot support is left out.
 
@@ -271,7 +271,7 @@ Characters, places, organisations and objects the other pieces refer to: `id` (`
 
 #### 6.5.2. Scenes ([`scene.json`](../../v0.3/json-schema/narrative/scene.json))
 
-A **contiguous range of paragraphs, in reading order, with one place, one story time and one cast**: `start` and `end` (inclusive), optional `place` (an entity of kind `place`), `time` (`label` and/or `date` with its own support), `cast` (characters present), `story_order` and `duration`.
+A **contiguous range of paragraphs, in reading order, with one place, one story time and one cast**: `start` and `end` (inclusive), optional `place` (an entity of kind `place`), `time` (`label` and/or `date` with its own support), `cast` (characters present), `story_order`, `duration` and `setting` (the frame that holds over the scene, section 6.5.5).
 
 - Scenes MUST NOT overlap. They need not cover every paragraph: a narrator's digression may belong to no scene.
 - A scene MAY cross a chapter boundary.
@@ -301,9 +301,38 @@ Genette's tempos (scene, summary, ellipsis, pause) are **derived**, not stored: 
 - `zero`: an unrestricted narrator, no character's perception. No `focalizer`.
 - `external`: only what an outside observer could see. No `focalizer`.
 
-Spans MUST NOT overlap. A span may match a scene, part of one, or a single paragraph. Who narrates is not part of the layer: it remains a fact of the producer's paragraph-level output. In the example the same scene at the inn has two internal focalizers in turn: don Quijote, who sees a castle (`fz-001`), and the innkeeper, who sees a poor horse (`fz-002`).
+Spans MUST NOT overlap. A span may match a scene, part of one, or a single paragraph. Who narrates is not a focalization: the kind of narrating voice is a slot of setting spans (section 6.5.5). In the example the same scene at the inn has two internal focalizers in turn: don Quijote, who sees a castle (`fz-001`), and the innkeeper, who sees a poor horse (`fz-002`).
 
-#### 6.5.5. Key truths ([`truth.json`](../../v0.3/json-schema/narrative/truth.json))
+#### 6.5.5. Setting ([`setting.json`](../../v0.3/json-schema/narrative/setting.json))
+
+A **setting span** is a run of paragraphs, in reading order, over which the **frame of the narration** holds: where the text is, when, on which plane, in whose voice, how it is told, under what weather and light, and with how many people around. A producer asks these questions paragraph by paragraph and carries each answer forward until the text changes it. **A span ends where any value changes.** `id` is `st-NNN`; `start` and `end` work as in focalization (`end` absent: the single paragraph `start`).
+
+| Slot | Values | Meaning |
+|---|---|---|
+| `enclosure` | `interior`, `exterior`, `vehicle`, `no_place` | Where the body of the narration is: `interior` inside a building or room, `exterior` in the open, `vehicle` in or on a vehicle. `no_place` means **there is no where**: a letter, a summary of years, a narrator's reflection. It is a value, not an absence. |
+| `place` | entity id | An entity of kind `place`. |
+| `vehicle` | text, 1–200 | The vehicle's name or a short description. Only when `enclosure` is `vehicle`. |
+| `surroundings` | `city`, `nature`, `water` | Only when `enclosure` is `exterior` or `vehicle`. |
+| `time_of_day` | `dawn`, `morning`, `midday`, `afternoon`, `dusk`, `night` | |
+| `season` | `spring`, `summer`, `autumn`, `winter` | |
+| `date_or_reference` | text, 1–200 | As the text gives it, in the book's language: «25 de septiembre», «al día siguiente». Not normalised. |
+| `plane` | `main`, `memory`, `embedded` | `main`: the main story. `memory`: an analepsis. `embedded`: a story told inside the story. |
+| `plane_level` | integer ≥ 1 | Required when `plane` is `embedded`, forbidden otherwise. 1 is a story inside the main story, 2 a story inside that one. |
+| `voice` | `outside_narrator`, `first_person_life`, `character_telling`, `written_text`, `theatre` | Who tells, and in what medium. `outside_narrator`: a narrator who is not a character of the story told. `first_person_life`: a character telling their own life. `character_telling`: a character telling others aloud. `written_text`: a letter, diary or telegram. `theatre`: no narrator. |
+| `mode` | `scene`, `dialogue`, `thought`, `summary`, `description`, `document`, `address` | How it is told. `scene`: action narrated as it happens. `dialogue`: characters' speech. `thought`: a character's thinking. `summary`: much story time told briefly. `description`: a pause. `document`: a text quoted whole (a letter, a sign, a poem). `address`: the narrator speaking to the reader. |
+| `weather` | 1–6 distinct of `rain`, `storm`, `snow`, `wind`, `heat`, `cold` | |
+| `light` | `darkness`, `artificial`, `moon` | Only when the hour does not already give it. `artificial`: a candle, a lamp, electric light. |
+| `company` | `alone`, `two`, `group`, `crowd` | How many people are present: one, two, a few, many. |
+| `animals` | boolean | `true` when animals are present. |
+
+- **Every slot is optional, and an absent slot means the text does not say.** A producer MUST NOT guess a slot. A span carries at least one slot.
+- Spans MUST NOT overlap. They need not cover every paragraph.
+- Each span carries a support and a visibility, like every other item.
+- A scene MAY carry a `setting` object: the same slots, with its own support and no `id`, `start`, `end` or `visibility`. It summarises the frame of the whole scene; setting spans give it paragraph by paragraph.
+
+The layer does not describe emotion or tone; that belongs to another layer. In the example the windmills open outdoors in the field, with two people present, don Quijote and Sancho (`st-005`); the night under the trees is told in summary (`st-006`); and the narrator's «Dejamos en la primera parte desta historia» at the start of chapter 9 has no place at all (`st-007`, `no_place`, private to the author while it is reviewed).
+
+#### 6.5.6. Key truths ([`truth.json`](../../v0.3/json-schema/narrative/truth.json))
 
 **The few revelations that matter**: facts the reader does not know at first and learns at a precise point. A book has a handful, not hundreds; a truth is not every fact.
 
@@ -312,7 +341,7 @@ Spans MUST NOT overlap. A span may match a scene, part of one, or a single parag
 - `evidence`: the paragraphs of the reveal.
 - `clues` (optional): earlier paragraphs that hint at the truth. All MUST come before `revealed_at`.
 
-#### 6.5.6. Knowledge links ([`knowledge.json`](../../v0.3/json-schema/narrative/knowledge.json))
+#### 6.5.7. Knowledge links ([`knowledge.json`](../../v0.3/json-schema/narrative/knowledge.json))
 
 **Who knows each truth, and from where**: one character (`knower`), one truth (`truth`), and two positions kept apart:
 
@@ -323,7 +352,7 @@ Both differ from the truth's own `revealed_at`, which is when the **reader** may
 
 With truths and knowledge links a consumer can tell, at any paragraph, who is in the dark: the reader knows the truth (its `revealed_at` is passed), a character is present (in the scene's cast), and that character holds no true link to it yet. In the example, the reader learns at `capitulo-07#p-010` that the priest and the barber walled up the library; the housekeeper and the niece know (`k-001`, `k-002`); don Quijote believes, wrongly, that an enchanter took it (`k-003`, `holds: false`), and still believes it in chapter 8.
 
-#### 6.5.7. Event salience ([`story-event.json`](../../v0.3/json-schema/narrative/story-event.json))
+#### 6.5.8. Event salience ([`story-event.json`](../../v0.3/json-schema/narrative/story-event.json))
 
 A story event told at `at`, with `salience`:
 
@@ -332,11 +361,11 @@ A story event told at `at`, with `salience`:
 
 This is an operational reading of Barthes' distinction, chosen because it can be checked against the text. The labels describe; they never judge. A catalysis is not "filler that could go".
 
-#### 6.5.8. Event coreference ([`coreference.json`](../../v0.3/json-schema/narrative/coreference.json))
+#### 6.5.9. Event coreference ([`coreference.json`](../../v0.3/json-schema/narrative/coreference.json))
 
 **Two or more paragraphs that tell the same story event**: `tellings` (at least two, each with `at` and an optional `teller`), and optionally the `event` they tell. In the example the raised swords of don Quijote and the Biscayan are told three times: as it happens (`capitulo-08#p-050`), in the narrator's recapitulation (`capitulo-09#p-001`), and as a picture in the found manuscript (`capitulo-09#p-010`).
 
-#### 6.5.9. Findings ([`finding.json`](../../v0.3/json-schema/narrative/finding.json))
+#### 6.5.10. Findings ([`finding.json`](../../v0.3/json-schema/narrative/finding.json))
 
 What the author may not know about their own book: `continuity`, `absence`, `voice_balance`, `reading_vs_story_order` or `open_question`, with `text`, `evidence` and optional `refs` to other items. **Always `visibility: "author"`.** A finding describes and never judges.
 
@@ -347,8 +376,9 @@ Public items are shown to a reader only once that reader has passed the item's *
 | Item | Shown from | Also |
 |---|---|---|
 | Entity | `revealed_at` | each alias from its own `revealed_at` |
-| Scene | `start` | only entities already shown appear as place or cast; `end` and `duration` only once the scene is over; never `story_order` (it would announce scenes still to come) |
+| Scene | `start` | only entities already shown appear as place or cast; its `setting` with the scene, its place only if already shown; `end` and `duration` only once the scene is over; never `story_order` (it would announce scenes still to come) |
 | Focalization span | `start` | only if its focalizer is already shown; `end` only once passed |
+| Setting span | `start` | `place` only if already shown; `end` only once passed |
 | Truth | `revealed_at` | only subjects already shown |
 | Knowledge link | the latest of its `revealed_at`, its `since` and its truth's `revealed_at` | only if its knower is already shown |
 | Story event | `at` | pickups only once passed; the label `kernel` only from the first pickup (before it, saying "kernel" announces that the book comes back) |
@@ -365,10 +395,10 @@ The reference implementation of the projection and the cut is [`v0.3/narrative/s
 A layer is valid when it passes the JSON Schema **and** these semantic rules, which a schema cannot express ([`validateNarrativeLayer`](../../v0.3/narrative/semantics.ts)):
 
 1. Ids are unique across the layer.
-2. Every reference resolves: places, cast, focalizers, knowers, subjects, truths, events, tellers, `continues`, finding `refs`.
+2. Every reference resolves: places (of scenes, scene settings and setting spans), cast, focalizers, knowers, subjects, truths, events, tellers, `continues`, finding `refs`.
 3. Kinds match: a `place` is an entity of kind `place`; cast and focalizers are characters; knowers and tellers are characters or organisations.
 4. Every address exists in the manifest version.
-5. Ranges do not end before they start; scenes do not overlap; focalization spans do not overlap.
+5. Ranges do not end before they start; scenes do not overlap; focalization spans do not overlap; setting spans do not overlap.
 6. `revealed_at` (truths, knowledge links) does not come before the earliest evidence.
 7. Clues come before the truth's `revealed_at`; pickups come after the event's `at`; a scene `continues` one that ends before it starts.
 8. No public item references a non-public item.

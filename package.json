@@ -1,6 +1,6 @@
 {
   "name": "@bookmanifest/schemas",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Formal schemas for Book Manifest 0.3: the manifest and its entities, reading events and the narrative layer",
   "type": "module",
   "main": "./dist/v0.3/index.js",
