@@ -210,7 +210,7 @@ Which truths the paragraph reveals is known from the narrative layer and is not 
 | `signed_in` | `true` when the reader had an account signed in |
 | `unlocks_at` | only with `wait`: when the chapter opens by itself (optional) |
 
-**A gate is not reading.** The chapter was not opened, so a reader app MUST NOT send a `chapter_transition` into it, a `heartbeat` for it or a `book_lifecycle` that counts it as started, and a consumer MUST NOT count an `access_gate` as a chapter open, a view or reading time. It is a commercial signal, not a reading one: where readers meet a gate and what they do next is read from the events that follow (the chapter being opened once it is unlocked, or not).
+**A gate is not reading.** The chapter was not opened, so a reader app MUST NOT send a `chapter_transition` into it, a `heartbeat` for it or a `book_lifecycle` that counts it as started, and a consumer MUST NOT count an `access_gate` as a chapter open, a view or reading time. It is a commercial signal, not a reading one.
 
 **Aggregates to:** for each chapter, how many readers met the gate, by kind of gate and whether signed in.
 
