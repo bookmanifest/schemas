@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/recap-view.json",
-  "title": "Recap View Event (DRAFT v0.3)",
-  "description": "DRAFT. The «what happened» recap (a few lines of the story up to where the reader stopped) was offered, viewed or dismissed. The gap since the last reading is sent as a coarse bucket.",
+  "title": "Recap View Event (v0.3)",
+  "description": "The «what happened» recap (a few lines of the story up to where the reader stopped) was offered, viewed or dismissed. The gap since the last reading is sent as a coarse bucket.",
   "allOf": [
     {
       "$ref": "./envelope.json"

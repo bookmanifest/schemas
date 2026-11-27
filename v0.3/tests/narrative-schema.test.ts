@@ -6,7 +6,7 @@ import { NarrativeLayerSchema } from '../zod/narrative'
 const ajv = loadAjv()
 const validate = ajv.getSchema(`${V03}/narrative/narrative-layer.json`)!
 
-describe('narrative layer schema (draft v0.3)', () => {
+describe('narrative layer schema (v0.3)', () => {
   it('every v0.3 schema compiles under draft 2020-12', () => {
     for (const file of globSync('./v0.3/json-schema/**/*.json')) {
       const schema = readJson(file)

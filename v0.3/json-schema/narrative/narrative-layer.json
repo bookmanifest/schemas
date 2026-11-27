@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/narrative/narrative-layer.json",
-  "title": "Narrative layer (DRAFT v0.3)",
-  "description": "DRAFT. An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.",
+  "title": "Narrative layer (v0.3)",
+  "description": "An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.",
   "type": "object",
   "required": ["narrative_layer", "book_id", "manifest_id", "manifest_version", "language"],
   "properties": {
-    "narrative_layer": { "description": "Version of this document's format.", "const": "0.3-draft" },
+    "narrative_layer": { "description": "Version of this document's format.", "const": "0.3" },
     "book_id": { "$ref": "../validators/did.json" },
     "manifest_id": { "$ref": "../validators/did.json" },
     "manifest_version": { "$ref": "../validators/semver.json", "description": "The manifest version every address resolves against." },

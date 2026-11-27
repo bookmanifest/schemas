@@ -1,4 +1,4 @@
-// DRAFT v0.3. Not exported by the package yet: import from the repository while the draft is under review.
+// v0.3: narrative layer and reading events. Published as `@bookmanifest/schemas/v0.3`.
 export * from './zod/validators'
 export * from './zod/narrative'
 export * from './zod/events'

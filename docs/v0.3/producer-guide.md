@@ -1,6 +1,6 @@
-# Producing a narrative layer and the new reading events (DRAFT v0.3)
+# Producing a narrative layer and the new reading events (v0.3)
 
-> **Status: draft for review.**
+> **Status: released in v0.3.0 (2026-11-27).** Every v0.1 document stays valid.
 
 What a program that reads a book (a *producer*) must emit to write a v0.3 [narrative layer](narrative-layer.md), and what a reader app must send to support the v0.3 [reading events](reading-events.md). It assumes the producer already reads paragraph by paragraph, cites paragraph addresses and knows, for each fact, the first paragraph after which a reader may know it.
 

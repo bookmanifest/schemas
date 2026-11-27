@@ -1,6 +1,6 @@
-# Narrative layer v0.3 (DRAFT)
+# Narrative layer v0.3
 
-> **Status: draft for review. Not a release.** Nothing here is part of the published package yet. Field names, shapes and rules may change before v0.3 is cut. The open choices are listed in the pull request that introduced this draft.
+> **Status: released in v0.3.0 (2026-11-27).** Every v0.1 document stays valid. The decisions behind this version are listed in the pull request that introduced it.
 
 The narrative layer describes **how a book is told**: where its scenes begin and end and how much story time they cover, who perceives each passage, which few revelations matter and who knows them, which events the book comes back to, and which events it tells more than once. It is optional and sits beside the manifest. A book without a narrative layer is complete, and every v0.1 document stays valid.
 
@@ -14,7 +14,7 @@ A narrative layer is a JSON document, separate from the manifest, bound to **one
 
 | Field | Required | Meaning |
 |---|---|---|
-| `narrative_layer` | yes | Format version, `"0.3-draft"`. |
+| `narrative_layer` | yes | Format version, `"0.3"`. |
 | `book_id`, `manifest_id` | yes | DIDs of the book and the manifest. |
 | `manifest_version` | yes | The manifest version every address resolves against. |
 | `language` | yes | ISO 639-1 language of every text field. |

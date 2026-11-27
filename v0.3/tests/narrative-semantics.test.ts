@@ -25,7 +25,7 @@ describe('address order', () => {
   })
 })
 
-describe('semantic validation (draft v0.3)', () => {
+describe('semantic validation (v0.3)', () => {
   it('the Quijote example has no issues', () => {
     expect(validateNarrativeLayer(fresh(), order)).toEqual([])
   })

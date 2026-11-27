@@ -1,4 +1,4 @@
-// DRAFT v0.3. Zod mirror of v0.3/json-schema/narrative/*.json. The JSON Schema is the source of truth;
+// v0.3. Zod mirror of v0.3/json-schema/narrative/*.json. The JSON Schema is the source of truth;
 // tests check that both accept and reject the same examples.
 import { z } from 'zod'
 import {
@@ -216,7 +216,7 @@ export const FindingSchema = z
 
 export const NarrativeLayerSchema = z
   .object({
-    narrative_layer: z.literal('0.3-draft'),
+    narrative_layer: z.literal('0.3'),
     book_id: didSchema,
     manifest_id: didSchema,
     manifest_version: semverSchema,

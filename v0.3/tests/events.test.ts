@@ -8,7 +8,7 @@ const ajv = loadAjv()
 const validateBatch = ajv.getSchema(`${V03}/events/batch.json`)!
 const NEW_EVENTS = ['reread', 'shared-entry', 'companion-open', 'recap-view', 'spoiler-warning']
 
-describe('reading events (draft v0.3)', () => {
+describe('reading events (v0.3)', () => {
   it('the example batch is valid in JSON Schema and Zod, and has every new type', () => {
     const batch = readJson('./v0.3/examples/events/batch-valid.json')
     expect(validateBatch(batch), JSON.stringify(validateBatch.errors, null, 2)).toBe(true)

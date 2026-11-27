@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/spoiler-warning.json",
-  "title": "Spoiler Warning Event (DRAFT v0.3)",
-  "description": "DRAFT. Before sharing or copying the link of a paragraph that is the reveal of a public key truth, the reader saw a warning and accepted or cancelled. Which truths it reveals is known from the narrative layer and is not sent.",
+  "title": "Spoiler Warning Event (v0.3)",
+  "description": "Before sharing or copying the link of a paragraph that is the reveal of a public key truth, the reader saw a warning and accepted or cancelled. Which truths it reveals is known from the narrative layer and is not sent.",
   "allOf": [
     {
       "$ref": "./envelope.json"

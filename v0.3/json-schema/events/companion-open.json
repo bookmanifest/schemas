@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/companion-open.json",
-  "title": "Companion Open Event (DRAFT v0.3)",
-  "description": "DRAFT. The reader opened a reading-companion surface (who is who, an entity card, the spoiler-safe map) at a position. Says where readers look for help and about whom; never what they typed or searched.",
+  "title": "Companion Open Event (v0.3)",
+  "description": "The reader opened a reading-companion surface (who is who, an entity card, the spoiler-safe map) at a position. Says where readers look for help and about whom; never what they typed or searched.",
   "allOf": [
     {
       "$ref": "./envelope.json"

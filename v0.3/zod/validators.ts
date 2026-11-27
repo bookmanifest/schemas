@@ -1,4 +1,4 @@
-// DRAFT v0.3. Validators the narrative layer and the v0.3 events add to those of v0.1.
+// v0.3. Validators the narrative layer and the v0.3 events add to those of v0.1.
 import { z } from 'zod'
 
 export { didSchema, semverSchema, iso8601Schema, languageCodeSchema } from '../../v0.1/zod/validators'

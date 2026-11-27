@@ -17,5 +17,5 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
-      - run: npm run typecheck:draft
+      - run: npm run typecheck:v0.3
       - run: npm run validate

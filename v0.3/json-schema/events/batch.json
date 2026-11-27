@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/batch.json",
-  "title": "Event Batch (DRAFT v0.3)",
-  "description": "DRAFT. A batch of 1 to 100 events: the five v0.1 events, unchanged, plus the five v0.3 reading events.",
+  "title": "Event Batch (v0.3)",
+  "description": "A batch of 1 to 100 events: the five v0.1 events, unchanged, plus the five v0.3 reading events.",
   "type": "object",
   "required": [
     "events"

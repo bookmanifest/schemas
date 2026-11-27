@@ -1,4 +1,4 @@
-// DRAFT v0.3. The five v0.3 reading events, and the v0.3 event union (v0.1's five, unchanged, plus these).
+// v0.3. The five v0.3 reading events, and the v0.3 event union (v0.1's five, unchanged, plus these).
 // Every payload is closed (.strict()): positions, ids and enums only; no text, no free strings, no exact
 // durations, nothing that identifies a person. See docs/v0.3/reading-events.md.
 import { z } from 'zod'

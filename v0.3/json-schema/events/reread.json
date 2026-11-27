@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/events/reread.json",
-  "title": "Re-read Event (DRAFT v0.3)",
-  "description": "DRAFT. The reader went back to an earlier paragraph and stayed there: the destination of a backward jump. Carries two positions and how the reader got there, nothing else. The origin is the context chapter plus `from_node_id`; the destination may be in another chapter.",
+  "title": "Re-read Event (v0.3)",
+  "description": "The reader went back to an earlier paragraph and stayed there: the destination of a backward jump. Carries two positions and how the reader got there, nothing else. The origin is the context chapter plus `from_node_id`; the destination may be in another chapter.",
   "allOf": [
     {
       "$ref": "./envelope.json"

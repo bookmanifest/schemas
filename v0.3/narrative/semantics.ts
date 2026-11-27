@@ -1,4 +1,4 @@
-// DRAFT v0.3. What JSON Schema cannot say about a narrative layer: ids resolve, positions come in the right
+// v0.3. What JSON Schema cannot say about a narrative layer: ids resolve, positions come in the right
 // order, public items never lean on private ones. Plus the two derived views the spec defines: the public
 // projection (what may be published) and the spoiler-safe cut (what a reader at a given paragraph may see).
 import type {

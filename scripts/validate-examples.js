@@ -68,9 +68,9 @@ async function validateExamples() {
     passed++
   }
 
-  // DRAFT v0.3: narrative layer and reading events, validated with a draft 2020-12 validator.
+  // v0.3: narrative layer and reading events, validated with a JSON Schema draft 2020-12 validator.
   // Valid examples must pass; *-invalid examples must fail.
-  console.log('\n🔍 DRAFT v0.3: narrative layer and reading events...')
+  console.log('\n🔍 v0.3: narrative layer and reading events...')
   const ajv2020 = new Ajv2020({ allErrors: true, strict: true, strictTypes: false, strictRequired: false, allowUnionTypes: true })
   addFormats(ajv2020)
   for (const file of (await glob('./v0.{1,3}/json-schema/**/*.json')).sort()) {

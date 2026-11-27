@@ -5,11 +5,13 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.3.0] - 2026-11-27
 
-### Added (DRAFT v0.3, for review, not released)
+v0.3 sits beside v0.1: every v0.1 schema, type, Zod validator, example and `dist/` file is unchanged, and v0.1 documents and events stay valid. There is no v0.2 of the format.
 
-- **Narrative layer v0.3 (draft)**: an optional document bound to one manifest version, beside the manifest, which stays unchanged. JSON Schemas in `v0.3/json-schema/narrative/` for each piece:
+### Added
+
+- **Narrative layer v0.3**: an optional document bound to one manifest version, beside the manifest, which stays unchanged. JSON Schemas in `v0.3/json-schema/narrative/` for each piece:
   - scenes (contiguous paragraph ranges with one place, time and cast; may cross chapters; `continues` for interrupted scenes; `story_order`);
   - story duration per scene (unit and magnitude, a range, a pause, or unknown), with basis and evidence;
   - focalization spans (internal with a focalizer, zero, external), distinct from the narrator;
@@ -21,13 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `visibility` on every item, `public` or `author`, absent meaning `author`.
 - Paragraph address validator (`<chapter-slug>#p-NNN`) and entity id validator.
 - Semantic validator, public projection and spoiler-safe cut (`v0.3/narrative/semantics.ts`); the cut never shows an address after the reader's position.
-- **Five reading events (draft)**: `reread`, `companion_open`, `recap_view` and `spoiler_warning` on the v0.1 envelope, and `shared_entry` on a new anonymous envelope (no reader id, no session id), all with closed payloads and no free-form strings. A v0.3 batch schema accepts the v0.1 events unchanged plus these.
+- **Five reading events**: `reread`, `companion_open`, `recap_view` and `spoiler_warning` on the v0.1 envelope, and `shared_entry` on a new anonymous envelope (no reader id, no session id), all with closed payloads and no free-form strings. A v0.3 batch schema accepts the v0.1 events unchanged plus these.
 - Zod mirrors of every new schema (`v0.3/zod/`).
 - Examples from *Don Quijote*, part I, chapters 1–20 (public domain), with an address index and excerpts so tests check that every address exists and every quote is literal; invalid examples for each rule.
 - Spec text, event spec, rationale and producer guide in `docs/v0.3/`.
-- `npm run typecheck:draft`; `npm run validate` now also checks the v0.3 examples (valid ones must pass, invalid ones must fail) and exits non-zero on a crash.
-
-v0.1 schemas, types, Zod validators and `dist/` are unchanged, and the package does not export v0.3 yet.
+- Package export `@bookmanifest/schemas/v0.3` (compiled to `dist/v0.3/`) and the v0.3 JSON Schemas under `@bookmanifest/schemas/v0.3/json-schema/*`.
+- `npm run typecheck:v0.3`; `npm run validate` now also checks the v0.3 examples (valid ones must pass, invalid ones must fail) and exits non-zero on a crash.
 
 ## [0.1.0] - 2025-12-30
 

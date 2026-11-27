@@ -1,6 +1,6 @@
-# Reading events v0.3 (DRAFT)
+# Reading events v0.3
 
-> **Status: draft for review. Not a release.**
+> **Status: released in v0.3.0 (2026-11-27).** Every v0.1 document stays valid.
 
 Five new events a reader app MAY send, beside the five of v0.1. They tell an author **where** readers go back, enter, look for help and hesitate to share, so that it can be set against **what** the book is doing at that point (the [narrative layer](narrative-layer.md)). They do not tell anyone who did it.
 

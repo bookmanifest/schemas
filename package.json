@@ -1,7 +1,7 @@
 {
   "name": "@bookmanifest/schemas",
-  "version": "0.1.0",
-  "description": "Formal schemas for Book Manifest",
+  "version": "0.3.0",
+  "description": "Formal schemas for Book Manifest (v0.1, and v0.3 with the narrative layer and reading events)",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,16 +22,21 @@
     "./validators": {
       "types": "./dist/zod/validators.d.ts",
       "default": "./dist/zod/validators.js"
-    }
+    },
+    "./v0.3": {
+      "types": "./dist/v0.3/index.d.ts",
+      "default": "./dist/v0.3/index.js"
+    },
+    "./v0.3/json-schema/*": "./v0.3/json-schema/*"
   },
   "scripts": {
     "build": "npm run generate && npm run compile",
     "generate": "node scripts/generate-from-json-schema.js",
-    "compile": "tsc",
+    "compile": "tsc && tsc -p tsconfig.v0.3.build.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "validate": "node scripts/validate-examples.js",
-    "typecheck:draft": "tsc -p tsconfig.v0.3.json"
+    "typecheck:v0.3": "tsc -p tsconfig.v0.3.json"
   },
   "keywords": [
     "bookmanifest",
@@ -53,6 +58,8 @@
     "dist/",
     "v0.1/json-schema/",
     "v0.1/typescript/",
+    "v0.3/json-schema/",
+    "docs/v0.3/",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
