@@ -1,7 +1,7 @@
 // v0.3. Zod mirror of v0.3/json-schema/narrative/*.json. The JSON Schema is the source of truth;
 // tests check that both accept and reject the same examples.
 import { z } from 'zod';
-import { didSchema, semverSchema, iso8601Schema, paragraphAddressSchema, entityIdSchema } from './validators';
+import { didSchema, semverSchema, iso8601Schema, paragraphAddressSchema, entityIdSchema } from './validators.js';
 const localId = (prefix) => z.string().regex(new RegExp(`^${prefix}-[0-9]{3,}$`));
 export const VisibilitySchema = z.enum(['public', 'author']);
 const addressList = z

@@ -18,8 +18,8 @@ export declare const EntitySchema: z.ZodObject<{
     visibility: z.ZodOptional<z.ZodEnum<["public", "author"]>>;
 }, "strict", z.ZodTypeAny, {
     id: string;
-    kind: "object" | "character" | "place" | "org";
     name: string;
+    kind: "object" | "character" | "place" | "org";
     revealed_at: string;
     aliases?: {
         name: string;
@@ -28,8 +28,8 @@ export declare const EntitySchema: z.ZodObject<{
     visibility?: "public" | "author" | undefined;
 }, {
     id: string;
-    kind: "object" | "character" | "place" | "org";
     name: string;
+    kind: "object" | "character" | "place" | "org";
     revealed_at: string;
     aliases?: {
         name: string;
@@ -51,8 +51,8 @@ export declare const DurationSchema: z.ZodEffects<z.ZodObject<{
 }, "strict", z.ZodTypeAny, {
     basis: "asserted" | "inferred";
     evidence: string[];
-    value?: number | undefined;
     status?: "verified" | "doubtful" | "review" | undefined;
+    value?: number | undefined;
     unknown?: true | undefined;
     quote?: string | undefined;
     unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -62,8 +62,8 @@ export declare const DurationSchema: z.ZodEffects<z.ZodObject<{
 }, {
     basis: "asserted" | "inferred";
     evidence: string[];
-    value?: number | undefined;
     status?: "verified" | "doubtful" | "review" | undefined;
+    value?: number | undefined;
     unknown?: true | undefined;
     quote?: string | undefined;
     unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -73,8 +73,8 @@ export declare const DurationSchema: z.ZodEffects<z.ZodObject<{
 }>, {
     basis: "asserted" | "inferred";
     evidence: string[];
-    value?: number | undefined;
     status?: "verified" | "doubtful" | "review" | undefined;
+    value?: number | undefined;
     unknown?: true | undefined;
     quote?: string | undefined;
     unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -84,8 +84,8 @@ export declare const DurationSchema: z.ZodEffects<z.ZodObject<{
 }, {
     basis: "asserted" | "inferred";
     evidence: string[];
-    value?: number | undefined;
     status?: "verified" | "doubtful" | "review" | undefined;
+    value?: number | undefined;
     unknown?: true | undefined;
     quote?: string | undefined;
     unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -155,8 +155,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     }, "strict", z.ZodTypeAny, {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -166,8 +166,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     }, {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -177,8 +177,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     }>, {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -188,8 +188,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     }, {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -229,8 +229,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     duration?: {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -264,8 +264,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     duration?: {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -299,8 +299,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     duration?: {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -334,8 +334,8 @@ export declare const SceneSchema: z.ZodEffects<z.ZodObject<{
     duration?: {
         basis: "asserted" | "inferred";
         evidence: string[];
-        value?: number | undefined;
         status?: "verified" | "doubtful" | "review" | undefined;
+        value?: number | undefined;
         unknown?: true | undefined;
         quote?: string | undefined;
         unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -420,10 +420,10 @@ export declare const TruthSchema: z.ZodEffects<z.ZodObject<{
     status: z.ZodOptional<z.ZodEnum<["verified", "doubtful", "review"]>>;
 }, "strict", z.ZodTypeAny, {
     id: string;
+    text: string;
     revealed_at: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
     visibility?: "public" | "author" | undefined;
@@ -432,10 +432,10 @@ export declare const TruthSchema: z.ZodEffects<z.ZodObject<{
     clues?: string[] | undefined;
 }, {
     id: string;
+    text: string;
     revealed_at: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
     visibility?: "public" | "author" | undefined;
@@ -444,10 +444,10 @@ export declare const TruthSchema: z.ZodEffects<z.ZodObject<{
     clues?: string[] | undefined;
 }>, {
     id: string;
+    text: string;
     revealed_at: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
     visibility?: "public" | "author" | undefined;
@@ -456,10 +456,10 @@ export declare const TruthSchema: z.ZodEffects<z.ZodObject<{
     clues?: string[] | undefined;
 }, {
     id: string;
+    text: string;
     revealed_at: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
     visibility?: "public" | "author" | undefined;
@@ -553,9 +553,9 @@ export declare const StoryEventSchema: z.ZodEffects<z.ZodObject<{
 }, "strict", z.ZodTypeAny, {
     at: string;
     id: string;
+    text: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     salience: "kernel" | "catalysis";
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
@@ -565,9 +565,9 @@ export declare const StoryEventSchema: z.ZodEffects<z.ZodObject<{
 }, {
     at: string;
     id: string;
+    text: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     salience: "kernel" | "catalysis";
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
@@ -577,9 +577,9 @@ export declare const StoryEventSchema: z.ZodEffects<z.ZodObject<{
 }>, {
     at: string;
     id: string;
+    text: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     salience: "kernel" | "catalysis";
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
@@ -589,9 +589,9 @@ export declare const StoryEventSchema: z.ZodEffects<z.ZodObject<{
 }, {
     at: string;
     id: string;
+    text: string;
     basis: "asserted" | "inferred";
     evidence: string[];
-    text: string;
     salience: "kernel" | "catalysis";
     status?: "verified" | "doubtful" | "review" | undefined;
     quote?: string | undefined;
@@ -680,17 +680,17 @@ export declare const FindingSchema: z.ZodObject<{
     visibility: z.ZodLiteral<"author">;
 }, "strict", z.ZodTypeAny, {
     id: string;
+    text: string;
     kind: "continuity" | "absence" | "voice_balance" | "reading_vs_story_order" | "open_question";
     visibility: "author";
     evidence: string[];
-    text: string;
     refs?: string[] | undefined;
 }, {
     id: string;
+    text: string;
     kind: "continuity" | "absence" | "voice_balance" | "reading_vs_story_order" | "open_question";
     visibility: "author";
     evidence: string[];
-    text: string;
     refs?: string[] | undefined;
 }>;
 export declare const NarrativeLayerSchema: z.ZodObject<{
@@ -728,8 +728,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         visibility: z.ZodOptional<z.ZodEnum<["public", "author"]>>;
     }, "strict", z.ZodTypeAny, {
         id: string;
-        kind: "object" | "character" | "place" | "org";
         name: string;
+        kind: "object" | "character" | "place" | "org";
         revealed_at: string;
         aliases?: {
             name: string;
@@ -738,8 +738,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         visibility?: "public" | "author" | undefined;
     }, {
         id: string;
-        kind: "object" | "character" | "place" | "org";
         name: string;
+        kind: "object" | "character" | "place" | "org";
         revealed_at: string;
         aliases?: {
             name: string;
@@ -809,8 +809,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         }, "strict", z.ZodTypeAny, {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -820,8 +820,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         }, {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -831,8 +831,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         }>, {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -842,8 +842,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         }, {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -883,8 +883,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         duration?: {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -918,8 +918,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         duration?: {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -953,8 +953,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         duration?: {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -988,8 +988,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         duration?: {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -1074,10 +1074,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         status: z.ZodOptional<z.ZodEnum<["verified", "doubtful", "review"]>>;
     }, "strict", z.ZodTypeAny, {
         id: string;
+        text: string;
         revealed_at: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
         visibility?: "public" | "author" | undefined;
@@ -1086,10 +1086,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         clues?: string[] | undefined;
     }, {
         id: string;
+        text: string;
         revealed_at: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
         visibility?: "public" | "author" | undefined;
@@ -1098,10 +1098,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         clues?: string[] | undefined;
     }>, {
         id: string;
+        text: string;
         revealed_at: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
         visibility?: "public" | "author" | undefined;
@@ -1110,10 +1110,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         clues?: string[] | undefined;
     }, {
         id: string;
+        text: string;
         revealed_at: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
         visibility?: "public" | "author" | undefined;
@@ -1207,9 +1207,9 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }, "strict", z.ZodTypeAny, {
         at: string;
         id: string;
+        text: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         salience: "kernel" | "catalysis";
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
@@ -1219,9 +1219,9 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }, {
         at: string;
         id: string;
+        text: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         salience: "kernel" | "catalysis";
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
@@ -1231,9 +1231,9 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }>, {
         at: string;
         id: string;
+        text: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         salience: "kernel" | "catalysis";
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
@@ -1243,9 +1243,9 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }, {
         at: string;
         id: string;
+        text: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         salience: "kernel" | "catalysis";
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
@@ -1334,25 +1334,38 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         visibility: z.ZodLiteral<"author">;
     }, "strict", z.ZodTypeAny, {
         id: string;
+        text: string;
         kind: "continuity" | "absence" | "voice_balance" | "reading_vs_story_order" | "open_question";
         visibility: "author";
         evidence: string[];
-        text: string;
         refs?: string[] | undefined;
     }, {
         id: string;
+        text: string;
         kind: "continuity" | "absence" | "voice_balance" | "reading_vs_story_order" | "open_question";
         visibility: "author";
         evidence: string[];
-        text: string;
         refs?: string[] | undefined;
     }>, "many">>;
 }, "strict", z.ZodTypeAny, {
-    narrative_layer: "0.3";
+    language: string;
     book_id: string;
     manifest_id: string;
     manifest_version: string;
-    language: string;
+    narrative_layer: "0.3";
+    events?: {
+        at: string;
+        id: string;
+        text: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        salience: "kernel" | "catalysis";
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        picked_up_at?: string[] | undefined;
+    }[] | undefined;
     generated_at?: string | undefined;
     generator?: {
         name: string;
@@ -1360,8 +1373,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     } | undefined;
     entities?: {
         id: string;
-        kind: "object" | "character" | "place" | "org";
         name: string;
+        kind: "object" | "character" | "place" | "org";
         revealed_at: string;
         aliases?: {
             name: string;
@@ -1394,8 +1407,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         duration?: {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -1420,10 +1433,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }[] | undefined;
     truths?: {
         id: string;
+        text: string;
         revealed_at: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
         visibility?: "public" | "author" | undefined;
@@ -1446,19 +1459,6 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
     }[] | undefined;
-    events?: {
-        at: string;
-        id: string;
-        basis: "asserted" | "inferred";
-        evidence: string[];
-        text: string;
-        salience: "kernel" | "catalysis";
-        status?: "verified" | "doubtful" | "review" | undefined;
-        quote?: string | undefined;
-        visibility?: "public" | "author" | undefined;
-        confidence?: number | undefined;
-        picked_up_at?: string[] | undefined;
-    }[] | undefined;
     coreference?: {
         id: string;
         basis: "asserted" | "inferred";
@@ -1475,18 +1475,31 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }[] | undefined;
     findings?: {
         id: string;
+        text: string;
         kind: "continuity" | "absence" | "voice_balance" | "reading_vs_story_order" | "open_question";
         visibility: "author";
         evidence: string[];
-        text: string;
         refs?: string[] | undefined;
     }[] | undefined;
 }, {
-    narrative_layer: "0.3";
+    language: string;
     book_id: string;
     manifest_id: string;
     manifest_version: string;
-    language: string;
+    narrative_layer: "0.3";
+    events?: {
+        at: string;
+        id: string;
+        text: string;
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        salience: "kernel" | "catalysis";
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        picked_up_at?: string[] | undefined;
+    }[] | undefined;
     generated_at?: string | undefined;
     generator?: {
         name: string;
@@ -1494,8 +1507,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     } | undefined;
     entities?: {
         id: string;
-        kind: "object" | "character" | "place" | "org";
         name: string;
+        kind: "object" | "character" | "place" | "org";
         revealed_at: string;
         aliases?: {
             name: string;
@@ -1528,8 +1541,8 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         duration?: {
             basis: "asserted" | "inferred";
             evidence: string[];
-            value?: number | undefined;
             status?: "verified" | "doubtful" | "review" | undefined;
+            value?: number | undefined;
             unknown?: true | undefined;
             quote?: string | undefined;
             unit?: "second" | "minute" | "hour" | "day" | "week" | "month" | "year" | undefined;
@@ -1554,10 +1567,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }[] | undefined;
     truths?: {
         id: string;
+        text: string;
         revealed_at: string;
         basis: "asserted" | "inferred";
         evidence: string[];
-        text: string;
         status?: "verified" | "doubtful" | "review" | undefined;
         quote?: string | undefined;
         visibility?: "public" | "author" | undefined;
@@ -1580,19 +1593,6 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         visibility?: "public" | "author" | undefined;
         confidence?: number | undefined;
     }[] | undefined;
-    events?: {
-        at: string;
-        id: string;
-        basis: "asserted" | "inferred";
-        evidence: string[];
-        text: string;
-        salience: "kernel" | "catalysis";
-        status?: "verified" | "doubtful" | "review" | undefined;
-        quote?: string | undefined;
-        visibility?: "public" | "author" | undefined;
-        confidence?: number | undefined;
-        picked_up_at?: string[] | undefined;
-    }[] | undefined;
     coreference?: {
         id: string;
         basis: "asserted" | "inferred";
@@ -1609,10 +1609,10 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
     }[] | undefined;
     findings?: {
         id: string;
+        text: string;
         kind: "continuity" | "absence" | "voice_balance" | "reading_vs_story_order" | "open_question";
         visibility: "author";
         evidence: string[];
-        text: string;
         refs?: string[] | undefined;
     }[] | undefined;
 }>;

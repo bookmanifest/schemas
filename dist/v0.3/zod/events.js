@@ -2,8 +2,8 @@
 // Every payload is closed (.strict()): positions, ids and enums only; no text, no free strings, no exact
 // durations, nothing that identifies a person. See docs/v0.3/reading-events.md.
 import { z } from 'zod';
-import { didSchema, semverSchema, iso8601Schema, nodeIdSchema, entityIdSchema } from './validators';
-import { HeartbeatEventSchema, ChapterTransitionEventSchema, BookLifecycleEventSchema, InteractionEventSchema, AppLifecycleEventSchema } from '../../v0.1/zod/events';
+import { didSchema, semverSchema, iso8601Schema, nodeIdSchema, entityIdSchema } from './validators.js';
+import { HeartbeatEventSchema, ChapterTransitionEventSchema, BookLifecycleEventSchema, InteractionEventSchema, AppLifecycleEventSchema } from '../../v0.1/zod/events.js';
 // Same context as v0.1 (the v0.1 schema does not export it).
 const EventContextSchema = z
     .object({

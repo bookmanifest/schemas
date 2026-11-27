@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { didSchema, iso8601Schema, urlSchema, languageCodeSchema, currencyCodeSchema, semverSchema } from './validators'
+import { didSchema, iso8601Schema, urlSchema, languageCodeSchema, currencyCodeSchema, semverSchema } from './validators.js'
 
 const AuthorLinkSchema = z.object({
   type: z.enum(['website', 'bluesky', 'twitter', 'mastodon', 'instagram', 'other']),

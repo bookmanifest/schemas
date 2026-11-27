@@ -14,22 +14,22 @@ export declare const RereadEventSchema: z.ZodObject<{
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -61,12 +61,12 @@ export declare const RereadEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -84,12 +84,12 @@ export declare const RereadEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -116,20 +116,20 @@ export declare const SharedEntryEventSchema: z.ZodObject<{
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "reader_id">, "strict", z.ZodTypeAny, {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -171,11 +171,11 @@ export declare const SharedEntryEventSchema: z.ZodObject<{
     id: string;
     timestamp: string;
     context: {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -192,11 +192,11 @@ export declare const SharedEntryEventSchema: z.ZodObject<{
     id: string;
     timestamp: string;
     context: {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -224,22 +224,22 @@ export declare const CompanionOpenEventSchema: z.ZodObject<{
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -278,12 +278,12 @@ export declare const CompanionOpenEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -300,12 +300,12 @@ export declare const CompanionOpenEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -332,22 +332,22 @@ export declare const RecapViewEventSchema: z.ZodObject<{
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -376,12 +376,12 @@ export declare const RecapViewEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -398,12 +398,12 @@ export declare const RecapViewEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -430,22 +430,22 @@ export declare const SpoilerWarningEventSchema: z.ZodObject<{
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -471,12 +471,12 @@ export declare const SpoilerWarningEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -492,12 +492,12 @@ export declare const SpoilerWarningEventSchema: z.ZodObject<{
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -523,22 +523,22 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -570,12 +570,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -593,12 +593,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -624,20 +624,20 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "reader_id">, "strict", z.ZodTypeAny, {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -679,11 +679,11 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     id: string;
     timestamp: string;
     context: {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -700,11 +700,11 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     id: string;
     timestamp: string;
     context: {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -731,22 +731,22 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -785,12 +785,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -807,12 +807,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -838,22 +838,22 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -882,12 +882,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -904,12 +904,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -935,22 +935,22 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -976,12 +976,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -997,12 +997,12 @@ export declare const ReadingEventV03Schema: z.ZodDiscriminatedUnion<"type", [z.Z
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1028,22 +1028,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1078,12 +1078,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1102,12 +1102,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1135,22 +1135,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1188,12 +1188,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1213,12 +1213,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1247,22 +1247,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1278,14 +1278,14 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         chapters_completed: z.ZodNumber;
     }, "strict", z.ZodTypeAny, {
         trigger: string;
-        action: "started" | "completed";
+        action: "completed" | "started";
         total_active_reading_time_seconds: number;
         completion_percentage: number;
         chapters_started: number;
         chapters_completed: number;
     }, {
         trigger: string;
-        action: "started" | "completed";
+        action: "completed" | "started";
         total_active_reading_time_seconds: number;
         completion_percentage: number;
         chapters_started: number;
@@ -1297,19 +1297,19 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     };
     payload: {
         trigger: string;
-        action: "started" | "completed";
+        action: "completed" | "started";
         total_active_reading_time_seconds: number;
         completion_percentage: number;
         chapters_started: number;
@@ -1321,19 +1321,19 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     };
     payload: {
         trigger: string;
-        action: "started" | "completed";
+        action: "completed" | "started";
         total_active_reading_time_seconds: number;
         completion_percentage: number;
         chapters_started: number;
@@ -1354,22 +1354,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1404,12 +1404,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1428,12 +1428,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1461,22 +1461,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1502,12 +1502,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1523,12 +1523,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1553,22 +1553,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1600,12 +1600,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1623,12 +1623,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1654,20 +1654,20 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "reader_id">, "strict", z.ZodTypeAny, {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1709,11 +1709,11 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     id: string;
     timestamp: string;
     context: {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1730,11 +1730,11 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     id: string;
     timestamp: string;
     context: {
+        chapter_id: string;
+        chapter_version: string;
         book_id: string;
         manifest_id: string;
         manifest_version: string;
-        chapter_id: string;
-        chapter_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1761,22 +1761,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1815,12 +1815,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1837,12 +1837,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1868,22 +1868,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1912,12 +1912,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1934,12 +1934,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -1965,22 +1965,22 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
         app_id: z.ZodString;
         app_version: z.ZodString;
     }, "strict", z.ZodTypeAny, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
     }, {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -2006,12 +2006,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -2027,12 +2027,12 @@ export declare const BookManifestEventV03Schema: z.ZodDiscriminatedUnion<"type",
     timestamp: string;
     session_id: string;
     context: {
-        book_id: string;
-        manifest_id: string;
-        manifest_version: string;
-        reader_id: string;
         chapter_id: string;
         chapter_version: string;
+        book_id: string;
+        reader_id: string;
+        manifest_id: string;
+        manifest_version: string;
         device_type: "mobile" | "tablet" | "desktop";
         app_id: string;
         app_version: string;
@@ -2059,22 +2059,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2109,12 +2109,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2133,12 +2133,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2166,22 +2166,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2219,12 +2219,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2244,12 +2244,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2278,22 +2278,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2309,14 +2309,14 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             chapters_completed: z.ZodNumber;
         }, "strict", z.ZodTypeAny, {
             trigger: string;
-            action: "started" | "completed";
+            action: "completed" | "started";
             total_active_reading_time_seconds: number;
             completion_percentage: number;
             chapters_started: number;
             chapters_completed: number;
         }, {
             trigger: string;
-            action: "started" | "completed";
+            action: "completed" | "started";
             total_active_reading_time_seconds: number;
             completion_percentage: number;
             chapters_started: number;
@@ -2328,19 +2328,19 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         };
         payload: {
             trigger: string;
-            action: "started" | "completed";
+            action: "completed" | "started";
             total_active_reading_time_seconds: number;
             completion_percentage: number;
             chapters_started: number;
@@ -2352,19 +2352,19 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         };
         payload: {
             trigger: string;
-            action: "started" | "completed";
+            action: "completed" | "started";
             total_active_reading_time_seconds: number;
             completion_percentage: number;
             chapters_started: number;
@@ -2385,22 +2385,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2435,12 +2435,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2459,12 +2459,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2492,22 +2492,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2533,12 +2533,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2554,12 +2554,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2584,22 +2584,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2631,12 +2631,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2654,12 +2654,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2685,20 +2685,20 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "reader_id">, "strict", z.ZodTypeAny, {
+            chapter_id: string;
+            chapter_version: string;
             book_id: string;
             manifest_id: string;
             manifest_version: string;
-            chapter_id: string;
-            chapter_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
+            chapter_id: string;
+            chapter_version: string;
             book_id: string;
             manifest_id: string;
             manifest_version: string;
-            chapter_id: string;
-            chapter_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2740,11 +2740,11 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         id: string;
         timestamp: string;
         context: {
+            chapter_id: string;
+            chapter_version: string;
             book_id: string;
             manifest_id: string;
             manifest_version: string;
-            chapter_id: string;
-            chapter_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2761,11 +2761,11 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         id: string;
         timestamp: string;
         context: {
+            chapter_id: string;
+            chapter_version: string;
             book_id: string;
             manifest_id: string;
             manifest_version: string;
-            chapter_id: string;
-            chapter_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2792,22 +2792,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2846,12 +2846,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2868,12 +2868,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2899,22 +2899,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2943,12 +2943,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2965,12 +2965,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -2996,22 +2996,22 @@ export declare const EventBatchV03Schema: z.ZodObject<{
             app_id: z.ZodString;
             app_version: z.ZodString;
         }, "strict", z.ZodTypeAny, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         }, {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3037,12 +3037,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3058,12 +3058,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3081,12 +3081,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3105,12 +3105,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3130,19 +3130,19 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         };
         payload: {
             trigger: string;
-            action: "started" | "completed";
+            action: "completed" | "started";
             total_active_reading_time_seconds: number;
             completion_percentage: number;
             chapters_started: number;
@@ -3154,12 +3154,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3178,12 +3178,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3199,12 +3199,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3221,11 +3221,11 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         id: string;
         timestamp: string;
         context: {
+            chapter_id: string;
+            chapter_version: string;
             book_id: string;
             manifest_id: string;
             manifest_version: string;
-            chapter_id: string;
-            chapter_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3243,12 +3243,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3265,12 +3265,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3287,12 +3287,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3310,12 +3310,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3334,12 +3334,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3359,19 +3359,19 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
         };
         payload: {
             trigger: string;
-            action: "started" | "completed";
+            action: "completed" | "started";
             total_active_reading_time_seconds: number;
             completion_percentage: number;
             chapters_started: number;
@@ -3383,12 +3383,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3407,12 +3407,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3428,12 +3428,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3450,11 +3450,11 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         id: string;
         timestamp: string;
         context: {
+            chapter_id: string;
+            chapter_version: string;
             book_id: string;
             manifest_id: string;
             manifest_version: string;
-            chapter_id: string;
-            chapter_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3472,12 +3472,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3494,12 +3494,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;
@@ -3516,12 +3516,12 @@ export declare const EventBatchV03Schema: z.ZodObject<{
         timestamp: string;
         session_id: string;
         context: {
-            book_id: string;
-            manifest_id: string;
-            manifest_version: string;
-            reader_id: string;
             chapter_id: string;
             chapter_version: string;
+            book_id: string;
+            reader_id: string;
+            manifest_id: string;
+            manifest_version: string;
             device_type: "mobile" | "tablet" | "desktop";
             app_id: string;
             app_version: string;

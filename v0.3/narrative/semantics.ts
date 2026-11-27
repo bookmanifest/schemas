@@ -11,7 +11,7 @@ import type {
   Knowledge,
   StoryEvent,
   Coreference
-} from '../zod/narrative'
+} from '../zod/narrative.js'
 
 /** Reading order of the manifest version the layer names. */
 export interface ReadingOrder {
