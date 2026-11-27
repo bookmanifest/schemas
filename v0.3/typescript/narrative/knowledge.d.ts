@@ -68,5 +68,12 @@ export interface Support {
    * Verification state: `verified`, `doubtful` (shown as such), `review` (needs a human). Absent means not verified.
    */
   status?: 'verified' | 'doubtful' | 'review';
+  /**
+   * Who verified the item. `producer`: the program that wrote the layer checked the item against its cited paragraphs. `author`: the book's author confirmed it by hand. Allowed only when `status` is `verified`; absent says nothing about who verified it.
+   *
+   * @minItems 1
+   * @maxItems 2
+   */
+  verified_by?: ['producer' | 'author'] | ['producer' | 'author', 'producer' | 'author'];
   [k: string]: unknown;
 }

@@ -5,6 +5,18 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.4] - 2026-11-27
+
+A support may say **who verified** its item. Additive: every 0.3.3 layer is still valid, and `narrative_layer` stays `"0.3"`.
+
+### Added
+
+- `verified_by` on the support ([`common.json#/$defs/support`](v0.3/json-schema/narrative/common.json)), so on every item that carries one, including a scene's `time`, `duration` and `setting`: one or both of `producer` (the program that wrote the layer checked the item against its cited paragraphs) and `author` (the book's author confirmed it by hand), unique. Allowed only when `status` is `verified`; the schema rejects it with any other status or none.
+- Zod: `verified_by` in every supported schema, with the same rule; the generated types gain the optional field.
+- Examples: `verified_by: ["producer"]` on scene `s-001` and `["author"]` on knowledge link `k-003` in the Quijote example and its public projection; `narrative-layer-verified-by-doubtful-invalid.json`, a doubtful scene with `verified_by`.
+- Tests: the rule on every kind of support in JSON Schema and Zod, and `publicProjection` and `spoilerSafeCut` keeping the field.
+- Docs: spec section 6.3 defines `verified_by`; section 6.4 says producers mark public only verified items whatever the source; a producer-guide row says a producer writes `producer` and an author-facing tool adds `author`.
+
 ## [0.3.3] - 2026-11-27
 
 The narrative layer gains an optional **setting** piece. It is additive: every 0.3.2 layer is still valid, and `narrative_layer` stays `"0.3"`.

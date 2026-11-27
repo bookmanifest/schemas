@@ -28,7 +28,7 @@ describe('narrative layer schema (v0.3)', () => {
   const invalid = globSync('./v0.3/examples/narrative/*-invalid.json')
     .filter((f) => !f.endsWith('-semantic-invalid.json'))
     .sort()
-  it('has invalid examples', () => expect(invalid.length).toBeGreaterThanOrEqual(11))
+  it('has invalid examples', () => expect(invalid.length).toBeGreaterThanOrEqual(12))
   for (const file of globSync('./v0.3/examples/narrative/*-semantic-invalid.json').sort()) {
     it(`accepts ${file} in JSON Schema and Zod (it fails only the semantic rules)`, () => {
       const data = readJson(file)
@@ -182,5 +182,72 @@ describe('setting spans (v0.3)', () => {
     layer.findings[0].refs = ['st-001']
     expect(validate(layer), JSON.stringify(validate.errors, null, 2)).toBe(true)
     expect(NarrativeLayerSchema.safeParse(layer).success).toBe(true)
+  })
+})
+
+describe('verified_by on the support (v0.3)', () => {
+  const layer = () => readJson('./v0.3/examples/narrative/narrative-layer-valid.json')
+  const keywords = () => (validate.errors ?? []).map((e) => e.keyword)
+  // Every kind of support: top-level items and the nested supports of a scene.
+  const supports: Array<[string, (l: any) => any]> = [
+    ['a scene', (l) => l.scenes[0]],
+    ["a scene's time", (l) => l.scenes[0].time],
+    ["a scene's duration", (l) => l.scenes[1].duration],
+    ["a scene's setting", (l) => l.scenes[2].setting],
+    ['a focalization span', (l) => l.focalization[0]],
+    ['a setting span', (l) => l.setting[0]],
+    ['a truth', (l) => l.truths[0]],
+    ['a knowledge link', (l) => l.knowledge[0]],
+    ['a story event', (l) => l.events[0]],
+    ['a coreference', (l) => l.coreference[0]]
+  ]
+
+  for (const [name, at] of supports) {
+    it(`${name} accepts verified_by with status verified`, () => {
+      for (const who of [['producer'], ['author'], ['producer', 'author']]) {
+        const l = layer()
+        Object.assign(at(l), { status: 'verified', verified_by: who })
+        expect(validate(l), JSON.stringify(validate.errors, null, 2)).toBe(true)
+        expect(NarrativeLayerSchema.safeParse(l).success).toBe(true)
+      }
+    })
+
+    it(`${name} rejects verified_by without status verified, in JSON Schema and Zod`, () => {
+      for (const status of ['doubtful', 'review', undefined]) {
+        const l = layer()
+        const item = at(l)
+        item.verified_by = ['author']
+        if (status === undefined) delete item.status
+        else item.status = status
+        expect(validate(l), String(status)).toBe(false)
+        expect(keywords(), String(status)).toContain('not')
+        expect(NarrativeLayerSchema.safeParse(l).success, String(status)).toBe(false)
+      }
+    })
+  }
+
+  const malformed: Array<[string, unknown, string]> = [
+    ['an empty list', [], 'minItems'],
+    ['the same source twice', ['producer', 'producer'], 'uniqueItems'],
+    ['an unknown source', ['reader'], 'enum'],
+    ['a string instead of a list', 'producer', 'type']
+  ]
+  for (const [name, value, keyword] of malformed) {
+    it(`rejects verified_by with ${name} (${keyword}) in JSON Schema and Zod`, () => {
+      const l = layer()
+      l.scenes[0].verified_by = value
+      expect(validate(l)).toBe(false)
+      expect(keywords()).toContain(keyword)
+      expect(NarrativeLayerSchema.safeParse(l).success).toBe(false)
+    })
+  }
+
+  it('the invalid example fails only because its status is doubtful', () => {
+    const l = readJson('./v0.3/examples/narrative/narrative-layer-verified-by-doubtful-invalid.json')
+    expect(validate(l)).toBe(false)
+    expect(keywords()).toContain('not')
+    l.scenes[0].status = 'verified'
+    expect(validate(l), JSON.stringify(validate.errors, null, 2)).toBe(true)
+    expect(NarrativeLayerSchema.safeParse(l).success).toBe(true)
   })
 })

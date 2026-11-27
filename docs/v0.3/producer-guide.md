@@ -27,7 +27,8 @@ What a program that reads a book (a *producer*) must emit to write a [narrative 
 | **Event salience** | Per story event: `kernel` with `picked_up_at` (the later paragraphs that pick it up), or `catalysis`. | «Picked up later» is something the producer can cite. |
 | **Event coreference** | Groups of paragraphs that tell the same event, each with an optional `teller`. | The repetitive case only. |
 | **Findings** | Continuity slips, absences, voice balance, reading against story order, open questions. | Always `visibility: "author"`. Describe; never judge. |
-| **Visibility** | `visibility` on every item. Absent means `author`. | Mark `public` only verified items you accept may be published. |
+| **Verification** | `status` per item and, on a verified item, `verified_by: ["producer"]` when the producer checked it against its cited paragraphs. | An author-facing tool (the author confirming an item left `doubtful`) sets `status: verified` and adds `author`. `verified_by` is allowed only with `status: verified`. |
+| **Visibility** | `visibility` on every item. Absent means `author`. | Mark `public` only verified items you accept may be published, whoever verified them. |
 
 A producer that cannot produce a piece leaves it out; the layer stays valid.
 

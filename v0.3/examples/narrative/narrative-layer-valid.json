@@ -47,6 +47,7 @@
       "evidence": ["capitulo-07#p-010", "capitulo-07#p-019"],
       "quote": "De allí a dos días se levantó don Quijote",
       "status": "verified",
+      "verified_by": ["producer"],
       "visibility": "public"
     },
     {
@@ -402,6 +403,7 @@
       "evidence": ["capitulo-07#p-014", "capitulo-08#p-013"],
       "quote": "aquel sabio Frestón que me robó el aposento y los libros",
       "status": "verified",
+      "verified_by": ["author"],
       "visibility": "public"
     },
     {
