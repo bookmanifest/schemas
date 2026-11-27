@@ -397,7 +397,8 @@ Public items are shown to a reader only once that reader has passed the item's *
 | Focalization span | `start` | only if its focalizer is already shown; `end` only once passed |
 | Setting span | `start` | `place` only if already shown; `end` only once passed |
 | Truth | `revealed_at` | only subjects already shown |
-| Knowledge link | the latest of its `revealed_at`, its `since` and its truth's `revealed_at` | only if its knower is already shown; its `until` only once both `until.at` and `until.revealed_at` are passed (before that it is left out entirely) |
+| Knowledge link | the latest of its `revealed_at`, its `since` and its truth's `revealed_at` | only if its knower is already shown |
+| A knowledge link's `until` | the later of `until.at` and `until.revealed_at` | with its link; before that, left out entirely |
 | Story event | `at` | pickups only once passed; the label `kernel` only from the first pickup (before it, saying "kernel" announces that the book comes back) |
 | Coreference | its second telling | tellings only once passed |
 
