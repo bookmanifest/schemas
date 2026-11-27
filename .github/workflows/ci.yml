@@ -8,13 +8,14 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(vars.CI_RUNNER || '["self-hosted","home-ci-bm"]') }}
     strategy:
       matrix:
         # The package must import with plain Node ESM on every maintained Node line (scripts/smoke-node-esm.mjs).
         node-version: ['20', '22', '24']
     steps:
       - uses: actions/checkout@v4
+      # No cache: npm here. The self-hosted runners keep ~/.npm between jobs, and restoring GitHub's copy of it is slower.
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
