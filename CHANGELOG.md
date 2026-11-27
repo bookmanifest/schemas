@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.5] - 2026-11-27
 
-A sixth **reading event**, `access_gate`. It is additive: every 0.3.3 batch is still valid.
+A sixth **reading event**, `access_gate`. It is additive: every 0.3.4 batch is still valid.
 
 ### Added
 
