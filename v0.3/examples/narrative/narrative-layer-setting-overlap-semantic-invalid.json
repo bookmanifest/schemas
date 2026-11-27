@@ -33,7 +33,7 @@
       "id": "st-002",
       "start": "capitulo-08#p-005",
       "end": "capitulo-08#p-007",
-      "mode": "dialogue",
+      "plane": "main",
       "basis": "asserted",
       "evidence": [
         "capitulo-08#p-005"

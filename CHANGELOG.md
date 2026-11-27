@@ -17,7 +17,7 @@ The narrative layer gains an optional **setting** piece. It is additive: every 0
 - Semantics: setting spans must not overlap (`overlap`); their ranges, addresses and places, and the place of a scene's setting, go through the existing checks (`range_reversed`, `unknown_address`, `unknown_reference`, `wrong_entity_kind`, `public_references_private`). `publicProjection` keeps public spans. `spoilerSafeCut` shows a span from its `start`, its `end` only once passed and its `place` only once that entity is shown, with the quote dropped and evidence cut; a scene's setting is shown with the scene, cited the same way.
 - A finding's `refs` may name a setting span (`st-NNN`).
 - Examples: eight setting spans and one scene setting in the Quijote example (and its public projection); invalid examples for an embedded plane without `plane_level`, `surroundings` on an interior span and a span with no slot; and `narrative-layer-setting-overlap-semantic-invalid.json`, which passes the schema and fails the semantic rules. `npm run validate` now runs the semantic rules on `*-semantic-invalid.json` examples.
-- Docs: spec section 6.5.5 «Setting» (later subsections renumbered), the gates table in 6.6 and rules 2 and 5 in 6.7; a producer-guide row; a rationale note on why setting is asked per paragraph and why it has no emotion or tone.
+- Docs: spec section 6.5.5 «Setting» (later subsections renumbered), the gates table in 6.6 and rules 2 and 5 in 6.7; section 6.5.4 and `focalization.json` now say that the narrating voice is a slot of setting spans; a producer-guide row; a rationale note on why setting is asked per paragraph and why it has no emotion or tone.
 
 ## [0.3.2] - 2026-11-27
 

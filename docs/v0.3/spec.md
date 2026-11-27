@@ -301,7 +301,7 @@ Genette's tempos (scene, summary, ellipsis, pause) are **derived**, not stored: 
 - `zero`: an unrestricted narrator, no character's perception. No `focalizer`.
 - `external`: only what an outside observer could see. No `focalizer`.
 
-Spans MUST NOT overlap. A span may match a scene, part of one, or a single paragraph. Who narrates is not part of the layer: it remains a fact of the producer's paragraph-level output. In the example the same scene at the inn has two internal focalizers in turn: don Quijote, who sees a castle (`fz-001`), and the innkeeper, who sees a poor horse (`fz-002`).
+Spans MUST NOT overlap. A span may match a scene, part of one, or a single paragraph. Who narrates is not a focalization: the kind of narrating voice is a slot of setting spans (section 6.5.5). In the example the same scene at the inn has two internal focalizers in turn: don Quijote, who sees a castle (`fz-001`), and the innkeeper, who sees a poor horse (`fz-002`).
 
 #### 6.5.5. Setting ([`setting.json`](../../v0.3/json-schema/narrative/setting.json))
 
@@ -309,7 +309,7 @@ A **setting span** is a run of paragraphs, in reading order, over which the **fr
 
 | Slot | Values | Meaning |
 |---|---|---|
-| `enclosure` | `interior`, `exterior`, `vehicle`, `no_place` | Where the body of the narration is. `no_place` means **there is no where**: a letter, a summary of years, a narrator's reflection. It is a value, not an absence. |
+| `enclosure` | `interior`, `exterior`, `vehicle`, `no_place` | Where the body of the narration is: `interior` inside a building or room, `exterior` in the open, `vehicle` in or on a vehicle. `no_place` means **there is no where**: a letter, a summary of years, a narrator's reflection. It is a value, not an absence. |
 | `place` | entity id | An entity of kind `place`. |
 | `vehicle` | text, 1–200 | The vehicle's name or a short description. Only when `enclosure` is `vehicle`. |
 | `surroundings` | `city`, `nature`, `water` | Only when `enclosure` is `exterior` or `vehicle`. |
@@ -318,11 +318,11 @@ A **setting span** is a run of paragraphs, in reading order, over which the **fr
 | `date_or_reference` | text, 1–200 | As the text gives it, in the book's language: «25 de septiembre», «al día siguiente». Not normalised. |
 | `plane` | `main`, `memory`, `embedded` | `main`: the main story. `memory`: an analepsis. `embedded`: a story told inside the story. |
 | `plane_level` | integer ≥ 1 | Required when `plane` is `embedded`, forbidden otherwise. 1 is a story inside the main story, 2 a story inside that one. |
-| `voice` | `outside_narrator`, `first_person_life`, `character_telling`, `written_text`, `theatre` | Who tells, and in what medium. `first_person_life`: a character telling their own life. `character_telling`: a character telling others aloud. `written_text`: a letter, diary or telegram. `theatre`: no narrator. |
-| `mode` | `scene`, `dialogue`, `thought`, `summary`, `description`, `document`, `address` | How it is told. `description` is a pause; `address` is the narrator speaking to the reader. |
+| `voice` | `outside_narrator`, `first_person_life`, `character_telling`, `written_text`, `theatre` | Who tells, and in what medium. `outside_narrator`: a narrator who is not a character of the story told. `first_person_life`: a character telling their own life. `character_telling`: a character telling others aloud. `written_text`: a letter, diary or telegram. `theatre`: no narrator. |
+| `mode` | `scene`, `dialogue`, `thought`, `summary`, `description`, `document`, `address` | How it is told. `scene`: action narrated as it happens. `dialogue`: characters' speech. `thought`: a character's thinking. `summary`: much story time told briefly. `description`: a pause. `document`: a text quoted whole (a letter, a sign, a poem). `address`: the narrator speaking to the reader. |
 | `weather` | 1–6 distinct of `rain`, `storm`, `snow`, `wind`, `heat`, `cold` | |
-| `light` | `darkness`, `artificial`, `moon` | Only when the hour does not already give it. |
-| `company` | `alone`, `two`, `group`, `crowd` | How many people are present. |
+| `light` | `darkness`, `artificial`, `moon` | Only when the hour does not already give it. `artificial`: a candle, a lamp, electric light. |
+| `company` | `alone`, `two`, `group`, `crowd` | How many people are present: one, two, a few, many. |
 | `animals` | boolean | `true` when animals are present. |
 
 - **Every slot is optional, and an absent slot means the text does not say.** A producer MUST NOT guess a slot. A span carries at least one slot.

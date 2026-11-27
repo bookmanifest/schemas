@@ -199,7 +199,7 @@ export type Frame = Support & {
  */
 export type EntityId2 = string;
 /**
- * Who perceives over a paragraph or a contiguous range of paragraphs (a scene, or part of one). Distinct from who narrates: the narrator is a separate fact of the producer's output. `internal`: the text renders what `focalizer` perceives or thinks; `zero`: an unrestricted narrator, no character's perception; `external`: only what an outside observer could see. Spans never overlap.
+ * Who perceives over a paragraph or a contiguous range of paragraphs (a scene, or part of one). Distinct from who narrates: the narrating voice is a slot of setting spans (setting.json). `internal`: the text renders what `focalizer` perceives or thinks; `zero`: an unrestricted narrator, no character's perception; `external`: only what an outside observer could see. Spans never overlap.
  */
 export type FocalizationSpan = Support & {
   [k: string]: unknown;
