@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/common.json",
+  "title": "Narrative layer: shared definitions",
+  "description": "Definitions every piece of the narrative layer uses: how an item cites the text (support) and who may see it (visibility).",
+  "$defs": {
+    "visibility": {
+      "description": "Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).",
+      "type": "string",
+      "enum": ["public", "author"],
+      "default": "author"
+    },
+    "addressList": {
+      "type": "array",
+      "items": { "$ref": "../validators/paragraph-address.json" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "support": {
+      "description": "How an item is grounded in the text. Every assertion in the layer carries it.",
+      "type": "object",
+      "required": ["basis", "evidence"],
+      "properties": {
+        "basis": {
+          "description": "`asserted`: one cited paragraph states it (a time marker, a named place, a line of dialogue). `inferred`: it follows from reading, not from one sentence; `quote` is then required.",
+          "type": "string",
+          "enum": ["asserted", "inferred"]
+        },
+        "evidence": {
+          "$ref": "#/$defs/addressList",
+          "description": "Paragraphs whose text supports the item. An address that does not exist in the manifest version invalidates the item."
+        },
+        "quote": {
+          "description": "The literal words, copied from one of the evidence paragraphs, that justify the item. Required when `basis` is `inferred`.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "confidence": {
+          "description": "Producer's confidence in the item, 0 to 1. Informative; consumers must not treat it as a calibrated probability.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "status": {
+          "description": "Verification state: `verified`, `doubtful` (shown as such), `review` (needs a human). Absent means not verified.",
+          "type": "string",
+          "enum": ["verified", "doubtful", "review"]
+        }
+      },
+      "if": { "properties": { "basis": { "const": "inferred" } }, "required": ["basis"] },
+      "then": { "required": ["quote"] }
+    }
+  }
+}

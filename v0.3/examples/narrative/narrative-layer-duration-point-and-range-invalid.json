@@ -1,0 +1,67 @@
+{
+  "narrative_layer": "0.3-draft",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "entities": [
+    {
+      "id": "e:don-quijote",
+      "kind": "character",
+      "name": "don Quijote",
+      "revealed_at": "capitulo-01#p-008",
+      "aliases": [
+        {
+          "name": "señor Quijana",
+          "revealed_at": "capitulo-05#p-007"
+        }
+      ],
+      "visibility": "public"
+    },
+    {
+      "id": "e:sancho-panza",
+      "kind": "character",
+      "name": "Sancho Panza",
+      "revealed_at": "capitulo-07#p-021",
+      "visibility": "public"
+    },
+    {
+      "id": "e:campo-de-los-molinos",
+      "kind": "place",
+      "name": "el campo de los molinos de viento",
+      "revealed_at": "capitulo-08#p-001",
+      "visibility": "public"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s-003",
+      "start": "capitulo-08#p-001",
+      "end": "capitulo-08#p-014",
+      "place": "e:campo-de-los-molinos",
+      "story_order": 3,
+      "cast": [
+        "e:don-quijote",
+        "e:sancho-panza"
+      ],
+      "duration": {
+        "unit": "minute",
+        "min": 5,
+        "max": 30,
+        "basis": "inferred",
+        "evidence": [
+          "capitulo-08#p-007",
+          "capitulo-08#p-011"
+        ],
+        "quote": "arremetió a todo el galope de Rocinante y embistió con el primero molino que estaba delante",
+        "value": 10
+      },
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-08#p-001"
+      ],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ]
+}

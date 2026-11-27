@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/entity.json",
+  "title": "Entity",
+  "description": "A character, place, organisation or object the other pieces refer to by id. Only what other pieces need: the full knowledge about an entity lives in the producer's own output.",
+  "type": "object",
+  "required": ["id", "kind", "name", "revealed_at"],
+  "properties": {
+    "id": { "$ref": "../validators/entity-id.json" },
+    "kind": { "type": "string", "enum": ["character", "place", "org", "object"] },
+    "name": {
+      "description": "The name a reader who has passed `revealed_at` knows the entity by.",
+      "type": "string", "minLength": 1, "maxLength": 200
+    },
+    "revealed_at": {
+      "$ref": "../validators/paragraph-address.json",
+      "description": "First paragraph after which a reader may know the entity under `name` (usually its first appearance)."
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "revealed_at"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+          "revealed_at": { "$ref": "../validators/paragraph-address.json" }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "additionalProperties": false
+}

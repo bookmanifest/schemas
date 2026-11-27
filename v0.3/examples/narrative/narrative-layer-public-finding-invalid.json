@@ -1,0 +1,51 @@
+{
+  "narrative_layer": "0.3-draft",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "entities": [
+    {
+      "id": "e:don-quijote",
+      "kind": "character",
+      "name": "don Quijote",
+      "revealed_at": "capitulo-01#p-008",
+      "aliases": [
+        {
+          "name": "señor Quijana",
+          "revealed_at": "capitulo-05#p-007"
+        }
+      ],
+      "visibility": "public"
+    },
+    {
+      "id": "e:sancho-panza",
+      "kind": "character",
+      "name": "Sancho Panza",
+      "revealed_at": "capitulo-07#p-021",
+      "visibility": "public"
+    },
+    {
+      "id": "e:campo-de-los-molinos",
+      "kind": "place",
+      "name": "el campo de los molinos de viento",
+      "revealed_at": "capitulo-08#p-001",
+      "visibility": "public"
+    }
+  ],
+  "findings": [
+    {
+      "id": "fd-001",
+      "kind": "continuity",
+      "text": "El capítulo 1 da como más probable que el hidalgo se llamara «Quijada»; en el capítulo 5 un vecino lo llama «señor Quijana».",
+      "refs": [
+        "e:don-quijote"
+      ],
+      "evidence": [
+        "capitulo-01#p-008",
+        "capitulo-05#p-007"
+      ],
+      "visibility": "public"
+    }
+  ]
+}

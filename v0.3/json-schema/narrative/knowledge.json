@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/knowledge.json",
+  "title": "Knowledge link",
+  "description": "What one character knows or believes about one key truth, and from where. Two positions are kept apart: `since`, from which paragraph the character holds it (the character's knowing), and `revealed_at`, from which paragraph a reader may be shown that the character holds it. Both are distinct from the truth's own `revealed_at` (the reader's knowing of the truth). Beliefs may be false.",
+  "type": "object",
+  "required": ["id", "truth", "knower", "stance", "holds", "since", "revealed_at"],
+  "allOf": [
+    { "$ref": "common.json#/$defs/support" },
+    {
+      "if": { "properties": { "stance": { "const": "knows" } }, "required": ["stance"] },
+      "then": { "properties": { "holds": { "const": true } } }
+    }
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^k-[0-9]{3,}$" },
+    "truth": { "type": "string", "pattern": "^t-[0-9]{3,}$" },
+    "knower": { "$ref": "../validators/entity-id.json" },
+    "stance": {
+      "description": "`knows`: holds the truth and is right. `believes`: holds something firmly, right or wrong. `suspects`: entertains it without commitment.",
+      "type": "string", "enum": ["knows", "believes", "suspects"]
+    },
+    "holds": {
+      "description": "true: the character holds the truth as stated. false: the character holds its contrary (a false belief). `knows` implies true.",
+      "type": "boolean"
+    },
+    "since": {
+      "description": "Paragraph from which the character holds it, or `before_text` when the character holds it before the narrative begins.",
+      "oneOf": [
+        { "$ref": "../validators/paragraph-address.json" },
+        { "const": "before_text" }
+      ]
+    },
+    "revealed_at": {
+      "$ref": "../validators/paragraph-address.json",
+      "description": "First paragraph after which a reader may know that the character holds it. Never before the earliest evidence."
+    },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false
+}

@@ -30,7 +30,8 @@
     "compile": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate": "node scripts/validate-examples.js"
+    "validate": "node scripts/validate-examples.js",
+    "typecheck:draft": "tsc -p tsconfig.v0.3.json"
   },
   "keywords": [
     "bookmanifest",

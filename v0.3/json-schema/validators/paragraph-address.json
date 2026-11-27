@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/validators/paragraph-address.json",
+  "title": "Paragraph address",
+  "description": "A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.",
+  "type": "string",
+  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*#p-[0-9]{3,}$",
+  "examples": ["capitulo-08#p-005", "capitulo-09#p-010"]
+}

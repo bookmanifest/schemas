@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/validators/did.json",
+  "title": "Book Manifest DID",
+  "description": "Decentralized Identifier for Book Manifest entities using did:web method",
+  "type": "string",
+  "pattern": "^did:web:bookmanifest\\.org:(author|publisher|series|book|manifest|chapter|reader|library-entry|progress):[a-zA-Z0-9-_]+(:[a-zA-Z0-9.-]+)?$",
+  "examples": [
+    "did:web:bookmanifest.org:author:miguel-de-cervantes",
+    "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+    "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-08:1.0.0"
+  ]
+}

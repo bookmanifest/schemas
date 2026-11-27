@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/validators/entity-id.json",
+  "title": "Entity id",
+  "description": "Book-local id of a character, place, organisation or object in a narrative layer: `e:` followed by a lowercase slug. Stable across manifest versions of the same book where possible.",
+  "type": "string",
+  "pattern": "^e:[a-z0-9]+(?:-[a-z0-9]+)*$",
+  "examples": ["e:don-quijote", "e:sancho-panza", "e:venta-de-puerto-lapice"]
+}

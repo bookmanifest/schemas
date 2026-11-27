@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/events/batch.json",
+  "title": "Event Batch (DRAFT v0.3)",
+  "description": "DRAFT. A batch of 1 to 100 events: the five v0.1 events, unchanged, plus the five v0.3 reading events.",
+  "type": "object",
+  "required": [
+    "events"
+  ],
+  "properties": {
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "https://bookmanifest.org/schemas/v0.1/events/heartbeat.json"
+          },
+          {
+            "$ref": "https://bookmanifest.org/schemas/v0.1/events/chapter-transition.json"
+          },
+          {
+            "$ref": "https://bookmanifest.org/schemas/v0.1/events/book-lifecycle.json"
+          },
+          {
+            "$ref": "https://bookmanifest.org/schemas/v0.1/events/interaction.json"
+          },
+          {
+            "$ref": "https://bookmanifest.org/schemas/v0.1/events/app-lifecycle.json"
+          },
+          {
+            "$ref": "./reread.json"
+          },
+          {
+            "$ref": "./shared-entry.json"
+          },
+          {
+            "$ref": "./companion-open.json"
+          },
+          {
+            "$ref": "./recap-view.json"
+          },
+          {
+            "$ref": "./spoiler-warning.json"
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,27 @@
+{
+  "events": [
+    {
+      "id": "5b2e9f10-0000-4000-8000-000000000008",
+      "timestamp": "2026-11-27T10:07:00Z",
+      "type": "recap_view",
+      "session_id": "7a1d2c3e-0000-4000-8000-000000000001",
+      "context": {
+        "reader_id": "did:web:bookmanifest.org:reader:3f6c1a52-8d0e-4b7a-9c41-2e5d7f9a0b13",
+        "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+        "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+        "manifest_version": "1.0.0",
+        "chapter_id": "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-09",
+        "chapter_version": "1.0.0",
+        "device_type": "mobile",
+        "app_id": "bookmanifest-reader-web",
+        "app_version": "1.0.0"
+      },
+      "payload": {
+        "action": "viewed",
+        "trigger": "return_prompt",
+        "at_node_id": "p-011",
+        "dormancy_seconds": 432000
+      }
+    }
+  ]
+}

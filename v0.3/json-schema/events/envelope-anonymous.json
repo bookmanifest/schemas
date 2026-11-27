@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/events/envelope-anonymous.json",
+  "title": "Anonymous Event Envelope (DRAFT v0.3)",
+  "description": "DRAFT. Envelope for events that must not be linkable to a reader: no `reader_id` and no `session_id`. Used by `shared_entry`. Each such event is sent at most once per entry per device, so counts of events stand in for counts of readers.",
+  "type": "object",
+  "required": [
+    "id",
+    "timestamp",
+    "type",
+    "context",
+    "payload"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique event identifier"
+    },
+    "timestamp": {
+      "$ref": "../validators/iso8601.json",
+      "description": "When the event occurred (client time)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "shared_entry"
+      ],
+      "description": "Event type"
+    },
+    "context": {
+      "type": "object",
+      "required": [
+        "book_id",
+        "manifest_id",
+        "manifest_version",
+        "chapter_id",
+        "chapter_version",
+        "device_type",
+        "app_id",
+        "app_version"
+      ],
+      "properties": {
+        "book_id": {
+          "$ref": "../validators/did.json"
+        },
+        "manifest_id": {
+          "$ref": "../validators/did.json"
+        },
+        "manifest_version": {
+          "$ref": "../validators/semver.json"
+        },
+        "chapter_id": {
+          "$ref": "../validators/did.json"
+        },
+        "chapter_version": {
+          "$ref": "../validators/semver.json"
+        },
+        "device_type": {
+          "type": "string",
+          "enum": [
+            "mobile",
+            "tablet",
+            "desktop"
+          ]
+        },
+        "app_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "app_version": {
+          "$ref": "../validators/semver.json"
+        }
+      },
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific data"
+    }
+  },
+  "additionalProperties": false
+}

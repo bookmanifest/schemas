@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/story-event.json",
+  "title": "Story event with salience",
+  "description": "Something that happens in the story, told at `at`, with its salience (Barthes). Operational rule: a `kernel` is an event the book picks up later (a later paragraph depends on it, refers back to it or follows from it), listed in `picked_up_at`; a `catalysis` is one the book does not pick up. The label describes, it never judges.",
+  "type": "object",
+  "required": ["id", "text", "at", "salience"],
+  "allOf": [
+    { "$ref": "common.json#/$defs/support" },
+    {
+      "if": { "properties": { "salience": { "const": "kernel" } }, "required": ["salience"] },
+      "then": { "required": ["picked_up_at"] },
+      "else": { "not": { "required": ["picked_up_at"] } }
+    }
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ev-[0-9]{3,}$" },
+    "text": { "description": "The event as one self-contained sentence in the book's language.", "type": "string", "minLength": 1, "maxLength": 500 },
+    "at": { "$ref": "../validators/paragraph-address.json", "description": "Paragraph where the event is told (the first telling, if told more than once)." },
+    "salience": { "type": "string", "enum": ["kernel", "catalysis"] },
+    "picked_up_at": {
+      "description": "Later paragraphs that pick the event up. Required and non-empty for a kernel; absent for a catalysis. All after `at`.",
+      "$ref": "common.json#/$defs/addressList"
+    },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false
+}

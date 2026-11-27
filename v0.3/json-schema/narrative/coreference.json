@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/coreference.json",
+  "title": "Event coreference",
+  "description": "Two or more paragraphs that tell the same story event (Genette's repetitive frequency: told several times, happened once). Each telling may name its teller when it is not the main narrator.",
+  "type": "object",
+  "required": ["id", "tellings"],
+  "allOf": [{ "$ref": "common.json#/$defs/support" }],
+  "properties": {
+    "id": { "type": "string", "pattern": "^co-[0-9]{3,}$" },
+    "event": { "description": "The story event told, when it is listed in `events`.", "type": "string", "pattern": "^ev-[0-9]{3,}$" },
+    "tellings": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "required": ["at"],
+        "properties": {
+          "at": { "$ref": "../validators/paragraph-address.json" },
+          "teller": { "$ref": "../validators/entity-id.json", "description": "Who tells it here, when not the main narrator." }
+        },
+        "additionalProperties": false
+      }
+    },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false
+}

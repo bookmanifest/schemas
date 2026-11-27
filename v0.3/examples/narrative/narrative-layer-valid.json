@@ -1,0 +1,386 @@
+{
+  "narrative_layer": "0.3-draft",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "generated_at": "2026-11-27T12:00:00Z",
+  "generator": { "name": "example-by-hand", "version": "0.3.0-draft" },
+  "entities": [
+    {
+      "id": "e:don-quijote",
+      "kind": "character",
+      "name": "don Quijote",
+      "revealed_at": "capitulo-01#p-008",
+      "aliases": [{ "name": "señor Quijana", "revealed_at": "capitulo-05#p-007" }],
+      "visibility": "public"
+    },
+    { "id": "e:ama", "kind": "character", "name": "el ama", "revealed_at": "capitulo-01#p-001", "visibility": "public" },
+    { "id": "e:sobrina", "kind": "character", "name": "la sobrina", "revealed_at": "capitulo-01#p-001", "visibility": "public" },
+    { "id": "e:cura", "kind": "character", "name": "el cura", "revealed_at": "capitulo-01#p-003", "visibility": "public" },
+    { "id": "e:barbero", "kind": "character", "name": "maese Nicolás, el barbero", "revealed_at": "capitulo-01#p-003", "visibility": "public" },
+    { "id": "e:ventero", "kind": "character", "name": "el ventero", "revealed_at": "capitulo-02#p-014", "visibility": "public" },
+    { "id": "e:freston", "kind": "character", "name": "Frestón", "revealed_at": "capitulo-07#p-014", "visibility": "public" },
+    { "id": "e:sancho-panza", "kind": "character", "name": "Sancho Panza", "revealed_at": "capitulo-07#p-021", "visibility": "public" },
+    { "id": "e:vizcaino", "kind": "character", "name": "el vizcaíno", "revealed_at": "capitulo-08#p-039", "visibility": "public" },
+    { "id": "e:cide-hamete-benengeli", "kind": "character", "name": "Cide Hamete Benengeli", "revealed_at": "capitulo-09#p-009", "visibility": "public" },
+    { "id": "e:casa-de-don-quijote", "kind": "place", "name": "la casa de don Quijote", "revealed_at": "capitulo-01#p-001", "visibility": "public" },
+    { "id": "e:venta", "kind": "place", "name": "la venta", "revealed_at": "capitulo-02#p-009", "visibility": "public" },
+    { "id": "e:campo-de-los-molinos", "kind": "place", "name": "el campo de los molinos de viento", "revealed_at": "capitulo-08#p-001", "visibility": "public" },
+    { "id": "e:camino-de-puerto-lapice", "kind": "place", "name": "el camino del Puerto Lápice", "revealed_at": "capitulo-08#p-015", "visibility": "public" },
+    { "id": "e:alcana-de-toledo", "kind": "place", "name": "el Alcaná de Toledo", "revealed_at": "capitulo-09#p-006", "visibility": "public" }
+  ],
+  "scenes": [
+    {
+      "id": "s-001",
+      "start": "capitulo-07#p-010",
+      "end": "capitulo-07#p-019",
+      "place": "e:casa-de-don-quijote",
+      "time": {
+        "label": "dos días después de que el cura y el barbero tapian el aposento",
+        "basis": "asserted",
+        "evidence": ["capitulo-07#p-010"]
+      },
+      "story_order": 1,
+      "cast": ["e:don-quijote", "e:ama", "e:sobrina"],
+      "basis": "inferred",
+      "evidence": ["capitulo-07#p-010", "capitulo-07#p-019"],
+      "quote": "De allí a dos días se levantó don Quijote",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "s-002",
+      "start": "capitulo-07#p-020",
+      "end": "capitulo-07#p-020",
+      "place": "e:casa-de-don-quijote",
+      "story_order": 2,
+      "cast": ["e:don-quijote", "e:cura", "e:barbero"],
+      "duration": {
+        "unit": "day",
+        "value": 15,
+        "basis": "asserted",
+        "evidence": ["capitulo-07#p-020"]
+      },
+      "basis": "asserted",
+      "evidence": ["capitulo-07#p-020"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "s-003",
+      "start": "capitulo-08#p-001",
+      "end": "capitulo-08#p-014",
+      "place": "e:campo-de-los-molinos",
+      "story_order": 3,
+      "cast": ["e:don-quijote", "e:sancho-panza"],
+      "duration": {
+        "unit": "minute",
+        "min": 5,
+        "max": 30,
+        "basis": "inferred",
+        "evidence": ["capitulo-08#p-007", "capitulo-08#p-011"],
+        "quote": "arremetió a todo el galope de Rocinante y embistió con el primero molino que estaba delante"
+      },
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-001"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "s-004",
+      "start": "capitulo-08#p-021",
+      "end": "capitulo-08#p-021",
+      "time": {
+        "label": "la noche que sigue a la aventura de los molinos",
+        "basis": "asserted",
+        "evidence": ["capitulo-08#p-021"]
+      },
+      "story_order": 4,
+      "cast": ["e:don-quijote", "e:sancho-panza"],
+      "duration": {
+        "unit": "hour",
+        "min": 8,
+        "max": 12,
+        "basis": "inferred",
+        "evidence": ["capitulo-08#p-021"],
+        "quote": "Toda aquella noche no durmió don Quijote"
+      },
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-021"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "s-005",
+      "start": "capitulo-08#p-026",
+      "end": "capitulo-08#p-050",
+      "place": "e:camino-de-puerto-lapice",
+      "story_order": 5,
+      "cast": ["e:don-quijote", "e:sancho-panza", "e:vizcaino"],
+      "basis": "inferred",
+      "evidence": ["capitulo-08#p-026"],
+      "quote": "asomaron por el camino dos frailes de la orden de San Benito",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "s-006",
+      "start": "capitulo-09#p-006",
+      "end": "capitulo-09#p-011",
+      "place": "e:alcana-de-toledo",
+      "story_order": 7,
+      "cast": [],
+      "duration": {
+        "unknown": true,
+        "basis": "inferred",
+        "evidence": ["capitulo-09#p-006"],
+        "quote": "Estando yo un día en el Alcaná de Toledo"
+      },
+      "basis": "asserted",
+      "evidence": ["capitulo-09#p-006"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "s-007",
+      "start": "capitulo-09#p-012",
+      "end": "capitulo-09#p-017",
+      "place": "e:camino-de-puerto-lapice",
+      "story_order": 6,
+      "cast": ["e:don-quijote", "e:vizcaino"],
+      "continues": "s-005",
+      "basis": "inferred",
+      "evidence": ["capitulo-09#p-012"],
+      "quote": "Puestas y levantadas en alto las cortadoras espadas de los dos valerosos y enojados combatientes",
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "focalization": [
+    {
+      "id": "fz-001",
+      "start": "capitulo-02#p-010",
+      "mode": "internal",
+      "focalizer": "e:don-quijote",
+      "basis": "inferred",
+      "evidence": ["capitulo-02#p-010"],
+      "quote": "luego que vio la venta, se le representó que era un castillo",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "fz-002",
+      "start": "capitulo-02#p-021",
+      "mode": "internal",
+      "focalizer": "e:ventero",
+      "basis": "inferred",
+      "evidence": ["capitulo-02#p-021"],
+      "quote": "Miróle el ventero, y no le pareció tan bueno como don Quijote decía",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "fz-003",
+      "start": "capitulo-07#p-011",
+      "mode": "external",
+      "basis": "inferred",
+      "evidence": ["capitulo-07#p-011"],
+      "quote": "volvía y revolvía los ojos por todo, sin decir palabra",
+      "status": "review",
+      "visibility": "author"
+    },
+    {
+      "id": "fz-004",
+      "start": "capitulo-08#p-001",
+      "mode": "zero",
+      "basis": "inferred",
+      "evidence": ["capitulo-08#p-001"],
+      "quote": "descubrieron treinta o cuarenta molinos de viento",
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "truths": [
+    {
+      "id": "t-001",
+      "text": "El cura y el barbero mandan tapiar el aposento de los libros de don Quijote; no se lo lleva ningún encantador.",
+      "subjects": ["e:cura", "e:barbero", "e:don-quijote"],
+      "revealed_at": "capitulo-07#p-010",
+      "basis": "asserted",
+      "evidence": ["capitulo-07#p-010"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "t-002",
+      "text": "Los gigantes que ve don Quijote son molinos de viento.",
+      "subjects": ["e:don-quijote"],
+      "revealed_at": "capitulo-08#p-001",
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-001", "capitulo-08#p-005"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "t-003",
+      "text": "La historia de don Quijote que se lee es la traducción de un manuscrito árabe de Cide Hamete Benengeli.",
+      "subjects": ["e:cide-hamete-benengeli", "e:don-quijote"],
+      "revealed_at": "capitulo-09#p-009",
+      "clues": ["capitulo-01#p-008", "capitulo-08#p-051"],
+      "basis": "asserted",
+      "evidence": ["capitulo-09#p-009"],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "k-001",
+      "truth": "t-001",
+      "knower": "e:ama",
+      "stance": "knows",
+      "holds": true,
+      "since": "capitulo-07#p-010",
+      "revealed_at": "capitulo-07#p-010",
+      "basis": "inferred",
+      "evidence": ["capitulo-07#p-010", "capitulo-07#p-012"],
+      "quote": "y que dijesen que un encantador se los había llevado",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "k-002",
+      "truth": "t-001",
+      "knower": "e:sobrina",
+      "stance": "knows",
+      "holds": true,
+      "since": "capitulo-07#p-010",
+      "revealed_at": "capitulo-07#p-010",
+      "basis": "inferred",
+      "evidence": ["capitulo-07#p-010", "capitulo-07#p-013"],
+      "quote": "y que dijesen que un encantador se los había llevado",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "k-003",
+      "truth": "t-001",
+      "knower": "e:don-quijote",
+      "stance": "believes",
+      "holds": false,
+      "since": "capitulo-07#p-014",
+      "revealed_at": "capitulo-07#p-014",
+      "basis": "inferred",
+      "evidence": ["capitulo-07#p-014", "capitulo-08#p-013"],
+      "quote": "aquel sabio Frestón que me robó el aposento y los libros",
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "k-004",
+      "truth": "t-002",
+      "knower": "e:sancho-panza",
+      "stance": "knows",
+      "holds": true,
+      "since": "capitulo-08#p-005",
+      "revealed_at": "capitulo-08#p-005",
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-005"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "k-005",
+      "truth": "t-002",
+      "knower": "e:don-quijote",
+      "stance": "believes",
+      "holds": false,
+      "since": "capitulo-08#p-002",
+      "revealed_at": "capitulo-08#p-002",
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-002", "capitulo-08#p-013"],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-001",
+      "text": "La sobrina le dice a don Quijote que un encantador se llevó el aposento y los libros.",
+      "at": "capitulo-07#p-013",
+      "salience": "kernel",
+      "picked_up_at": ["capitulo-08#p-013"],
+      "basis": "asserted",
+      "evidence": ["capitulo-07#p-013", "capitulo-08#p-013"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "ev-002",
+      "text": "Don Quijote embiste el primer molino, la lanza se hace pedazos y el aspa lo derriba.",
+      "at": "capitulo-08#p-011",
+      "salience": "kernel",
+      "picked_up_at": ["capitulo-08#p-015", "capitulo-08#p-021", "capitulo-08#p-028"],
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-011", "capitulo-08#p-021", "capitulo-08#p-028"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "ev-003",
+      "text": "En la venta le sirven a don Quijote bacallao mal remojado y peor cocido a la puerta, por el fresco.",
+      "at": "capitulo-02#p-028",
+      "salience": "catalysis",
+      "basis": "asserted",
+      "evidence": ["capitulo-02#p-028"],
+      "status": "verified",
+      "visibility": "public"
+    },
+    {
+      "id": "ev-004",
+      "text": "Don Quijote y el vizcaíno se acometen con las espadas en alto.",
+      "at": "capitulo-08#p-050",
+      "salience": "kernel",
+      "picked_up_at": ["capitulo-09#p-001", "capitulo-09#p-010", "capitulo-09#p-012"],
+      "basis": "asserted",
+      "evidence": ["capitulo-08#p-050", "capitulo-09#p-012"],
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "coreference": [
+    {
+      "id": "co-001",
+      "event": "ev-004",
+      "tellings": [
+        { "at": "capitulo-08#p-050" },
+        { "at": "capitulo-09#p-001" },
+        { "at": "capitulo-09#p-010" }
+      ],
+      "basis": "inferred",
+      "evidence": ["capitulo-08#p-050", "capitulo-09#p-001", "capitulo-09#p-010"],
+      "quote": "puestos en la mesma postura que la historia cuenta",
+      "status": "verified",
+      "visibility": "public"
+    }
+  ],
+  "findings": [
+    {
+      "id": "fd-001",
+      "kind": "continuity",
+      "text": "El capítulo 1 da como más probable que el hidalgo se llamara «Quijada»; en el capítulo 5 un vecino lo llama «señor Quijana».",
+      "refs": ["e:don-quijote"],
+      "evidence": ["capitulo-01#p-008", "capitulo-05#p-007"],
+      "visibility": "author"
+    },
+    {
+      "id": "fd-002",
+      "kind": "reading_vs_story_order",
+      "text": "La batalla con el vizcaíno se interrumpe al final del capítulo 8; en el capítulo 9, antes de que siga, el narrador cuenta cómo halló después el manuscrito en Toledo.",
+      "refs": ["s-005", "s-006", "s-007"],
+      "evidence": ["capitulo-08#p-051", "capitulo-09#p-006", "capitulo-09#p-012"],
+      "visibility": "author"
+    }
+  ]
+}

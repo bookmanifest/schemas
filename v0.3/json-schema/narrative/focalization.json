@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/focalization.json",
+  "title": "Focalization span",
+  "description": "Who perceives over a paragraph or a contiguous range of paragraphs (a scene, or part of one). Distinct from who narrates: the narrator is a separate fact of the producer's output. `internal`: the text renders what `focalizer` perceives or thinks; `zero`: an unrestricted narrator, no character's perception; `external`: only what an outside observer could see. Spans never overlap.",
+  "type": "object",
+  "required": ["id", "start", "mode"],
+  "allOf": [
+    { "$ref": "common.json#/$defs/support" },
+    {
+      "if": { "properties": { "mode": { "const": "internal" } }, "required": ["mode"] },
+      "then": { "required": ["focalizer"] },
+      "else": { "not": { "required": ["focalizer"] } }
+    }
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^fz-[0-9]{3,}$" },
+    "start": { "$ref": "../validators/paragraph-address.json" },
+    "end": { "$ref": "../validators/paragraph-address.json", "description": "Last paragraph, inclusive. Absent: the span is the single paragraph `start`." },
+    "mode": { "type": "string", "enum": ["internal", "zero", "external"] },
+    "focalizer": { "$ref": "../validators/entity-id.json", "description": "The perceiving character. Required for `internal`, forbidden otherwise." },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false
+}
