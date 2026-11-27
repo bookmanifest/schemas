@@ -5,6 +5,20 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.3] - 2026-11-27
+
+The narrative layer gains an optional **setting** piece. It is additive: every 0.3.2 layer is still valid, and `narrative_layer` stays `"0.3"`.
+
+### Added
+
+- **Setting spans** (`setting`, up to 50000, schema [`v0.3/json-schema/narrative/setting.json`](v0.3/json-schema/narrative/setting.json)): runs of paragraphs over which the frame of the narration holds. Each span has `id` (`st-NNN`), `start`, an optional `end`, a support, a visibility and at least one slot: `enclosure` (`interior`, `exterior`, `vehicle`, `no_place`), `place`, `vehicle`, `surroundings`, `time_of_day`, `season`, `date_or_reference`, `plane` and `plane_level`, `voice`, `mode`, `weather`, `light`, `company` and `animals`. The schema encodes that `plane_level` goes with `plane: embedded` and only with it, that `vehicle` needs `enclosure: vehicle`, and that `surroundings` needs `exterior` or `vehicle`.
+- A scene may carry a `setting` object: the same slots with their own support, summarising the scene's frame.
+- Zod: `SettingSchema`, `SettingSummarySchema` and the `Setting` and `SettingSummary` types; `SceneSchema` and `NarrativeLayerSchema` accept the new fields.
+- Semantics: setting spans must not overlap (`overlap`); their ranges, addresses and places, and the place of a scene's setting, go through the existing checks (`range_reversed`, `unknown_address`, `unknown_reference`, `wrong_entity_kind`, `public_references_private`). `publicProjection` keeps public spans. `spoilerSafeCut` shows a span from its `start`, its `end` only once passed and its `place` only once that entity is shown, with the quote dropped and evidence cut; a scene's setting is shown with the scene, cited the same way.
+- A finding's `refs` may name a setting span (`st-NNN`).
+- Examples: eight setting spans and one scene setting in the Quijote example (and its public projection); invalid examples for an embedded plane without `plane_level`, `surroundings` on an interior span and a span with no slot; and `narrative-layer-setting-overlap-semantic-invalid.json`, which passes the schema and fails the semantic rules. `npm run validate` now runs the semantic rules on `*-semantic-invalid.json` examples.
+- Docs: spec section 6.5.5 «Setting» (later subsections renumbered), the gates table in 6.6 and rules 2 and 5 in 6.7; a producer-guide row; a rationale note on why setting is asked per paragraph and why it has no emotion or tone.
+
 ## [0.3.2] - 2026-11-27
 
 One format version: **v0.1 is folded into 0.3**. Book Manifest 0.1 existed only as a draft and nobody uses the format yet, so 0.3, the first public version, now holds the manifest and its entities, the session events, the reading events and the narrative layer together. The format stays at 0.3.

@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/setting.json",
+  "title": "Setting span",
+  "description": "A paragraph or a contiguous range of paragraphs, in reading order, over which the frame of the narration holds: where the text is, when, on which plane, in whose voice, how it is told, under what weather and light, and with how many people around. A producer asks these questions paragraph by paragraph and carries each answer forward until the text changes it; a span ends where any value changes. Every slot is optional and an absent slot means the text does not say. Spans never overlap and need not cover every paragraph.",
+  "type": "object",
+  "required": ["id", "start"],
+  "allOf": [{ "$ref": "#/$defs/frame" }],
+  "properties": {
+    "id": { "type": "string", "pattern": "^st-[0-9]{3,}$" },
+    "start": { "$ref": "../validators/paragraph-address.json", "description": "First paragraph of the span." },
+    "end": { "$ref": "../validators/paragraph-address.json", "description": "Last paragraph, inclusive. Absent: the span is the single paragraph `start`." },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false,
+  "$defs": {
+    "frame": {
+      "description": "The slots of a setting, with their support. At least one slot is present. Shared by setting spans and by a scene's `setting`.",
+      "type": "object",
+      "allOf": [
+        { "$ref": "common.json#/$defs/support" },
+        {
+          "if": { "properties": { "plane": { "const": "embedded" } }, "required": ["plane"] },
+          "then": { "required": ["plane_level"] },
+          "else": { "not": { "required": ["plane_level"] } }
+        },
+        {
+          "if": { "required": ["vehicle"] },
+          "then": { "required": ["enclosure"], "properties": { "enclosure": { "const": "vehicle" } } }
+        },
+        {
+          "if": { "required": ["surroundings"] },
+          "then": { "required": ["enclosure"], "properties": { "enclosure": { "enum": ["exterior", "vehicle"] } } }
+        }
+      ],
+      "anyOf": [
+        { "required": ["enclosure"] },
+        { "required": ["place"] },
+        { "required": ["vehicle"] },
+        { "required": ["surroundings"] },
+        { "required": ["time_of_day"] },
+        { "required": ["season"] },
+        { "required": ["date_or_reference"] },
+        { "required": ["plane"] },
+        { "required": ["voice"] },
+        { "required": ["mode"] },
+        { "required": ["weather"] },
+        { "required": ["light"] },
+        { "required": ["company"] },
+        { "required": ["animals"] }
+      ],
+      "properties": {
+        "enclosure": {
+          "description": "Where the body of the narration is. `interior`: inside a building or room. `exterior`: in the open. `vehicle`: inside or on a vehicle (a coach, a ship, a train). `no_place`: there is no where, as in a letter, a summary of years or a narrator's reflection; this differs from an absent `enclosure`, which means the text does not say.",
+          "type": "string",
+          "enum": ["interior", "exterior", "vehicle", "no_place"]
+        },
+        "place": {
+          "description": "Where the narration is: an entity of kind `place`.",
+          "$ref": "../validators/entity-id.json"
+        },
+        "vehicle": {
+          "description": "The vehicle's name or a short description, in the book's language. Only when `enclosure` is `vehicle`.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "surroundings": {
+          "description": "What lies around the narration: `city`, `nature` or `water`. Only when `enclosure` is `exterior` or `vehicle`.",
+          "type": "string",
+          "enum": ["city", "nature", "water"]
+        },
+        "time_of_day": {
+          "description": "The hour of the narration, in six parts.",
+          "type": "string",
+          "enum": ["dawn", "morning", "midday", "afternoon", "dusk", "night"]
+        },
+        "season": {
+          "description": "The season of the narration.",
+          "type": "string",
+          "enum": ["spring", "summer", "autumn", "winter"]
+        },
+        "date_or_reference": {
+          "description": "The date or time reference as the text gives it, in the book's language: «25 de septiembre», «al día siguiente». Free text, not normalised.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "plane": {
+          "description": "Which story the paragraphs tell. `main`: the main story. `memory`: an analepsis, a return to an earlier time of the story. `embedded`: a story told inside the story; `plane_level` then says how deep.",
+          "type": "string",
+          "enum": ["main", "memory", "embedded"]
+        },
+        "plane_level": {
+          "description": "Depth of an embedded story: 1 is a story inside the main story, 2 a story inside that one. Required when `plane` is `embedded`, forbidden otherwise.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "voice": {
+          "description": "Who tells, and in what medium. `outside_narrator`: a narrator who is not a character of the story told. `first_person_life`: a character telling their own life. `character_telling`: a character telling others aloud. `written_text`: a letter, a diary or a telegram. `theatre`: dialogue and directions with no narrator.",
+          "type": "string",
+          "enum": ["outside_narrator", "first_person_life", "character_telling", "written_text", "theatre"]
+        },
+        "mode": {
+          "description": "How it is told. `scene`: action narrated as it happens. `dialogue`: characters' speech. `thought`: a character's thinking. `summary`: much story time told briefly. `description`: a pause, the story does not advance. `document`: a text quoted whole (a letter, a sign, a poem). `address`: the narrator speaking to the reader.",
+          "type": "string",
+          "enum": ["scene", "dialogue", "thought", "summary", "description", "document", "address"]
+        },
+        "weather": {
+          "description": "The weather the text states.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/weather" },
+          "minItems": 1,
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "light": {
+          "description": "The light, only when the hour does not already give it: `darkness`, `artificial` (a candle, a lamp, electric light) or `moon`.",
+          "type": "string",
+          "enum": ["darkness", "artificial", "moon"]
+        },
+        "company": {
+          "description": "How many people are present: `alone` (one), `two`, `group` (a few) or `crowd` (many).",
+          "type": "string",
+          "enum": ["alone", "two", "group", "crowd"]
+        },
+        "animals": {
+          "description": "`true` when animals are present.",
+          "type": "boolean"
+        }
+      }
+    },
+    "weather": {
+      "description": "One kind of weather: `rain`, `storm`, `snow`, `wind`, `heat` or `cold`.",
+      "type": "string",
+      "enum": ["rain", "storm", "snow", "wind", "heat", "cold"]
+    },
+    "summary": {
+      "description": "A scene's setting: the frame that holds over the scene, with its own support. The same slots as a setting span, with no id, start, end or visibility (it is shown with its scene).",
+      "type": "object",
+      "allOf": [{ "$ref": "#/$defs/frame" }],
+      "unevaluatedProperties": false
+    }
+  }
+}

@@ -46,6 +46,7 @@ export type Scene = Support & {
    */
   cast?: EntityId[];
   duration?: StoryDuration;
+  setting?: Summary;
   /**
    * Id of an earlier scene this one resumes after an interruption (same place, time and cast, broken by other text).
    */
@@ -94,6 +95,110 @@ export type StoryDuration = Support & {
   [k: string]: unknown;
 };
 /**
+ * The frame that holds over the scene (where, when, on which plane, in whose voice, how it is told, weather, light, company), with its own support. Paragraph-level detail goes in the layer's setting spans.
+ */
+export type Summary = Frame;
+/**
+ * The slots of a setting, with their support. At least one slot is present. Shared by setting spans and by a scene's `setting`.
+ */
+export type Frame = Support & {
+  [k: string]: unknown;
+} & {
+  /**
+   * Where the body of the narration is. `interior`: inside a building or room. `exterior`: in the open. `vehicle`: inside or on a vehicle (a coach, a ship, a train). `no_place`: there is no where, as in a letter, a summary of years or a narrator's reflection; this differs from an absent `enclosure`, which means the text does not say.
+   */
+  enclosure?: 'interior' | 'exterior' | 'vehicle' | 'no_place';
+  place?: EntityId2;
+  /**
+   * The vehicle's name or a short description, in the book's language. Only when `enclosure` is `vehicle`.
+   */
+  vehicle?: string;
+  /**
+   * What lies around the narration: `city`, `nature` or `water`. Only when `enclosure` is `exterior` or `vehicle`.
+   */
+  surroundings?: 'city' | 'nature' | 'water';
+  /**
+   * The hour of the narration, in six parts.
+   */
+  time_of_day?: 'dawn' | 'morning' | 'midday' | 'afternoon' | 'dusk' | 'night';
+  /**
+   * The season of the narration.
+   */
+  season?: 'spring' | 'summer' | 'autumn' | 'winter';
+  /**
+   * The date or time reference as the text gives it, in the book's language: «25 de septiembre», «al día siguiente». Free text, not normalised.
+   */
+  date_or_reference?: string;
+  /**
+   * Which story the paragraphs tell. `main`: the main story. `memory`: an analepsis, a return to an earlier time of the story. `embedded`: a story told inside the story; `plane_level` then says how deep.
+   */
+  plane?: 'main' | 'memory' | 'embedded';
+  /**
+   * Depth of an embedded story: 1 is a story inside the main story, 2 a story inside that one. Required when `plane` is `embedded`, forbidden otherwise.
+   */
+  plane_level?: number;
+  /**
+   * Who tells, and in what medium. `outside_narrator`: a narrator who is not a character of the story told. `first_person_life`: a character telling their own life. `character_telling`: a character telling others aloud. `written_text`: a letter, a diary or a telegram. `theatre`: dialogue and directions with no narrator.
+   */
+  voice?: 'outside_narrator' | 'first_person_life' | 'character_telling' | 'written_text' | 'theatre';
+  /**
+   * How it is told. `scene`: action narrated as it happens. `dialogue`: characters' speech. `thought`: a character's thinking. `summary`: much story time told briefly. `description`: a pause, the story does not advance. `document`: a text quoted whole (a letter, a sign, a poem). `address`: the narrator speaking to the reader.
+   */
+  mode?: 'scene' | 'dialogue' | 'thought' | 'summary' | 'description' | 'document' | 'address';
+  /**
+   * The weather the text states.
+   *
+   * @minItems 1
+   * @maxItems 6
+   */
+  weather?:
+    | ['rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold']
+    | ['rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold', 'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold']
+    | [
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold'
+      ]
+    | [
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold'
+      ]
+    | [
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold'
+      ]
+    | [
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold',
+        'rain' | 'storm' | 'snow' | 'wind' | 'heat' | 'cold'
+      ];
+  /**
+   * The light, only when the hour does not already give it: `darkness`, `artificial` (a candle, a lamp, electric light) or `moon`.
+   */
+  light?: 'darkness' | 'artificial' | 'moon';
+  /**
+   * How many people are present: `alone` (one), `two`, `group` (a few) or `crowd` (many).
+   */
+  company?: 'alone' | 'two' | 'group' | 'crowd';
+  /**
+   * `true` when animals are present.
+   */
+  animals?: boolean;
+  [k: string]: unknown;
+};
+/**
+ * Book-local id of a character, place, organisation or object in a narrative layer: `e:` followed by a lowercase slug. Stable across manifest versions of the same book where possible.
+ */
+export type EntityId2 = string;
+/**
  * Who perceives over a paragraph or a contiguous range of paragraphs (a scene, or part of one). Distinct from who narrates: the narrator is a separate fact of the producer's output. `internal`: the text renders what `focalizer` perceives or thinks; `zero`: an unrestricted narrator, no character's perception; `external`: only what an outside observer could see. Spans never overlap.
  */
 export type FocalizationSpan = Support & {
@@ -103,7 +208,7 @@ export type FocalizationSpan = Support & {
   start: ParagraphAddress1;
   end?: ParagraphAddress4;
   mode: 'internal' | 'zero' | 'external';
-  focalizer?: EntityId2;
+  focalizer?: EntityId3;
   /**
    * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
    */
@@ -117,7 +222,28 @@ export type ParagraphAddress4 = string;
 /**
  * Book-local id of a character, place, organisation or object in a narrative layer: `e:` followed by a lowercase slug. Stable across manifest versions of the same book where possible.
  */
-export type EntityId2 = string;
+export type EntityId3 = string;
+/**
+ * A paragraph or a contiguous range of paragraphs, in reading order, over which the frame of the narration holds: where the text is, when, on which plane, in whose voice, how it is told, under what weather and light, and with how many people around. A producer asks these questions paragraph by paragraph and carries each answer forward until the text changes it; a span ends where any value changes. Every slot is optional and an absent slot means the text does not say. Spans never overlap and need not cover every paragraph.
+ */
+export type SettingSpan = Frame & {
+  id: string;
+  start: ParagraphAddress5;
+  end?: ParagraphAddress6;
+  /**
+   * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
+   */
+  visibility?: 'public' | 'author';
+  [k: string]: unknown;
+};
+/**
+ * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
+ */
+export type ParagraphAddress5 = string;
+/**
+ * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
+ */
+export type ParagraphAddress6 = string;
 /**
  * One of the few revelations that matter in the book: a fact the reader does not know at first and learns at a precise point. A book has a handful, not hundreds. `evidence` cites the paragraphs of the reveal.
  */
@@ -307,7 +433,7 @@ export type KeyTruth = Support & {
         EntityId,
         EntityId
       ];
-  revealed_at: ParagraphAddress5;
+  revealed_at: ParagraphAddress7;
   clues?: AddressList1;
   /**
    * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
@@ -318,7 +444,7 @@ export type KeyTruth = Support & {
 /**
  * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
  */
-export type ParagraphAddress5 = string;
+export type ParagraphAddress7 = string;
 /**
  * Earlier paragraphs that hint at the truth before it is revealed (planted clues). All before `revealed_at`.
  *
@@ -346,7 +472,7 @@ export type KnowledgeLink = Support & {
    * Paragraph from which the character holds it, or `before_text` when the character holds it before the narrative begins.
    */
   since: ParagraphAddress1 | 'before_text';
-  revealed_at: ParagraphAddress6;
+  revealed_at: ParagraphAddress8;
   /**
    * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
    */
@@ -356,7 +482,7 @@ export type KnowledgeLink = Support & {
 /**
  * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
  */
-export type ParagraphAddress6 = string;
+export type ParagraphAddress8 = string;
 /**
  * Something that happens in the story, told at `at`, with its salience (Barthes). Operational rule: a `kernel` is an event the book picks up later (a later paragraph depends on it, refers back to it or follows from it), listed in `picked_up_at`; a `catalysis` is one the book does not pick up. The label describes, it never judges.
  */
@@ -368,7 +494,7 @@ export type StoryEventWithSalience = Support & {
    * The event as one self-contained sentence in the book's language.
    */
   text: string;
-  at: ParagraphAddress7;
+  at: ParagraphAddress9;
   salience: 'kernel' | 'catalysis';
   picked_up_at?: AddressList2;
   /**
@@ -380,7 +506,7 @@ export type StoryEventWithSalience = Support & {
 /**
  * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
  */
-export type ParagraphAddress7 = string;
+export type ParagraphAddress9 = string;
 /**
  * Later paragraphs that pick the event up. Required and non-empty for a kernel; absent for a catalysis. All after `at`.
  *
@@ -403,15 +529,15 @@ export type EventCoreference = Support & {
   tellings: [
     {
       at: ParagraphAddress1;
-      teller?: EntityId3;
+      teller?: EntityId4;
     },
     {
       at: ParagraphAddress1;
-      teller?: EntityId3;
+      teller?: EntityId4;
     },
     ...{
       at: ParagraphAddress1;
-      teller?: EntityId3;
+      teller?: EntityId4;
     }[]
   ];
   /**
@@ -423,14 +549,14 @@ export type EventCoreference = Support & {
 /**
  * Book-local id of a character, place, organisation or object in a narrative layer: `e:` followed by a lowercase slug. Stable across manifest versions of the same book where possible.
  */
-export type EntityId3 = string;
+export type EntityId4 = string;
 /**
  * @minItems 1
  */
 export type AddressList3 = [ParagraphAddress1, ...ParagraphAddress1[]];
 
 /**
- * An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.
+ * An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, setting, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.
  */
 export interface NarrativeLayer {
   /**
@@ -464,6 +590,10 @@ export interface NarrativeLayer {
    * @maxItems 50000
    */
   focalization?: FocalizationSpan[];
+  /**
+   * @maxItems 50000
+   */
+  setting?: SettingSpan[];
   /**
    * @maxItems 200
    */

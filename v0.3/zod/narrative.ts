@@ -86,6 +86,73 @@ const SceneTimeSchema = z
     }
   })
 
+// The slots of a setting (setting.json#/$defs/frame), shared by setting spans and a scene's `setting`.
+const settingSlots = {
+  enclosure: z.enum(['interior', 'exterior', 'vehicle', 'no_place']).optional(),
+  place: entityIdSchema.optional(),
+  vehicle: z.string().min(1).max(200).optional(),
+  surroundings: z.enum(['city', 'nature', 'water']).optional(),
+  time_of_day: z.enum(['dawn', 'morning', 'midday', 'afternoon', 'dusk', 'night']).optional(),
+  season: z.enum(['spring', 'summer', 'autumn', 'winter']).optional(),
+  date_or_reference: z.string().min(1).max(200).optional(),
+  plane: z.enum(['main', 'memory', 'embedded']).optional(),
+  plane_level: z.number().int().min(1).optional(),
+  voice: z.enum(['outside_narrator', 'first_person_life', 'character_telling', 'written_text', 'theatre']).optional(),
+  mode: z.enum(['scene', 'dialogue', 'thought', 'summary', 'description', 'document', 'address']).optional(),
+  weather: z
+    .array(z.enum(['rain', 'storm', 'snow', 'wind', 'heat', 'cold']))
+    .min(1)
+    .max(6)
+    .refine((items) => new Set(items).size === items.length, { message: 'Weather must be unique' })
+    .optional(),
+  light: z.enum(['darkness', 'artificial', 'moon']).optional(),
+  company: z.enum(['alone', 'two', 'group', 'crowd']).optional(),
+  animals: z.boolean().optional()
+}
+
+// The slots that count towards «at least one slot» (plane_level only qualifies plane).
+const SETTING_SLOTS = Object.keys(settingSlots).filter((k) => k !== 'plane_level') as Array<
+  Exclude<keyof typeof settingSlots, 'plane_level'>
+>
+
+type Frame = Supported & { [K in keyof typeof settingSlots]?: unknown }
+
+function checkFrame(f: Frame, ctx: z.RefinementCtx) {
+  requireQuoteWhenInferred(f, ctx)
+  if (!SETTING_SLOTS.some((k) => f[k] !== undefined)) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'A setting needs at least one slot' })
+  }
+  if (f.plane === 'embedded' && f.plane_level === undefined) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['plane_level'], message: 'An embedded plane needs a plane_level' })
+  }
+  if (f.plane !== 'embedded' && f.plane_level !== undefined) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['plane_level'], message: 'Only an embedded plane has a plane_level' })
+  }
+  if (f.vehicle !== undefined && f.enclosure !== 'vehicle') {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['vehicle'], message: 'A vehicle needs enclosure: vehicle' })
+  }
+  if (f.surroundings !== undefined && f.enclosure !== 'exterior' && f.enclosure !== 'vehicle') {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['surroundings'], message: 'Surroundings need enclosure: exterior or vehicle' })
+  }
+}
+
+export const SettingSummarySchema = z
+  .object({ ...supportShape, ...settingSlots })
+  .strict()
+  .superRefine(checkFrame)
+
+export const SettingSchema = z
+  .object({
+    ...supportShape,
+    id: localId('st'),
+    start: paragraphAddressSchema,
+    end: paragraphAddressSchema.optional(),
+    ...settingSlots,
+    visibility: VisibilitySchema.optional()
+  })
+  .strict()
+  .superRefine(checkFrame)
+
 export const SceneSchema = z
   .object({
     ...supportShape,
@@ -101,6 +168,7 @@ export const SceneSchema = z
       .refine((items) => new Set(items).size === items.length, { message: 'Cast must be unique' })
       .optional(),
     duration: DurationSchema.optional(),
+    setting: SettingSummarySchema.optional(),
     continues: localId('s').optional(),
     visibility: VisibilitySchema.optional()
   })
@@ -206,7 +274,7 @@ export const FindingSchema = z
     kind: z.enum(['continuity', 'absence', 'voice_balance', 'reading_vs_story_order', 'open_question']),
     text: z.string().min(1).max(2000),
     refs: z
-      .array(z.string().regex(/^(e:[a-z0-9]+(?:-[a-z0-9]+)*|(s|fz|t|k|ev|co)-[0-9]{3,})$/))
+      .array(z.string().regex(/^(e:[a-z0-9]+(?:-[a-z0-9]+)*|(s|fz|st|t|k|ev|co)-[0-9]{3,})$/))
       .refine((items) => new Set(items).size === items.length, { message: 'Refs must be unique' })
       .optional(),
     evidence: addressList,
@@ -226,6 +294,7 @@ export const NarrativeLayerSchema = z
     entities: z.array(EntitySchema).max(5000).optional(),
     scenes: z.array(SceneSchema).max(20000).optional(),
     focalization: z.array(FocalizationSchema).max(50000).optional(),
+    setting: z.array(SettingSchema).max(50000).optional(),
     truths: z.array(TruthSchema).max(200).optional(),
     knowledge: z.array(KnowledgeSchema).max(5000).optional(),
     events: z.array(StoryEventSchema).max(20000).optional(),
@@ -239,6 +308,8 @@ export type Entity = z.infer<typeof EntitySchema>
 export type Scene = z.infer<typeof SceneSchema>
 export type Duration = z.infer<typeof DurationSchema>
 export type Focalization = z.infer<typeof FocalizationSchema>
+export type Setting = z.infer<typeof SettingSchema>
+export type SettingSummary = z.infer<typeof SettingSummarySchema>
 export type Truth = z.infer<typeof TruthSchema>
 export type Knowledge = z.infer<typeof KnowledgeSchema>
 export type StoryEvent = z.infer<typeof StoryEventSchema>

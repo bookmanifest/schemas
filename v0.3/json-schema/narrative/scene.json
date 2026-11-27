@@ -34,6 +34,10 @@
       "type": "array", "items": { "$ref": "../validators/entity-id.json" }, "uniqueItems": true, "maxItems": 200
     },
     "duration": { "$ref": "duration.json" },
+    "setting": {
+      "description": "The frame that holds over the scene (where, when, on which plane, in whose voice, how it is told, weather, light, company), with its own support. Paragraph-level detail goes in the layer's setting spans.",
+      "$ref": "setting.json#/$defs/summary"
+    },
     "continues": {
       "description": "Id of an earlier scene this one resumes after an interruption (same place, time and cast, broken by other text).",
       "type": "string", "pattern": "^s-[0-9]{3,}$"
