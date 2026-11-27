@@ -198,6 +198,7 @@ describe('verified_by on the support (v0.3)', () => {
     ['a setting span', (l) => l.setting[0]],
     ['a truth', (l) => l.truths[0]],
     ['a knowledge link', (l) => l.knowledge[0]],
+    ["a knowledge link's until", (l) => (l.knowledge[4].until = { at: 'capitulo-08#p-011', revealed_at: 'capitulo-08#p-013', basis: 'asserted', evidence: ['capitulo-08#p-013'] })],
     ['a story event', (l) => l.events[0]],
     ['a coreference', (l) => l.coreference[0]]
   ]
@@ -250,4 +251,45 @@ describe('verified_by on the support (v0.3)', () => {
     expect(validate(l), JSON.stringify(validate.errors, null, 2)).toBe(true)
     expect(NarrativeLayerSchema.safeParse(l).success).toBe(true)
   })
+})
+
+describe('until on a knowledge link (v0.3)', () => {
+  const layer = () => readJson('./v0.3/examples/narrative/narrative-layer-valid.json')
+  const keywords = () => (validate.errors ?? []).map((e) => e.keyword)
+  const until = () => ({
+    at: 'capitulo-08#p-011',
+    revealed_at: 'capitulo-08#p-013',
+    basis: 'inferred',
+    evidence: ['capitulo-08#p-013'],
+    quote: 'ha vuelto estos gigantes en molinos',
+    confidence: 0.6,
+    status: 'review'
+  })
+
+  it('accepts an until with its own support, in JSON Schema and Zod', () => {
+    const l = layer()
+    l.knowledge[4].until = until()
+    expect(validate(l), JSON.stringify(validate.errors, null, 2)).toBe(true)
+    expect(NarrativeLayerSchema.safeParse(l).success).toBe(true)
+  })
+
+  const bad: Array<[string, (u: any) => void, string]> = [
+    ['no at', (u) => delete u.at, 'required'],
+    ['no revealed_at', (u) => delete u.revealed_at, 'required'],
+    ['no evidence', (u) => delete u.evidence, 'required'],
+    ['an inferred until without a quote', (u) => delete u.quote, 'required'],
+    ['an at that is not a paragraph address', (u) => (u.at = 'capitulo-08'), 'pattern'],
+    ['a field of its own', (u) => (u.since = 'capitulo-08#p-002'), 'unevaluatedProperties']
+  ]
+  for (const [name, mutate, keyword] of bad) {
+    it(`rejects an until with ${name} (${keyword}) in JSON Schema and Zod`, () => {
+      const l = layer()
+      const u = until()
+      mutate(u)
+      l.knowledge[4].until = u
+      expect(validate(l)).toBe(false)
+      expect(keywords()).toContain(keyword)
+      expect(NarrativeLayerSchema.safeParse(l).success).toBe(false)
+    })
+  }
 })

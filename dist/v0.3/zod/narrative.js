@@ -194,6 +194,15 @@ export const TruthSchema = z
 })
     .strict()
     .superRefine(checkSupport);
+// When a character stops holding a truth (knowledge.json#/properties/until): a nested assertion with its own support.
+const KnowledgeUntilSchema = z
+    .object({
+    ...supportShape,
+    at: paragraphAddressSchema,
+    revealed_at: paragraphAddressSchema
+})
+    .strict()
+    .superRefine(checkSupport);
 export const KnowledgeSchema = z
     .object({
     ...supportShape,
@@ -204,6 +213,7 @@ export const KnowledgeSchema = z
     holds: z.boolean(),
     since: z.union([paragraphAddressSchema, z.literal('before_text')]),
     revealed_at: paragraphAddressSchema,
+    until: KnowledgeUntilSchema.optional(),
     visibility: VisibilitySchema.optional()
 })
     .strict()

@@ -39,6 +39,10 @@ export type SceneView = Omit<Cited<Scene>, 'end' | 'duration' | 'time' | 'settin
     duration?: Cited<Duration>;
     setting?: Cited<SettingSummary>;
 };
+/** A knowledge link in the cut: `until` only once the reader has passed both its `at` and its `revealed_at`. */
+export type KnowledgeView = Omit<Cited<Knowledge>, 'until'> & {
+    until?: Cited<NonNullable<Knowledge['until']>>;
+};
 /** A spoiler-safe view: a public layer cut at a position. Not a layer document. */
 export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id' | 'manifest_id' | 'manifest_version' | 'language' | 'generated_at' | 'generator'> & {
     entities?: Entity[];
@@ -46,7 +50,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
     focalization?: Cited<Focalization>[];
     setting?: Cited<Setting>[];
     truths?: Cited<Truth>[];
-    knowledge?: Cited<Knowledge>[];
+    knowledge?: KnowledgeView[];
     events?: Array<Omit<Cited<StoryEvent>, 'salience'> & {
         salience?: StoryEvent['salience'];
     }>;
@@ -57,7 +61,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
  * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
  * at its revealed_at (each alias at its own); a scene, a focalization span and a setting span at their start; a
  * truth at its revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's
- * revealed_at; a story event at `at`, with only the pickups already passed and its salience only once the first
+ * revealed_at, and its until only once both until.at and until.revealed_at are passed; a story event at `at`, with only the pickups already passed and its salience only once the first
  * pickup is passed; a coreference once its second telling is passed. In every item shown, quotes are dropped and
  * evidence is cut to what the reader has passed; a scene shows its end and duration only once it is over, and
  * never its story order; a span shows its end only once passed; a scene's setting is shown with the scene.

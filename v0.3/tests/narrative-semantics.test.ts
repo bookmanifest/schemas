@@ -16,6 +16,17 @@ const order: ReadingOrder = {
 }
 const fresh = (): NarrativeLayer => readJson('./v0.3/examples/narrative/narrative-layer-valid.json')
 const codes = (layer: NarrativeLayer) => validateNarrativeLayer(layer, order).map((i) => i.code)
+// An `until` for don Quijote's belief in the giants (k-005), for tests only: the example carries none.
+type Until = NonNullable<NarrativeLayer['knowledge']>[number]['until']
+const until = (over: Partial<NonNullable<Until>> = {}): Until => ({
+  at: 'capitulo-08#p-011',
+  revealed_at: 'capitulo-08#p-013',
+  basis: 'inferred',
+  evidence: ['capitulo-08#p-013', 'capitulo-08#p-021'],
+  quote: 'ha vuelto estos gigantes en molinos',
+  status: 'verified',
+  ...over
+})
 
 describe('address order', () => {
   it('orders within a chapter by paragraph number and across chapters by manifest order', () => {
@@ -60,6 +71,10 @@ describe('semantic validation (v0.3)', () => {
     ['a setting span past the end of the chapter', (l) => (l.setting![7].end = 'capitulo-09#p-018'), 'unknown_address'],
     ['two setting spans with the same id', (l) => (l.setting![0].id = 'st-002'), 'duplicate_id'],
     ['a public setting span in a private place', (l) => delete l.entities![11].visibility, 'public_references_private'],
+    ['a knowledge link that stops before it starts', (l) => (l.knowledge![4].until = until({ at: 'capitulo-08#p-001' })), 'range_reversed'],
+    ['a knowledge link that stops where it starts', (l) => (l.knowledge![4].until = until({ at: 'capitulo-08#p-002' })), 'range_reversed'],
+    ['a stop revealed before its evidence', (l) => (l.knowledge![4].until = until({ revealed_at: 'capitulo-08#p-012' })), 'revealed_before_evidence'],
+    ['a stop past the end of the chapter', (l) => (l.knowledge![4].until = until({ at: 'capitulo-08#p-099' })), 'unknown_address'],
     [
       'a public scene whose setting is in a private place',
       (l) => {
@@ -101,6 +116,39 @@ describe('setting spans: semantic rules', () => {
   })
 })
 
+describe('until on a knowledge link: semantic rules', () => {
+  it('a link that stops after it starts has no issues, and since before_text has nothing to compare', () => {
+    const layer = fresh()
+    layer.knowledge![4].until = until()
+    expect(codes(layer)).toEqual([])
+    layer.knowledge![4].since = 'before_text'
+    layer.knowledge![4].until = until({ at: 'capitulo-01#p-001', revealed_at: 'capitulo-08#p-013' })
+    expect(codes(layer)).toEqual([])
+  })
+
+  it('reports each rule at the until path', () => {
+    const layer = fresh()
+    layer.knowledge![4].until = until({ at: 'capitulo-08#p-001', revealed_at: 'capitulo-08#p-012' })
+    expect(validateNarrativeLayer(layer, order).map((i) => [i.code, i.path])).toEqual([
+      ['revealed_before_evidence', 'knowledge[4].until.revealed_at'],
+      ['range_reversed', 'knowledge[4].until.at']
+    ])
+  })
+
+  it('compares until.at with since across chapters only with the reading order', () => {
+    const layer = fresh()
+    layer.knowledge![4].until = until({ at: 'capitulo-07#p-019' })
+    expect(codes(layer)).toContain('range_reversed')
+    expect(validateNarrativeLayer(layer).map((i) => i.code)).not.toContain('range_reversed')
+  })
+
+  it('the until-before-since example passes the schema and fails only for range_reversed', () => {
+    const layer = readJson('./v0.3/examples/narrative/narrative-layer-knowledge-until-before-since-semantic-invalid.json')
+    const issues = validateNarrativeLayer(layer, order)
+    expect(issues.map((i) => [i.code, i.path])).toEqual([['range_reversed', 'knowledge[0].until.at']])
+  })
+})
+
 describe('public projection', () => {
   it('keeps public items only and never findings', () => {
     const projected = publicProjection(fresh())
@@ -117,6 +165,12 @@ describe('public projection', () => {
     const view = spoilerSafeCut(fresh(), 'capitulo-08#p-013', order)
     expect(view.scenes!.find((s) => s.id === 's-001')!.verified_by).toEqual(['producer'])
     expect(view.knowledge!.find((k) => k.id === 'k-003')!.verified_by).toEqual(['author'])
+  })
+
+  it('keeps a knowledge link\'s until as it is', () => {
+    const layer = fresh()
+    layer.knowledge![4].until = until()
+    expect(publicProjection(layer).knowledge!.find((k) => k.id === 'k-005')!.until).toEqual(until())
   })
 
   it('drops the setting piece when no span is public', () => {
@@ -213,6 +267,30 @@ describe('spoiler-safe cut', () => {
     const unmet = spoilerSafeCut(layer, 'capitulo-08#p-001', order).scenes!.find((s) => s.id === 's-003')!
     expect(unmet.setting!.place).toBeUndefined()
     expect(unmet.setting!.enclosure).toBe('exterior')
+  })
+
+  it('shows a knowledge link\'s until only once both its at and its revealed_at are passed', () => {
+    const k5 = (layer: NarrativeLayer, position: string) =>
+      spoilerSafeCut(layer, position, order).knowledge!.find((k) => k.id === 'k-005')!
+    const layer = fresh()
+    layer.knowledge![4].until = until()
+    // Before both, and with only `at` passed: the link is shown as before, with no trace of its until.
+    for (const position of ['capitulo-08#p-010', 'capitulo-08#p-012']) {
+      const shown = k5(layer, position)
+      expect(shown.since, position).toBe('capitulo-08#p-002')
+      expect('until' in shown, position).toBe(false)
+      expect(JSON.stringify(shown), position).not.toContain('capitulo-08#p-011')
+    }
+    // After both: the until, without its quote and with evidence cut to what the reader has passed.
+    expect(k5(layer, 'capitulo-08#p-013').until).toEqual({
+      at: 'capitulo-08#p-011', revealed_at: 'capitulo-08#p-013', basis: 'inferred', evidence: ['capitulo-08#p-013'], status: 'verified'
+    })
+    expect(k5(layer, 'capitulo-08#p-021').until!.evidence).toEqual(['capitulo-08#p-013', 'capitulo-08#p-021'])
+    // With only `revealed_at` passed (the stop is announced before it happens), still hidden.
+    const early = fresh()
+    early.knowledge![4].until = until({ at: 'capitulo-08#p-021', revealed_at: 'capitulo-08#p-013', evidence: ['capitulo-08#p-013'] })
+    expect('until' in k5(early, 'capitulo-08#p-014')).toBe(false)
+    expect(k5(early, 'capitulo-08#p-021').until!.at).toBe('capitulo-08#p-021')
   })
 
   it('never contains author-private items', () => {

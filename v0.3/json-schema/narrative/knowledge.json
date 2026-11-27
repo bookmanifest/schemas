@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bookmanifest.org/schemas/v0.3/narrative/knowledge.json",
   "title": "Knowledge link",
-  "description": "What one character knows or believes about one key truth, and from where. Two positions are kept apart: `since`, from which paragraph the character holds it (the character's knowing), and `revealed_at`, from which paragraph a reader may be shown that the character holds it. Both are distinct from the truth's own `revealed_at` (the reader's knowing of the truth). Beliefs may be false.",
+  "description": "What one character knows or believes about one key truth, and from where. Two positions are kept apart: `since`, from which paragraph the character holds it (the character's knowing), and `revealed_at`, from which paragraph a reader may be shown that the character holds it. Both are distinct from the truth's own `revealed_at` (the reader's knowing of the truth). Beliefs may be false. An optional `until` says when the character stops holding it.",
   "type": "object",
   "required": ["id", "truth", "knower", "stance", "holds", "since", "revealed_at"],
   "allOf": [
@@ -34,6 +34,23 @@
     "revealed_at": {
       "$ref": "../validators/paragraph-address.json",
       "description": "First paragraph after which a reader may know that the character holds it. Never before the earliest evidence."
+    },
+    "until": {
+      "description": "When the character stops holding it (a false belief corrected, a suspicion dropped, a secret forgotten, a death), with its own support. Absent: the text does not say the character stops holding it.",
+      "type": "object",
+      "required": ["at", "revealed_at"],
+      "allOf": [{ "$ref": "common.json#/$defs/support" }],
+      "properties": {
+        "at": {
+          "$ref": "../validators/paragraph-address.json",
+          "description": "Paragraph from which the character no longer holds it (as stated by `stance` and `holds`). After `since`."
+        },
+        "revealed_at": {
+          "$ref": "../validators/paragraph-address.json",
+          "description": "First paragraph after which a reader may know that the character stopped holding it. Never before the earliest of this object's evidence."
+        }
+      },
+      "unevaluatedProperties": false
     },
     "visibility": { "$ref": "common.json#/$defs/visibility" }
   },
