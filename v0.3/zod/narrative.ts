@@ -7,7 +7,7 @@ import {
   iso8601Schema,
   paragraphAddressSchema,
   entityIdSchema
-} from './validators'
+} from './validators.js'
 
 const localId = (prefix: string) => z.string().regex(new RegExp(`^${prefix}-[0-9]{3,}$`))
 

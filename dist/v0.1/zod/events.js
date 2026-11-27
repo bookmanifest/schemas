@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { didSchema, semverSchema, iso8601Schema } from './validators';
+import { didSchema, semverSchema, iso8601Schema } from './validators.js';
 // Event context (shared across all events)
 const EventContextSchema = z.object({
     reader_id: didSchema,

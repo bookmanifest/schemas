@@ -1,4 +1,4 @@
-import type { NarrativeLayer, Entity, Scene, Duration, Focalization, Truth, Knowledge, StoryEvent, Coreference } from '../zod/narrative';
+import type { NarrativeLayer, Entity, Scene, Duration, Focalization, Truth, Knowledge, StoryEvent, Coreference } from '../zod/narrative.js';
 /** Reading order of the manifest version the layer names. */
 export interface ReadingOrder {
     /** Chapter slugs in manifest order. */

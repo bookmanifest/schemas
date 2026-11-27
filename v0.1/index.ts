@@ -1,13 +1,13 @@
 // Entity schemas
-export * from './zod/entities'
+export * from './zod/entities.js'
 
 // Event schemas
-export * from './zod/events'
+export * from './zod/events.js'
 
 // Validators
-export * from './zod/validators'
+export * from './zod/validators.js'
 
 // Re-export everything for convenience
-export * as Entities from './zod/entities'
-export * as Events from './zod/events'
-export * as Validators from './zod/validators'
+export * as Entities from './zod/entities.js'
+export * as Events from './zod/events.js'
+export * as Validators from './zod/validators.js'

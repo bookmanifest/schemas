@@ -9,13 +9,21 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # The package must import with plain Node ESM on every maintained Node line (scripts/smoke-node-esm.mjs).
+        node-version: ['20', '22', '24']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
+      - name: Committed dist/ matches the build
+        run: |
+          git status --porcelain -- dist
+          test -z "$(git status --porcelain -- dist)"
       - run: npm test
       - run: npm run typecheck:v0.3
       - run: npm run validate

@@ -37,7 +37,11 @@ npm install @bookmanifest/schemas
 
 ```typescript
 import { BookSchema, AuthorSchema, BookManifestEventSchema } from '@bookmanifest/schemas'
+// The same module, named by version:
+import * as v01 from '@bookmanifest/schemas/v0.1'
 ```
+
+The package is plain ESM that Node imports directly (no bundler needed), and TypeScript resolves its types with `moduleResolution` set to `NodeNext`, `Node16` or `Bundler`.
 
 ### Import by Category
 
@@ -109,11 +113,12 @@ const validBatch = EventBatchSchema.parse(batch)
 ### JSON Schema (Language Agnostic)
 
 ```javascript
-// Import JSON Schema files directly for use with any validator
-import authorSchema from '@bookmanifest/schemas/json-schema'
-// Or import specific schemas
+// Import JSON Schema files directly for use with any validator (Node needs the JSON import attribute)
+import authorSchema from '@bookmanifest/schemas/v0.1/json-schema/entities/author.json' with { type: 'json' }
+// `@bookmanifest/schemas/json-schema/*` is the same v0.1 directory; v0.3 is under `@bookmanifest/schemas/v0.3/json-schema/*`
+// Or read the files from disk
 import { readFileSync } from 'fs'
-const schema = JSON.parse(readFileSync('./node_modules/@bookmanifest/schemas/v0.1/json-schema/entities/author.json'))
+const schema = JSON.parse(readFileSync('./node_modules/@bookmanifest/schemas/v0.1/json-schema/entities/author.json', 'utf-8'))
 ```
 
 ## Available Schemas

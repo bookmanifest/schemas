@@ -1,28 +1,33 @@
 {
   "name": "@bookmanifest/schemas",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Formal schemas for Book Manifest (v0.1, and v0.3 with the narrative layer and reading events)",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/v0.1/index.js",
+  "types": "./dist/v0.1/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/v0.1/index.d.ts",
+      "default": "./dist/v0.1/index.js"
     },
-    "./json-schema": "./v0.1/json-schema/index.json",
+    "./v0.1": {
+      "types": "./dist/v0.1/index.d.ts",
+      "default": "./dist/v0.1/index.js"
+    },
     "./entities": {
-      "types": "./dist/zod/entities.d.ts",
-      "default": "./dist/zod/entities.js"
+      "types": "./dist/v0.1/zod/entities.d.ts",
+      "default": "./dist/v0.1/zod/entities.js"
     },
     "./events": {
-      "types": "./dist/zod/events.d.ts",
-      "default": "./dist/zod/events.js"
+      "types": "./dist/v0.1/zod/events.d.ts",
+      "default": "./dist/v0.1/zod/events.js"
     },
     "./validators": {
-      "types": "./dist/zod/validators.d.ts",
-      "default": "./dist/zod/validators.js"
+      "types": "./dist/v0.1/zod/validators.d.ts",
+      "default": "./dist/v0.1/zod/validators.js"
     },
+    "./json-schema/*": "./v0.1/json-schema/*",
+    "./v0.1/json-schema/*": "./v0.1/json-schema/*",
     "./v0.3": {
       "types": "./dist/v0.3/index.d.ts",
       "default": "./dist/v0.3/index.js"
@@ -32,8 +37,9 @@
   "scripts": {
     "build": "npm run generate && npm run compile",
     "generate": "node scripts/generate-from-json-schema.js",
-    "compile": "tsc && tsc -p tsconfig.v0.3.build.json",
-    "test": "vitest run",
+    "compile": "tsc",
+    "test": "vitest run && npm run test:node",
+    "test:node": "node scripts/smoke-node-esm.mjs",
     "test:watch": "vitest",
     "validate": "node scripts/validate-examples.js",
     "typecheck:v0.3": "tsc -p tsconfig.v0.3.json"

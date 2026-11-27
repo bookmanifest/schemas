@@ -1,7 +1,7 @@
 // v0.3. Validators the narrative layer and the v0.3 events add to those of v0.1.
 import { z } from 'zod'
 
-export { didSchema, semverSchema, iso8601Schema, languageCodeSchema } from '../../v0.1/zod/validators'
+export { didSchema, semverSchema, iso8601Schema, languageCodeSchema } from '../../v0.1/zod/validators.js'
 
 // `<chapter-slug>#p-NNN`, resolved against the manifest version of the document that holds it.
 export const PARAGRAPH_ADDRESS_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*#p-[0-9]{3,}$/
