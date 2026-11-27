@@ -254,17 +254,19 @@ function extractEventType(name, schema) {
 function generateEventDiagram(events) {
   let diagram = `flowchart TD\n`
   diagram += `    %% Book Manifest Event Hierarchy\n\n`
-  diagram += `    Envelope[\"Event Envelope\\nCommon fields for all events\"]\n\n`
+  diagram += `    Envelope[\"Event Envelope\\nCommon fields of identified events\"]\n`
+  diagram += `    AnonymousEnvelope[\"Anonymous Event Envelope\\nNo reader_id, no session_id\"]\n\n`
 
   const eventTypes = []
 
   for (const [name, schema] of Object.entries(events)) {
-    if (name === 'envelope') continue
+    if (name.startsWith('envelope') || name === 'batch') continue
 
     const eventInfo = extractEventType(name, schema)
     if (eventInfo) {
       eventTypes.push(eventInfo)
-      diagram += `    Envelope -->|"extends\"| ${name.replace(/-/g, '_')}[\"${eventInfo.title}\\ntype: ${eventInfo.type}\"]\n`
+      const parent = schema.allOf?.[0]?.$ref === './envelope-anonymous.json' ? 'AnonymousEnvelope' : 'Envelope'
+      diagram += `    ${parent} -->|"extends\"| ${name.replace(/-/g, '_')}[\"${eventInfo.title}\\ntype: ${eventInfo.type}\"]\n`
     }
   }
 

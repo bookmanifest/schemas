@@ -14,7 +14,7 @@ The key words MUST, MUST NOT, SHOULD and MAY are to be read as in RFC 2119.
 
 ## 1. Historia
 
-Version 0.1 existed only as a draft: the manifest, the entities and the five session events, never published as a stable version. 0.2 was never a version of the format (the number was used by a private program's output contract). **0.3 is the first public version.** It contains everything 0.1 had, folded in unchanged except for the manifest's new `book_manifest` field, plus the narrative layer and five reading events. Schemas under `https://bookmanifest.org/schemas/v0.1/` are withdrawn; documents written against them are not 0.3 documents until they carry `book_manifest: "0.3"`.
+Version 0.1 existed only as a draft: the manifest, the entities and the five session events, never published as a stable version. 0.2 was never a version of the format (the number was used by a private program's output contract). **0.3 is the first public version.** It contains everything 0.1 had, folded in unchanged except for the manifest's new `book_manifest` field, plus the narrative layer and five reading events. The v0.1 schemas are no longer part of this repository or the package; a manifest written against them becomes a 0.3 manifest by adding `book_manifest: "0.3"`.
 
 ## 2. Versions
 
@@ -29,7 +29,7 @@ This is not the book's own version: a manifest's `version` (for example `1.1.0`)
 
 Every schema's `$id` is `https://bookmanifest.org/schemas/v0.3/<path>`, and schemas refer to each other by relative path, so the whole version resolves within itself.
 
-A future format version gets its own schema path (`…/schemas/v<version>/`), and the `book_manifest` and `narrative_layer` constants change to the new version. A consumer MUST reject a document whose format field names a version it does not implement, rather than read it as the version it knows; the schemas do this by construction.
+A future format version gets its own schema path (`…/schemas/v<version>/`), and the `book_manifest` and `narrative_layer` constants change to the new version. Because the field is a constant, the 0.3 schemas reject a document that names any other version, so a 0.3 validator never reads a document of another version as 0.3.
 
 ## 3. Identifiers and validators
 

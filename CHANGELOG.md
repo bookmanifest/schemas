@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.2] - 2026-11-27
 
-One format version: **v0.1 is folded into 0.3**. Book Manifest 0.1 existed only as a draft and nobody implements it, so 0.3, the first public version, now holds the manifest and its entities, the session events, the reading events and the narrative layer together. The format stays at 0.3.
+One format version: **v0.1 is folded into 0.3**. Book Manifest 0.1 existed only as a draft and nobody uses the format yet, so 0.3, the first public version, now holds the manifest and its entities, the session events, the reading events and the narrative layer together. The format stays at 0.3.
 
 ### Changed
 
@@ -16,7 +16,7 @@ One format version: **v0.1 is folded into 0.3**. Book Manifest 0.1 existed only 
 - One Zod module set in `v0.3/zod/`. `EventBatchSchema` and `BookManifestEventSchema` cover all ten events; the five reading events are `ReadingEventSchema`. `EventBatchV03Schema`, `BookManifestEventV03Schema` and `ReadingEventV03Schema` are gone, as are their `*V03` types (now `BookManifestEvent`, `ReadingEvent`, `EventBatch`).
 - Package exports: `.` and its alias `./v0.3` are the 0.3 module (`dist/v0.3/index.js`), `./json-schema/*` and its alias `./v0.3/json-schema/*` the 0.3 JSON Schemas. `main` and `types` point into `dist/v0.3/`. The plain-Node ESM build of 0.3.1 is kept.
 - One spec document, [`docs/v0.3/spec.md`](docs/v0.3/spec.md), with a «Historia» note; it replaces `docs/v0.3/narrative-layer.md` and `docs/v0.3/reading-events.md`.
-- `npm run validate` checks every example (entities, events, narrative layer) with a strict draft 2020-12 validator; it used to check the entities with a lax validator and skip the event batch. `npm run generate` exits non-zero on failure. `npm run typecheck:v0.3` is now `npm run typecheck` (`tsconfig.typecheck.json`).
+- `npm run validate` checks every example (entities, events, narrative layer) with a strict draft 2020-12 validator; it used to check the entities with a lax validator and skip the event batch. `npm run generate` exits non-zero on failure. `npm run typecheck:v0.3` is now `npm run typecheck` (`tsconfig.typecheck.json`). `scripts/generate-diagrams.js` reads the 0.3 schemas and draws `shared_entry` from the anonymous envelope; the diagrams in `docs/diagrams/` are regenerated.
 
 ### Removed
 
