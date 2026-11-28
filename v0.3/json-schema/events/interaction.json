@@ -39,6 +39,26 @@
             "annotation": {
               "type": "string",
               "description": "User annotation (if applicable)"
+            },
+            "fragment": {
+              "type": "object",
+              "required": ["start", "end"],
+              "properties": {
+                "start": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000,
+                  "description": "Offset of the first character of the fragment in the paragraph's plain text, in UTF-16 code units"
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1000000,
+                  "description": "Offset just after the last character of the fragment, in UTF-16 code units; greater than start"
+                }
+              },
+              "additionalProperties": false,
+              "description": "Optional. The part of the target paragraph the reader acted on, as positions in the paragraph's plain text; absent means the whole paragraph. Positions only, never text. When present, selection_length SHOULD be end minus start, and end MUST be greater than start (a consumer discards a fragment that is not)."
             }
           },
           "additionalProperties": false

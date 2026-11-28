@@ -30,6 +30,19 @@ export type InteractionEvent = EventEnvelope & {
      * User annotation (if applicable)
      */
     annotation?: string;
+    /**
+     * Optional. The part of the target paragraph the reader acted on, as positions in the paragraph's plain text; absent means the whole paragraph. Positions only, never text. When present, selection_length SHOULD be end minus start, and end MUST be greater than start (a consumer discards a fragment that is not).
+     */
+    fragment?: {
+      /**
+       * Offset of the first character of the fragment in the paragraph's plain text, in UTF-16 code units
+       */
+      start: number;
+      /**
+       * Offset just after the last character of the fragment, in UTF-16 code units; greater than start
+       */
+      end: number;
+    };
   };
   [k: string]: unknown;
 };
