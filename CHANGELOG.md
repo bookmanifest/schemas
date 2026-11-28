@@ -5,6 +5,20 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.7] - 2026-11-28
+
+The narrative layer gains an optional **anachronies** piece: where the narration jumps back or forward in story time. Additive: every 0.3.6 layer is still valid, and `narrative_layer` stays `"0.3"`.
+
+### Added
+
+- **Anachronies** (`anachronies`, up to 20000, schema [`v0.3/json-schema/narrative/anachrony.json`](v0.3/json-schema/narrative/anachrony.json)): paragraph spans with `id` (`an-NNN`), `start`, an optional inclusive `end`, `kind` (`analepsis`: back to an earlier story time; `prolepsis`: forward to a later one), an optional `reach` (1–200 characters, how far it jumps as the text says it, in the book's language), a support and a visibility.
+- Zod: `AnachronySchema` and the `Anachrony` type; `NarrativeLayerSchema` accepts the piece.
+- Semantics: anachronies must not overlap (`overlap`); their ranges and addresses go through the existing checks (`range_reversed`, `unknown_address`, `duplicate_id`). `publicProjection` keeps public spans. `spoilerSafeCut` shows a span from its `start`, with its `reach`, and its `end` only once passed, with the quote dropped and evidence cut. A prolepsis has no other gate: it is text the reader is reading.
+- A finding's `refs` may name an anachrony (`an-NNN`).
+- Examples: `narrative-layer-anachrony-overlap-semantic-invalid.json`, which passes the schema and fails the semantic rules. The Quijote example carries no anachrony: no fixture paragraph clearly jumps in story time.
+- Tests: the schema in JSON Schema and Zod (including `verified_by`), the semantic rules, the projection and the cut.
+- Docs: spec section 6.5.6 «Anachronies» (later subsections renumbered), the §6 intro and the 6.1 table, a pointer from scenes' `story_order`, the gates table in 6.6 and rule 5 in 6.7; a producer-guide row; a rationale row and a note on why anachronies are paragraph spans and not scene order.
+
 ## [0.3.6] - 2026-11-28
 
 A knowledge link may say **when the character stops holding** its truth. Additive: every 0.3.5 layer is still valid, and `narrative_layer` stays `"0.3"`.

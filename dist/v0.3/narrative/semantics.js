@@ -43,6 +43,7 @@ export function validateNarrativeLayer(layer, order) {
         ['scenes', layer.scenes],
         ['focalization', layer.focalization],
         ['setting', layer.setting],
+        ['anachronies', layer.anachronies],
         ['truths', layer.truths],
         ['knowledge', layer.knowledge],
         ['events', layer.events],
@@ -156,6 +157,9 @@ export function validateNarrativeLayer(layer, order) {
     });
     if (layer.setting)
         checkNoOverlap(layer.setting, 'setting');
+    layer.anachronies?.forEach((an, i) => checkRange(an.start, an.end, `anachronies[${i}]`));
+    if (layer.anachronies)
+        checkNoOverlap(layer.anachronies, 'anachronies');
     layer.truths?.forEach((t, i) => {
         const path = `truths[${i}]`;
         checkRevealAfterEvidence(t, path);
@@ -217,6 +221,7 @@ export function publicProjection(layer) {
         scenes: keep(layer.scenes),
         focalization: keep(layer.focalization),
         setting: keep(layer.setting),
+        anachronies: keep(layer.anachronies),
         truths: keep(layer.truths),
         knowledge: keep(layer.knowledge),
         events: keep(layer.events),
@@ -231,7 +236,7 @@ export function publicProjection(layer) {
 /**
  * The spoiler-safe cut of a public layer for a reader at `position`: only what that reader may know, and no
  * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
- * at its revealed_at (each alias at its own); a scene, a focalization span and a setting span at their start; a
+ * at its revealed_at (each alias at its own); a scene, a focalization span, a setting span and an anachrony at their start; a
  * truth at its revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's
  * revealed_at, and its until only once both until.at and until.revealed_at are passed; a story event at `at`, with only the pickups already passed and its salience only once the first
  * pickup is passed; a coreference once its second telling is passed. In every item shown, quotes are dropped and
@@ -307,6 +312,15 @@ export function spoilerSafeCut(layer, position, order) {
             delete out.place;
         return out;
     });
+    // A prolepsis is text the reader is reading: its reach is shown with the span, with no gate of its own.
+    const anachronies = pub.anachronies
+        ?.filter((an) => passed(an.start))
+        .map((an) => {
+        const out = cite(an);
+        if (out.end !== undefined && !passed(out.end))
+            delete out.end;
+        return out;
+    });
     const knowledge = pub.knowledge
         ?.filter((k) => knownTruths.has(k.truth) &&
         passed(k.revealed_at) &&
@@ -337,8 +351,8 @@ export function spoilerSafeCut(layer, position, order) {
             .map((t) => (t.teller !== undefined && !met.has(t.teller) ? { at: t.at } : t))
     }))
         .filter((co) => co.tellings.length >= 2);
-    const { findings: _findings, entities: _e, scenes: _s, focalization: _f, setting: _st, truths: _t, knowledge: _k, events: _ev, coreference: _c, ...header } = pub;
-    const cut = { ...header, entities, scenes, focalization, setting, truths, knowledge, events, coreference };
+    const { findings: _findings, entities: _e, scenes: _s, focalization: _f, setting: _st, anachronies: _an, truths: _t, knowledge: _k, events: _ev, coreference: _c, ...header } = pub;
+    const cut = { ...header, entities, scenes, focalization, setting, anachronies, truths, knowledge, events, coreference };
     for (const key of Object.keys(cut)) {
         const value = cut[key];
         if (value === undefined || (Array.isArray(value) && value.length === 0))

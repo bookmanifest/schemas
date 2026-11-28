@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmanifest.org/schemas/v0.3/narrative/anachrony.json",
+  "title": "Anachrony",
+  "description": "A jump in story time over a paragraph or a contiguous range of paragraphs: the narration tells what happened earlier than the story's present (`analepsis`: a flashback, backstory, a past told later than it happened) or what will happen later (`prolepsis`: an announcement). Inside a scene, between scenes or outside any scene. Spans never overlap.",
+  "type": "object",
+  "required": ["id", "start", "kind"],
+  "allOf": [{ "$ref": "common.json#/$defs/support" }],
+  "properties": {
+    "id": { "type": "string", "pattern": "^an-[0-9]{3,}$" },
+    "start": { "$ref": "../validators/paragraph-address.json" },
+    "end": { "$ref": "../validators/paragraph-address.json", "description": "Last paragraph, inclusive. Absent: the span is the single paragraph `start`." },
+    "kind": {
+      "description": "`analepsis`: the narration goes back to an earlier story time. `prolepsis`: it goes forward to a later one.",
+      "type": "string",
+      "enum": ["analepsis", "prolepsis"]
+    },
+    "reach": {
+      "description": "How far it jumps, as the text says it, in the book's language: «años atrás», «when she was a child», «the following spring». Not normalised.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "visibility": { "$ref": "common.json#/$defs/visibility" }
+  },
+  "unevaluatedProperties": false
+}

@@ -185,6 +185,78 @@ describe('setting spans (v0.3)', () => {
   })
 })
 
+describe('anachronies (v0.3)', () => {
+  const base = {
+    id: 'an-001',
+    start: 'capitulo-07#p-013',
+    kind: 'analepsis',
+    basis: 'asserted',
+    evidence: ['capitulo-07#p-013'],
+    visibility: 'public'
+  }
+  const withSpan = (span: Record<string, unknown>) => {
+    const layer = readJson('./v0.3/examples/narrative/narrative-layer-valid.json')
+    layer.anachronies = [{ ...base, ...span }]
+    return layer
+  }
+  const without = (key: string) => {
+    const layer = withSpan({})
+    delete layer.anachronies[0][key]
+    return layer
+  }
+  const keywords = () => (validate.errors ?? []).map((e) => e.keyword)
+
+  const accepted: Array<[string, Record<string, unknown>]> = [
+    ['a single paragraph and no reach', {}],
+    ['a prolepsis', { kind: 'prolepsis' }],
+    ['a range, a reach and every support field', {
+      start: 'capitulo-07#p-012', end: 'capitulo-07#p-013', reach: 'una noche, después del día que vuestra merced de aquí se partió',
+      basis: 'inferred', quote: 'vino sobre una nube una noche', confidence: 0.6, status: 'verified', verified_by: ['author']
+    }]
+  ]
+  for (const [name, span] of accepted) {
+    it(`accepts a span with ${name}`, () => {
+      const layer = withSpan(span)
+      expect(validate(layer), JSON.stringify(validate.errors, null, 2)).toBe(true)
+      expect(NarrativeLayerSchema.safeParse(layer).success).toBe(true)
+    })
+  }
+
+  const rejected: Array<[string, () => unknown, string]> = [
+    ['no kind', () => without('kind'), 'required'],
+    ['no start', () => without('start'), 'required'],
+    ['no evidence', () => without('evidence'), 'required'],
+    ['an unknown kind', () => withSpan({ kind: 'ellipsis' }), 'enum'],
+    ['a bad id', () => withSpan({ id: 'ana-001' }), 'pattern'],
+    ['a bad end address', () => withSpan({ end: 'capitulo-07#13' }), 'pattern'],
+    ['an empty reach', () => withSpan({ reach: '' }), 'minLength'],
+    ['a reach over 200 characters', () => withSpan({ reach: 'a'.repeat(201) }), 'maxLength'],
+    ['an unknown field', () => withSpan({ story_order: 1 }), 'unevaluatedProperties'],
+    ['an inferred span without a quote', () => withSpan({ basis: 'inferred' }), 'required'],
+    ['a public visibility spelled wrong', () => withSpan({ visibility: 'reader' }), 'enum']
+  ]
+  for (const [name, layer, keyword] of rejected) {
+    it(`rejects a span with ${name} (${keyword}) in JSON Schema and Zod`, () => {
+      const data = layer()
+      expect(validate(data)).toBe(false)
+      expect(keywords()).toContain(keyword)
+      expect(NarrativeLayerSchema.safeParse(data).success).toBe(false)
+    })
+  }
+
+  it('a layer holds at most 20000 anachronies', () => {
+    const schema = readJson('./v0.3/json-schema/narrative/narrative-layer.json')
+    expect(schema.properties.anachronies.maxItems).toBe(20000)
+  })
+
+  it('a finding may refer to an anachrony', () => {
+    const layer = withSpan({})
+    layer.findings[0].refs = ['an-001']
+    expect(validate(layer), JSON.stringify(validate.errors, null, 2)).toBe(true)
+    expect(NarrativeLayerSchema.safeParse(layer).success).toBe(true)
+  })
+})
+
 describe('verified_by on the support (v0.3)', () => {
   const layer = () => readJson('./v0.3/examples/narrative/narrative-layer-valid.json')
   const keywords = () => (validate.errors ?? []).map((e) => e.keyword)
@@ -196,6 +268,7 @@ describe('verified_by on the support (v0.3)', () => {
     ["a scene's setting", (l) => l.scenes[2].setting],
     ['a focalization span', (l) => l.focalization[0]],
     ['a setting span', (l) => l.setting[0]],
+    ['an anachrony', (l) => (l.anachronies = [{ id: 'an-001', start: 'capitulo-07#p-013', kind: 'analepsis', basis: 'asserted', evidence: ['capitulo-07#p-013'] }])[0]],
     ['a truth', (l) => l.truths[0]],
     ['a knowledge link', (l) => l.knowledge[0]],
     ["a knowledge link's until", (l) => (l.knowledge[4].until = { at: 'capitulo-08#p-011', revealed_at: 'capitulo-08#p-013', basis: 'asserted', evidence: ['capitulo-08#p-013'] })],

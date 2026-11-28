@@ -1,4 +1,4 @@
-import type { NarrativeLayer, Entity, Scene, Duration, Focalization, Setting, SettingSummary, Truth, Knowledge, StoryEvent, Coreference } from '../zod/narrative.js';
+import type { NarrativeLayer, Entity, Scene, Duration, Focalization, Setting, SettingSummary, Anachrony, Truth, Knowledge, StoryEvent, Coreference } from '../zod/narrative.js';
 /** Reading order of the manifest version the layer names. */
 export interface ReadingOrder {
     /** Chapter slugs in manifest order. */
@@ -49,6 +49,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
     scenes?: SceneView[];
     focalization?: Cited<Focalization>[];
     setting?: Cited<Setting>[];
+    anachronies?: Cited<Anachrony>[];
     truths?: Cited<Truth>[];
     knowledge?: KnowledgeView[];
     events?: Array<Omit<Cited<StoryEvent>, 'salience'> & {
@@ -59,7 +60,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
 /**
  * The spoiler-safe cut of a public layer for a reader at `position`: only what that reader may know, and no
  * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
- * at its revealed_at (each alias at its own); a scene, a focalization span and a setting span at their start; a
+ * at its revealed_at (each alias at its own); a scene, a focalization span, a setting span and an anachrony at their start; a
  * truth at its revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's
  * revealed_at, and its until only once both until.at and until.revealed_at are passed; a story event at `at`, with only the pickups already passed and its salience only once the first
  * pickup is passed; a coreference once its second telling is passed. In every item shown, quotes are dropped and

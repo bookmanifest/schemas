@@ -1,0 +1,31 @@
+{
+  "narrative_layer": "0.3",
+  "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+  "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+  "manifest_version": "1.0.0",
+  "language": "es",
+  "anachronies": [
+    {
+      "id": "an-001",
+      "start": "capitulo-07#p-012",
+      "end": "capitulo-07#p-013",
+      "kind": "analepsis",
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-07#p-012"
+      ],
+      "status": "review"
+    },
+    {
+      "id": "an-002",
+      "start": "capitulo-07#p-013",
+      "kind": "analepsis",
+      "reach": "una noche, después del día que vuestra merced de aquí se partió",
+      "basis": "asserted",
+      "evidence": [
+        "capitulo-07#p-013"
+      ],
+      "status": "review"
+    }
+  ]
+}
