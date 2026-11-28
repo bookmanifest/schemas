@@ -44,6 +44,30 @@
               "minimum": 0,
               "maximum": 1,
               "description": "Position in chapter (0-1)"
+            },
+            "visible": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 200,
+              "description": "Optional. The paragraphs the screen or page showed, in reading order, each with the number of its words that were on it. A paginated reader knows these exactly; a consumer then shares the heartbeat's time by these words instead of estimating them from the range.",
+              "items": {
+                "type": "object",
+                "required": ["node_id", "words"],
+                "properties": {
+                  "node_id": {
+                    "type": "string",
+                    "pattern": "^p-[0-9]{3,}$",
+                    "description": "Paragraph id"
+                  },
+                  "words": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100000,
+                    "description": "Words of the paragraph that were shown"
+                  }
+                },
+                "additionalProperties": false
+              }
             }
           },
           "additionalProperties": false

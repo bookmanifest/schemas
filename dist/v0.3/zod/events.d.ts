@@ -43,6 +43,16 @@ export declare const HeartbeatEventSchema: z.ZodObject<{
         end_node_id: z.ZodString;
         focus_node_id: z.ZodString;
         progress_percentage: z.ZodNumber;
+        visible: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            node_id: z.ZodString;
+            words: z.ZodNumber;
+        }, "strict", z.ZodTypeAny, {
+            node_id: string;
+            words: number;
+        }, {
+            node_id: string;
+            words: number;
+        }>, "many">>;
     }, "strict", z.ZodTypeAny, {
         duration_seconds: number;
         active_seconds: number;
@@ -50,6 +60,10 @@ export declare const HeartbeatEventSchema: z.ZodObject<{
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     }, {
         duration_seconds: number;
         active_seconds: number;
@@ -57,6 +71,10 @@ export declare const HeartbeatEventSchema: z.ZodObject<{
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     }>;
 }, "strict", z.ZodTypeAny, {
     type: "heartbeat";
@@ -81,6 +99,10 @@ export declare const HeartbeatEventSchema: z.ZodObject<{
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     };
 }, {
     type: "heartbeat";
@@ -105,6 +127,10 @@ export declare const HeartbeatEventSchema: z.ZodObject<{
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     };
 }>;
 export declare const ChapterTransitionEventSchema: z.ZodObject<{
@@ -1788,6 +1814,16 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         end_node_id: z.ZodString;
         focus_node_id: z.ZodString;
         progress_percentage: z.ZodNumber;
+        visible: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            node_id: z.ZodString;
+            words: z.ZodNumber;
+        }, "strict", z.ZodTypeAny, {
+            node_id: string;
+            words: number;
+        }, {
+            node_id: string;
+            words: number;
+        }>, "many">>;
     }, "strict", z.ZodTypeAny, {
         duration_seconds: number;
         active_seconds: number;
@@ -1795,6 +1831,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     }, {
         duration_seconds: number;
         active_seconds: number;
@@ -1802,6 +1842,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     }>;
 }, "strict", z.ZodTypeAny, {
     type: "heartbeat";
@@ -1826,6 +1870,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     };
 }, {
     type: "heartbeat";
@@ -1850,6 +1898,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         end_node_id: string;
         focus_node_id: string;
         progress_percentage: number;
+        visible?: {
+            node_id: string;
+            words: number;
+        }[] | undefined;
     };
 }>, z.ZodObject<{
     id: z.ZodString;
@@ -2919,6 +2971,16 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: z.ZodString;
             focus_node_id: z.ZodString;
             progress_percentage: z.ZodNumber;
+            visible: z.ZodOptional<z.ZodArray<z.ZodObject<{
+                node_id: z.ZodString;
+                words: z.ZodNumber;
+            }, "strict", z.ZodTypeAny, {
+                node_id: string;
+                words: number;
+            }, {
+                node_id: string;
+                words: number;
+            }>, "many">>;
         }, "strict", z.ZodTypeAny, {
             duration_seconds: number;
             active_seconds: number;
@@ -2926,6 +2988,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: string;
             focus_node_id: string;
             progress_percentage: number;
+            visible?: {
+                node_id: string;
+                words: number;
+            }[] | undefined;
         }, {
             duration_seconds: number;
             active_seconds: number;
@@ -2933,6 +2999,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: string;
             focus_node_id: string;
             progress_percentage: number;
+            visible?: {
+                node_id: string;
+                words: number;
+            }[] | undefined;
         }>;
     }, "strict", z.ZodTypeAny, {
         type: "heartbeat";
@@ -2957,6 +3027,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: string;
             focus_node_id: string;
             progress_percentage: number;
+            visible?: {
+                node_id: string;
+                words: number;
+            }[] | undefined;
         };
     }, {
         type: "heartbeat";
@@ -2981,6 +3055,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: string;
             focus_node_id: string;
             progress_percentage: number;
+            visible?: {
+                node_id: string;
+                words: number;
+            }[] | undefined;
         };
     }>, z.ZodObject<{
         id: z.ZodString;
@@ -4029,6 +4107,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: string;
             focus_node_id: string;
             progress_percentage: number;
+            visible?: {
+                node_id: string;
+                words: number;
+            }[] | undefined;
         };
     } | {
         type: "chapter_transition";
@@ -4279,6 +4361,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             end_node_id: string;
             focus_node_id: string;
             progress_percentage: number;
+            visible?: {
+                node_id: string;
+                words: number;
+            }[] | undefined;
         };
     } | {
         type: "chapter_transition";

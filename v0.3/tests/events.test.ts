@@ -23,6 +23,19 @@ describe('reading events', () => {
     for (const t of ['heartbeat', 'chapter_transition', 'book_lifecycle', 'interaction', 'app_lifecycle']) expect(types).toContain(t)
   })
 
+  it('a heartbeat may say the paragraphs it showed and their words, and nothing more', () => {
+    const batch = readJson('./v0.3/examples/events/batch-valid.json')
+    const paged = batch.events.find((e: { type: string; payload: { visible?: unknown } }) => e.type === 'heartbeat' && e.payload.visible !== undefined)
+    expect(paged.payload.visible).toEqual([{ node_id: 'p-014', words: 38 }, { node_id: 'p-015', words: 121 }, { node_id: 'p-016', words: 64 }])
+    const withVisible = (visible: unknown) => ({ events: [{ ...paged, payload: { ...paged.payload, visible } }] })
+    for (const visible of [[], [{ node_id: 'p-014' }], [{ node_id: 'p-014', words: -1 }], [{ node_id: 'p-014', words: 1.5 }], [{ node_id: 'chapter', words: 3 }], [{ node_id: 'p-014', words: 3, text: 'x' }]]) {
+      expect(validateBatch(withVisible(visible)), JSON.stringify(visible)).toBe(false)
+      expect(EventBatchSchema.safeParse(withVisible(visible)).success, JSON.stringify(visible)).toBe(false)
+    }
+    const { visible: _visible, ...withoutVisible } = paged.payload
+    expect(validateBatch({ events: [{ ...paged, payload: withoutVisible }] })).toBe(true)
+  })
+
   const invalid = globSync('./v0.3/examples/events/*-invalid.json').sort()
   for (const file of invalid) {
     it(`rejects ${file} in JSON Schema and Zod`, () => {

@@ -35,7 +35,13 @@ export const HeartbeatEventSchema = BaseEventSchema.extend({
     start_node_id: z.string().min(1),
     end_node_id: z.string().min(1),
     focus_node_id: z.string().min(1),
-    progress_percentage: z.number().min(0).max(1)
+    progress_percentage: z.number().min(0).max(1),
+    // Optional: the paragraphs shown, in reading order, with the words of each on the screen or page (a paginated reader
+    // knows them exactly). A consumer shares the heartbeat's time by these words.
+    visible: z.array(z.object({
+      node_id: nodeIdSchema,
+      words: z.number().int().min(0).max(100000)
+    }).strict()).min(1).max(200).optional()
   }).strict()
 }).strict()
 

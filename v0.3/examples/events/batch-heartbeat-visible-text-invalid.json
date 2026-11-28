@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "id": "5b2e9f10-0000-4000-8000-000000000101",
+      "timestamp": "2025-01-25T14:31:10Z",
+      "type": "heartbeat",
+      "session_id": "7a1d2c3e-0000-4000-8000-000000000001",
+      "context": {
+        "reader_id": "did:web:bookmanifest.org:reader:3f6c1a52-8d0e-4b7a-9c41-2e5d7f9a0b13",
+        "book_id": "did:web:bookmanifest.org:book:don-quijote-i-1-20",
+        "manifest_id": "did:web:bookmanifest.org:manifest:don-quijote-i-1-20:1.0.0",
+        "manifest_version": "1.0.0",
+        "chapter_id": "did:web:bookmanifest.org:chapter:don-quijote-i-1-20-capitulo-08",
+        "chapter_version": "1.0.0",
+        "device_type": "mobile",
+        "app_id": "com.conepass.app",
+        "app_version": "1.0.0"
+      },
+      "payload": {
+        "duration_seconds": 70,
+        "active_seconds": 70,
+        "start_node_id": "p-014",
+        "end_node_id": "p-016",
+        "focus_node_id": "p-015",
+        "progress_percentage": 0.48,
+        "visible": [
+          {
+            "node_id": "p-014",
+            "words": 38,
+            "text": "En un lugar de la Mancha"
+          },
+          {
+            "node_id": "intro",
+            "words": 10
+          }
+        ]
+      }
+    }
+  ]
+}
