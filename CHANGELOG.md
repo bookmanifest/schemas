@@ -5,6 +5,24 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.8] - 2026-11-28
+
+The heartbeat gains an optional **`visible`** field: the paragraphs a screen or page showed, with the words of each that were
+on it. Additive: every 0.3.7 event is still valid.
+
+### Added
+
+- **`visible`** on `heartbeat` (schema [`v0.3/json-schema/events/heartbeat.json`](v0.3/json-schema/events/heartbeat.json)): 1
+  to 200 entries, each `{ node_id, words }`, where `node_id` is a paragraph id (`p-NNN`) and `words` is an integer from 0 to
+  100000. Closed objects: no other field. A paginated reader knows these exactly, because pages cut paragraphs at page
+  breaks; a consumer then shares the heartbeat's time by these words instead of estimating them from `start_node_id` to
+  `end_node_id`.
+- Zod: `HeartbeatEventSchema` accepts it. TypeScript types regenerated.
+- Examples: a paginated reader's heartbeat with `visible` in `batch-valid.json`, and
+  `batch-heartbeat-visible-text-invalid.json` (an entry with text and a non-paragraph id).
+- Tests: the field in JSON Schema and Zod, including what it refuses.
+- Docs: the heartbeat row in spec 5.3, and «What a heartbeat showed».
+
 ## [0.3.7] - 2026-11-28
 
 The narrative layer gains an optional **anachronies** piece: where the narration jumps back or forward in story time. Additive: every 0.3.6 layer is still valid, and `narrative_layer` stays `"0.3"`.

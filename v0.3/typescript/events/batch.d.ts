@@ -30,6 +30,34 @@ export type HeartbeatEvent = EventEnvelope & {
      * Position in chapter (0-1)
      */
     progress_percentage: number;
+    /**
+     * Optional. The paragraphs the screen or page showed, in reading order, each with the number of its words that were on it. A paginated reader knows these exactly; a consumer then shares the heartbeat's time by these words instead of estimating them from the range.
+     *
+     * @minItems 1
+     * @maxItems 200
+     */
+    visible?: [
+      {
+        /**
+         * Paragraph id
+         */
+        node_id: string;
+        /**
+         * Words of the paragraph that were shown
+         */
+        words: number;
+      },
+      ...{
+        /**
+         * Paragraph id
+         */
+        node_id: string;
+        /**
+         * Words of the paragraph that were shown
+         */
+        words: number;
+      }[]
+    ];
   };
   [k: string]: unknown;
 };
