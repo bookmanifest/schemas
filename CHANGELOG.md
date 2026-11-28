@@ -5,6 +5,25 @@ All notable changes to the Book Manifest Schemas package will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.9] - 2026-11-28
+
+The `interaction` event gains an optional **`fragment`**: the part of a paragraph the reader acted on, as positions. Additive:
+every 0.3.8 event is still valid, and an interaction without `fragment` is on the whole paragraph, as before.
+
+### Added
+
+- **`fragment`** on `interaction` (schema [`v0.3/json-schema/events/interaction.json`](v0.3/json-schema/events/interaction.json)):
+  `{ start, end }`, both integers from 0 to 1000000, in UTF-16 code units of the paragraph's plain text (its text runs in
+  document order, joined with nothing between them). Closed object: no other field. `end` MUST be greater than `start`, which
+  JSON Schema cannot say, so a consumer checks it; `selection_length` SHOULD be `end` minus `start`.
+- Positions only, never text. The fragment carries no `exact`, `prefix` or `suffix`, so the privacy rule that events carry no
+  book text holds. A reader app that keeps the phrase for its own reader's notes or shares keeps it on its own side.
+- Zod: `InteractionEventSchema` accepts it. TypeScript types regenerated.
+- Examples: a `share` with a fragment in `batch-valid.json`, and `batch-interaction-fragment-text-invalid.json` (a fragment
+  that carries text).
+- Tests: the field in JSON Schema and Zod, including what it refuses.
+- Docs: the interaction row in spec 5.3, and «What an interaction acted on».
+
 ## [0.3.8] - 2026-11-28
 
 The heartbeat gains an optional **`visible`** field: the paragraphs a screen or page showed, with the words of each that were

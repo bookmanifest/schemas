@@ -398,6 +398,16 @@ export declare const InteractionEventSchema: z.ZodObject<{
         text_selection: z.ZodOptional<z.ZodString>;
         selection_length: z.ZodNumber;
         annotation: z.ZodOptional<z.ZodString>;
+        fragment: z.ZodOptional<z.ZodObject<{
+            start: z.ZodNumber;
+            end: z.ZodNumber;
+        }, "strict", z.ZodTypeAny, {
+            start: number;
+            end: number;
+        }, {
+            start: number;
+            end: number;
+        }>>;
     }, "strict", z.ZodTypeAny, {
         action: "highlight" | "comment" | "copy" | "share" | "bookmark" | "search_definition" | "link_click";
         target_node_id: string;
@@ -405,6 +415,10 @@ export declare const InteractionEventSchema: z.ZodObject<{
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     }, {
         action: "highlight" | "comment" | "copy" | "share" | "bookmark" | "search_definition" | "link_click";
         target_node_id: string;
@@ -412,6 +426,10 @@ export declare const InteractionEventSchema: z.ZodObject<{
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     }>;
 }, "strict", z.ZodTypeAny, {
     type: "interaction";
@@ -436,6 +454,10 @@ export declare const InteractionEventSchema: z.ZodObject<{
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     };
 }, {
     type: "interaction";
@@ -460,6 +482,10 @@ export declare const InteractionEventSchema: z.ZodObject<{
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     };
 }>;
 export declare const AppLifecycleEventSchema: z.ZodObject<{
@@ -2166,6 +2192,16 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         text_selection: z.ZodOptional<z.ZodString>;
         selection_length: z.ZodNumber;
         annotation: z.ZodOptional<z.ZodString>;
+        fragment: z.ZodOptional<z.ZodObject<{
+            start: z.ZodNumber;
+            end: z.ZodNumber;
+        }, "strict", z.ZodTypeAny, {
+            start: number;
+            end: number;
+        }, {
+            start: number;
+            end: number;
+        }>>;
     }, "strict", z.ZodTypeAny, {
         action: "highlight" | "comment" | "copy" | "share" | "bookmark" | "search_definition" | "link_click";
         target_node_id: string;
@@ -2173,6 +2209,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     }, {
         action: "highlight" | "comment" | "copy" | "share" | "bookmark" | "search_definition" | "link_click";
         target_node_id: string;
@@ -2180,6 +2220,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     }>;
 }, "strict", z.ZodTypeAny, {
     type: "interaction";
@@ -2204,6 +2248,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     };
 }, {
     type: "interaction";
@@ -2228,6 +2276,10 @@ export declare const BookManifestEventSchema: z.ZodDiscriminatedUnion<"type", [z
         selection_length: number;
         text_selection?: string | undefined;
         annotation?: string | undefined;
+        fragment?: {
+            start: number;
+            end: number;
+        } | undefined;
     };
 }>, z.ZodObject<{
     id: z.ZodString;
@@ -3323,6 +3375,16 @@ export declare const EventBatchSchema: z.ZodObject<{
             text_selection: z.ZodOptional<z.ZodString>;
             selection_length: z.ZodNumber;
             annotation: z.ZodOptional<z.ZodString>;
+            fragment: z.ZodOptional<z.ZodObject<{
+                start: z.ZodNumber;
+                end: z.ZodNumber;
+            }, "strict", z.ZodTypeAny, {
+                start: number;
+                end: number;
+            }, {
+                start: number;
+                end: number;
+            }>>;
         }, "strict", z.ZodTypeAny, {
             action: "highlight" | "comment" | "copy" | "share" | "bookmark" | "search_definition" | "link_click";
             target_node_id: string;
@@ -3330,6 +3392,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             selection_length: number;
             text_selection?: string | undefined;
             annotation?: string | undefined;
+            fragment?: {
+                start: number;
+                end: number;
+            } | undefined;
         }, {
             action: "highlight" | "comment" | "copy" | "share" | "bookmark" | "search_definition" | "link_click";
             target_node_id: string;
@@ -3337,6 +3403,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             selection_length: number;
             text_selection?: string | undefined;
             annotation?: string | undefined;
+            fragment?: {
+                start: number;
+                end: number;
+            } | undefined;
         }>;
     }, "strict", z.ZodTypeAny, {
         type: "interaction";
@@ -3361,6 +3431,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             selection_length: number;
             text_selection?: string | undefined;
             annotation?: string | undefined;
+            fragment?: {
+                start: number;
+                end: number;
+            } | undefined;
         };
     }, {
         type: "interaction";
@@ -3385,6 +3459,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             selection_length: number;
             text_selection?: string | undefined;
             annotation?: string | undefined;
+            fragment?: {
+                start: number;
+                end: number;
+            } | undefined;
         };
     }>, z.ZodObject<{
         id: z.ZodString;
@@ -4184,6 +4262,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             selection_length: number;
             text_selection?: string | undefined;
             annotation?: string | undefined;
+            fragment?: {
+                start: number;
+                end: number;
+            } | undefined;
         };
     } | {
         type: "app_lifecycle";
@@ -4438,6 +4520,10 @@ export declare const EventBatchSchema: z.ZodObject<{
             selection_length: number;
             text_selection?: string | undefined;
             annotation?: string | undefined;
+            fragment?: {
+                start: number;
+                end: number;
+            } | undefined;
         };
     } | {
         type: "app_lifecycle";

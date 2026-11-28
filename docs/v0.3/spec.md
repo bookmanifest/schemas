@@ -121,7 +121,7 @@ Five events describe a reading session. Each uses the identified envelope and ha
 | [`heartbeat`](../../v0.3/json-schema/events/heartbeat.json) | periodically while reading | `duration_seconds` and `active_seconds` (0–600, since the last heartbeat), `start_node_id`, `end_node_id` and `focus_node_id` (first, last and central visible paragraph), `progress_percentage` in the chapter (0–1), optional `visible` (the paragraphs shown, with the words of each on screen) |
 | [`chapter_transition`](../../v0.3/json-schema/events/chapter-transition.json) | the reader moves between chapters | `from_chapter_id`, `from_chapter_version`, `to_chapter_id` and `to_chapter_version` (null when closing the book), `trigger` (`scroll_end`, `next_button`, `prev_button`, `toc_jump`, `link_internal`, `book_close`), `time_in_chapter_seconds`, `chapter_completion_percentage` |
 | [`book_lifecycle`](../../v0.3/json-schema/events/book-lifecycle.json) | the book is started or completed | `action` (`started`, `completed`), `trigger`, `total_active_reading_time_seconds`, `completion_percentage`, `chapters_started`, `chapters_completed` |
-| [`interaction`](../../v0.3/json-schema/events/interaction.json) | the reader acts on content | `action` (`highlight`, `comment`, `copy`, `share`, `bookmark`, `search_definition`, `link_click`), `target_node_id`, `target_node_type`, `selection_length`, optional `text_selection` and `annotation` |
+| [`interaction`](../../v0.3/json-schema/events/interaction.json) | the reader acts on content | `action` (`highlight`, `comment`, `copy`, `share`, `bookmark`, `search_definition`, `link_click`), `target_node_id`, `target_node_type`, `selection_length`, optional `fragment` (`start`, `end`), optional `text_selection` and `annotation` |
 | [`app_lifecycle`](../../v0.3/json-schema/events/app-lifecycle.json) | the app opens, goes to the background or foreground, or closes | `action` (`open`, `background`, `foreground`, `close`), optional `source` (`direct`, `notification`, `deeplink`, `widget`) and `time_since_last_session_seconds` |
 
 **What a heartbeat showed.** `start_node_id` and `end_node_id` say which paragraphs were on screen, not how much of each: a
@@ -130,6 +130,16 @@ its layout SHOULD send `visible`: every paragraph the screen or page showed, in 
 words that were on it (`node_id`, `words`; at most 200 entries). Its first and last entries are `start_node_id` and
 `end_node_id`. A consumer that receives `visible` SHOULD share the heartbeat's active time by those words. Without it, a
 consumer estimates the words from the range. The field carries positions and counts only, never text.
+
+**What an interaction acted on.** `target_node_id` names the paragraph; without more, the action is on the whole paragraph. A
+reader that lets the reader act on part of a paragraph (a highlight, a share, a comment on a phrase) SHOULD send `fragment`:
+`start` and `end`, the positions of the part in the paragraph's plain text. The plain text of a paragraph is its text runs in
+document order, joined with nothing between them (a hard break adds no character, and the marks that style a run add none).
+Positions are counted in UTF-16 code units, `start` is the first character and `end` the one after the last, and `end` MUST
+be greater than `start`; a consumer discards a fragment that is not, or that falls outside the paragraph of the chapter
+version the event names. `selection_length` is then `end` minus `start`. A fragment lies inside one paragraph: an action on
+two paragraphs is two events. The field carries positions only, never text, so it falls under the rule of 5.1; a reader app
+that keeps the phrase itself keeps it on its own side.
 
 ### 5.4. The reading events
 

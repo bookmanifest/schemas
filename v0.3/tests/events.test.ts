@@ -36,6 +36,19 @@ describe('reading events', () => {
     expect(validateBatch({ events: [{ ...paged, payload: withoutVisible }] })).toBe(true)
   })
 
+  it('an interaction may say the part of the paragraph it acted on, as positions and nothing more', () => {
+    const batch = readJson('./v0.3/examples/events/batch-valid.json')
+    const shared = batch.events.find((e: { type: string; payload: { fragment?: unknown } }) => e.type === 'interaction' && e.payload.fragment !== undefined)
+    expect(shared.payload.fragment).toEqual({ start: 42, end: 78 })
+    const withFragment = (fragment: unknown) => ({ events: [{ ...shared, payload: { ...shared.payload, fragment } }] })
+    for (const fragment of [{}, { start: 42 }, { end: 78 }, { start: -1, end: 4 }, { start: 1.5, end: 4 }, { start: 0, end: 1000001 }, { start: 42, end: 78, exact: 'x' }, { start: 42, end: 78, prefix: 'x' }, 'x', 42, null]) {
+      expect(validateBatch(withFragment(fragment)), JSON.stringify(fragment)).toBe(false)
+      expect(EventBatchSchema.safeParse(withFragment(fragment)).success, JSON.stringify(fragment)).toBe(false)
+    }
+    const { fragment: _fragment, ...whole } = shared.payload
+    expect(validateBatch({ events: [{ ...shared, payload: whole }] })).toBe(true)
+  })
+
   const invalid = globSync('./v0.3/examples/events/*-invalid.json').sort()
   for (const file of invalid) {
     it(`rejects ${file} in JSON Schema and Zod`, () => {

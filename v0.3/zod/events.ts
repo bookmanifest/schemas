@@ -81,7 +81,13 @@ export const InteractionEventSchema = BaseEventSchema.extend({
     target_node_type: z.string().min(1),
     text_selection: z.string().optional(),
     selection_length: z.number().int().min(0),
-    annotation: z.string().optional()
+    annotation: z.string().optional(),
+    // Optional: the part of the target paragraph acted on, as positions in its plain text (UTF-16 code units). Positions
+    // only, never text; end must be greater than start, which a consumer checks.
+    fragment: z.object({
+      start: z.number().int().min(0).max(1000000),
+      end: z.number().int().min(0).max(1000000)
+    }).strict().optional()
   }).strict()
 }).strict()
 
