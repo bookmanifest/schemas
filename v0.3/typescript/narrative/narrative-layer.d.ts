@@ -245,6 +245,31 @@ export type ParagraphAddress5 = string;
  */
 export type ParagraphAddress6 = string;
 /**
+ * A jump in story time over a paragraph or a contiguous range of paragraphs: the narration tells what happened earlier than the story's present (`analepsis`: a flashback, backstory, a past told later than it happened) or what will happen later (`prolepsis`: an announcement). Inside a scene, between scenes or outside any scene. Spans never overlap.
+ */
+export type Anachrony = Support & {
+  id: string;
+  start: ParagraphAddress1;
+  end?: ParagraphAddress7;
+  /**
+   * `analepsis`: the narration goes back to an earlier story time. `prolepsis`: it goes forward to a later one.
+   */
+  kind: 'analepsis' | 'prolepsis';
+  /**
+   * How far it jumps, as the text says it, in the book's language: «años atrás», «when she was a child», «the following spring». Not normalised.
+   */
+  reach?: string;
+  /**
+   * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
+   */
+  visibility?: 'public' | 'author';
+  [k: string]: unknown;
+};
+/**
+ * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
+ */
+export type ParagraphAddress7 = string;
+/**
  * One of the few revelations that matter in the book: a fact the reader does not know at first and learns at a precise point. A book has a handful, not hundreds. `evidence` cites the paragraphs of the reveal.
  */
 export type KeyTruth = Support & {
@@ -433,7 +458,7 @@ export type KeyTruth = Support & {
         EntityId,
         EntityId
       ];
-  revealed_at: ParagraphAddress7;
+  revealed_at: ParagraphAddress8;
   clues?: AddressList1;
   /**
    * Who may see the item. `public`: may be published with the book and shown to readers by spoiler-safe features, gated by the item's reveal position. `author`: private to the author, never published. Absent means `author` (fail closed).
@@ -444,7 +469,7 @@ export type KeyTruth = Support & {
 /**
  * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
  */
-export type ParagraphAddress7 = string;
+export type ParagraphAddress8 = string;
 /**
  * Earlier paragraphs that hint at the truth before it is revealed (planted clues). All before `revealed_at`.
  *
@@ -472,7 +497,7 @@ export type KnowledgeLink = Support & {
    * Paragraph from which the character holds it, or `before_text` when the character holds it before the narrative begins.
    */
   since: ParagraphAddress1 | 'before_text';
-  revealed_at: ParagraphAddress8;
+  revealed_at: ParagraphAddress9;
   /**
    * When the character stops holding it (a false belief corrected, a suspicion dropped, a secret forgotten, a death), with its own support. Absent: the text does not say the character stops holding it.
    */
@@ -486,7 +511,7 @@ export type KnowledgeLink = Support & {
 /**
  * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
  */
-export type ParagraphAddress8 = string;
+export type ParagraphAddress9 = string;
 /**
  * Something that happens in the story, told at `at`, with its salience (Barthes). Operational rule: a `kernel` is an event the book picks up later (a later paragraph depends on it, refers back to it or follows from it), listed in `picked_up_at`; a `catalysis` is one the book does not pick up. The label describes, it never judges.
  */
@@ -498,7 +523,7 @@ export type StoryEventWithSalience = Support & {
    * The event as one self-contained sentence in the book's language.
    */
   text: string;
-  at: ParagraphAddress9;
+  at: ParagraphAddress10;
   salience: 'kernel' | 'catalysis';
   picked_up_at?: AddressList2;
   /**
@@ -510,7 +535,7 @@ export type StoryEventWithSalience = Support & {
 /**
  * A paragraph of one chapter version: `<chapter-slug>#p-NNN`. The slug is the Chapter's `slug`; `p-NNN` is the paragraph node id in that chapter version's content. An address is resolved against the manifest version named by the document that holds it, so the same address in another manifest version may point elsewhere. Reading order is the manifest's chapter order, then the paragraph number.
  */
-export type ParagraphAddress9 = string;
+export type ParagraphAddress10 = string;
 /**
  * Later paragraphs that pick the event up. Required and non-empty for a kernel; absent for a catalysis. All after `at`.
  *
@@ -560,7 +585,7 @@ export type EntityId4 = string;
 export type AddressList3 = [ParagraphAddress1, ...ParagraphAddress1[]];
 
 /**
- * An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, setting, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.
+ * An optional document that describes how one manifest version of a book is told: scenes and their story duration, focalization, setting, anachronies, key truths and who knows them, event salience and event coreference, plus findings private to the author. It sits beside the manifest and does not change it: a book without a narrative layer is complete. Every address in it is resolved against the manifest version it names. Every piece is optional; the producer may stay silent but may not guess.
  */
 export interface NarrativeLayer {
   /**
@@ -598,6 +623,10 @@ export interface NarrativeLayer {
    * @maxItems 50000
    */
   setting?: SettingSpan[];
+  /**
+   * @maxItems 20000
+   */
+  anachronies?: Anachrony[];
   /**
    * @maxItems 200
    */

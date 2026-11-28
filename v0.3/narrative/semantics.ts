@@ -9,6 +9,7 @@ import type {
   Focalization,
   Setting,
   SettingSummary,
+  Anachrony,
   Truth,
   Knowledge,
   StoryEvent,
@@ -91,6 +92,7 @@ export function validateNarrativeLayer(layer: NarrativeLayer, order?: ReadingOrd
     ['scenes', layer.scenes],
     ['focalization', layer.focalization],
     ['setting', layer.setting],
+    ['anachronies', layer.anachronies],
     ['truths', layer.truths],
     ['knowledge', layer.knowledge],
     ['events', layer.events],
@@ -206,6 +208,9 @@ export function validateNarrativeLayer(layer: NarrativeLayer, order?: ReadingOrd
   })
   if (layer.setting) checkNoOverlap(layer.setting, 'setting')
 
+  layer.anachronies?.forEach((an: Anachrony, i) => checkRange(an.start, an.end, `anachronies[${i}]`))
+  if (layer.anachronies) checkNoOverlap(layer.anachronies, 'anachronies')
+
   layer.truths?.forEach((t: Truth, i) => {
     const path = `truths[${i}]`
     checkRevealAfterEvidence(t, path)
@@ -270,6 +275,7 @@ export function publicProjection(layer: NarrativeLayer): NarrativeLayer {
     scenes: keep(layer.scenes),
     focalization: keep(layer.focalization),
     setting: keep(layer.setting),
+    anachronies: keep(layer.anachronies),
     truths: keep(layer.truths),
     knowledge: keep(layer.knowledge),
     events: keep(layer.events),
@@ -301,6 +307,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
   scenes?: SceneView[]
   focalization?: Cited<Focalization>[]
   setting?: Cited<Setting>[]
+  anachronies?: Cited<Anachrony>[]
   truths?: Cited<Truth>[]
   knowledge?: KnowledgeView[]
   events?: Array<Omit<Cited<StoryEvent>, 'salience'> & { salience?: StoryEvent['salience'] }>
@@ -310,7 +317,7 @@ export type SpoilerSafeView = Pick<NarrativeLayer, 'narrative_layer' | 'book_id'
 /**
  * The spoiler-safe cut of a public layer for a reader at `position`: only what that reader may know, and no
  * address after `position` anywhere in it. Gates (docs/v0.3/spec.md, «Spoiler-safe use»): an entity
- * at its revealed_at (each alias at its own); a scene, a focalization span and a setting span at their start; a
+ * at its revealed_at (each alias at its own); a scene, a focalization span, a setting span and an anachrony at their start; a
  * truth at its revealed_at; a knowledge link at the latest of its revealed_at, its since and its truth's
  * revealed_at, and its until only once both until.at and until.revealed_at are passed; a story event at `at`, with only the pickups already passed and its salience only once the first
  * pickup is passed; a coreference once its second telling is passed. In every item shown, quotes are dropped and
@@ -378,6 +385,14 @@ export function spoilerSafeCut(layer: NarrativeLayer, position: string, order: R
       if (out.place !== undefined && !met.has(out.place)) delete out.place
       return out
     })
+  // A prolepsis is text the reader is reading: its reach is shown with the span, with no gate of its own.
+  const anachronies = pub.anachronies
+    ?.filter((an) => passed(an.start))
+    .map((an) => {
+      const out = cite(an)
+      if (out.end !== undefined && !passed(out.end)) delete out.end
+      return out
+    })
   const knowledge = pub.knowledge
     ?.filter(
       (k) =>
@@ -416,13 +431,14 @@ export function spoilerSafeCut(layer: NarrativeLayer, position: string, order: R
     scenes: _s,
     focalization: _f,
     setting: _st,
+    anachronies: _an,
     truths: _t,
     knowledge: _k,
     events: _ev,
     coreference: _c,
     ...header
   } = pub
-  const cut: SpoilerSafeView = { ...header, entities, scenes, focalization, setting, truths, knowledge, events, coreference }
+  const cut: SpoilerSafeView = { ...header, entities, scenes, focalization, setting, anachronies, truths, knowledge, events, coreference }
   for (const key of Object.keys(cut) as Array<keyof SpoilerSafeView>) {
     const value = cut[key]
     if (value === undefined || (Array.isArray(value) && value.length === 0)) delete cut[key]

@@ -884,6 +884,72 @@ export declare const FocalizationSchema: z.ZodEffects<z.ZodObject<{
     end?: string | undefined;
     focalizer?: string | undefined;
 }>;
+export declare const AnachronySchema: z.ZodEffects<z.ZodObject<{
+    id: z.ZodString;
+    start: z.ZodString;
+    end: z.ZodOptional<z.ZodString>;
+    kind: z.ZodEnum<["analepsis", "prolepsis"]>;
+    reach: z.ZodOptional<z.ZodString>;
+    visibility: z.ZodOptional<z.ZodEnum<["public", "author"]>>;
+    basis: z.ZodEnum<["asserted", "inferred"]>;
+    evidence: z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
+    quote: z.ZodOptional<z.ZodString>;
+    confidence: z.ZodOptional<z.ZodNumber>;
+    status: z.ZodOptional<z.ZodEnum<["verified", "doubtful", "review"]>>;
+    verified_by: z.ZodOptional<z.ZodEffects<z.ZodArray<z.ZodEnum<["producer", "author"]>, "many">, ("author" | "producer")[], ("author" | "producer")[]>>;
+}, "strict", z.ZodTypeAny, {
+    id: string;
+    kind: "analepsis" | "prolepsis";
+    basis: "asserted" | "inferred";
+    evidence: string[];
+    start: string;
+    status?: "verified" | "doubtful" | "review" | undefined;
+    quote?: string | undefined;
+    verified_by?: ("author" | "producer")[] | undefined;
+    visibility?: "public" | "author" | undefined;
+    confidence?: number | undefined;
+    end?: string | undefined;
+    reach?: string | undefined;
+}, {
+    id: string;
+    kind: "analepsis" | "prolepsis";
+    basis: "asserted" | "inferred";
+    evidence: string[];
+    start: string;
+    status?: "verified" | "doubtful" | "review" | undefined;
+    quote?: string | undefined;
+    verified_by?: ("author" | "producer")[] | undefined;
+    visibility?: "public" | "author" | undefined;
+    confidence?: number | undefined;
+    end?: string | undefined;
+    reach?: string | undefined;
+}>, {
+    id: string;
+    kind: "analepsis" | "prolepsis";
+    basis: "asserted" | "inferred";
+    evidence: string[];
+    start: string;
+    status?: "verified" | "doubtful" | "review" | undefined;
+    quote?: string | undefined;
+    verified_by?: ("author" | "producer")[] | undefined;
+    visibility?: "public" | "author" | undefined;
+    confidence?: number | undefined;
+    end?: string | undefined;
+    reach?: string | undefined;
+}, {
+    id: string;
+    kind: "analepsis" | "prolepsis";
+    basis: "asserted" | "inferred";
+    evidence: string[];
+    start: string;
+    status?: "verified" | "doubtful" | "review" | undefined;
+    quote?: string | undefined;
+    verified_by?: ("author" | "producer")[] | undefined;
+    visibility?: "public" | "author" | undefined;
+    confidence?: number | undefined;
+    end?: string | undefined;
+    reach?: string | undefined;
+}>;
 export declare const TruthSchema: z.ZodEffects<z.ZodObject<{
     id: z.ZodString;
     text: z.ZodString;
@@ -2006,6 +2072,72 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         animals?: boolean | undefined;
         end?: string | undefined;
     }>, "many">>;
+    anachronies: z.ZodOptional<z.ZodArray<z.ZodEffects<z.ZodObject<{
+        id: z.ZodString;
+        start: z.ZodString;
+        end: z.ZodOptional<z.ZodString>;
+        kind: z.ZodEnum<["analepsis", "prolepsis"]>;
+        reach: z.ZodOptional<z.ZodString>;
+        visibility: z.ZodOptional<z.ZodEnum<["public", "author"]>>;
+        basis: z.ZodEnum<["asserted", "inferred"]>;
+        evidence: z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
+        quote: z.ZodOptional<z.ZodString>;
+        confidence: z.ZodOptional<z.ZodNumber>;
+        status: z.ZodOptional<z.ZodEnum<["verified", "doubtful", "review"]>>;
+        verified_by: z.ZodOptional<z.ZodEffects<z.ZodArray<z.ZodEnum<["producer", "author"]>, "many">, ("author" | "producer")[], ("author" | "producer")[]>>;
+    }, "strict", z.ZodTypeAny, {
+        id: string;
+        kind: "analepsis" | "prolepsis";
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        start: string;
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        end?: string | undefined;
+        reach?: string | undefined;
+    }, {
+        id: string;
+        kind: "analepsis" | "prolepsis";
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        start: string;
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        end?: string | undefined;
+        reach?: string | undefined;
+    }>, {
+        id: string;
+        kind: "analepsis" | "prolepsis";
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        start: string;
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        end?: string | undefined;
+        reach?: string | undefined;
+    }, {
+        id: string;
+        kind: "analepsis" | "prolepsis";
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        start: string;
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        end?: string | undefined;
+        reach?: string | undefined;
+    }>, "many">>;
     truths: z.ZodOptional<z.ZodArray<z.ZodEffects<z.ZodObject<{
         id: z.ZodString;
         text: z.ZodString;
@@ -2538,6 +2670,20 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         end?: string | undefined;
         focalizer?: string | undefined;
     }[] | undefined;
+    anachronies?: {
+        id: string;
+        kind: "analepsis" | "prolepsis";
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        start: string;
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        end?: string | undefined;
+        reach?: string | undefined;
+    }[] | undefined;
     truths?: {
         id: string;
         text: string;
@@ -2740,6 +2886,20 @@ export declare const NarrativeLayerSchema: z.ZodObject<{
         end?: string | undefined;
         focalizer?: string | undefined;
     }[] | undefined;
+    anachronies?: {
+        id: string;
+        kind: "analepsis" | "prolepsis";
+        basis: "asserted" | "inferred";
+        evidence: string[];
+        start: string;
+        status?: "verified" | "doubtful" | "review" | undefined;
+        quote?: string | undefined;
+        verified_by?: ("author" | "producer")[] | undefined;
+        visibility?: "public" | "author" | undefined;
+        confidence?: number | undefined;
+        end?: string | undefined;
+        reach?: string | undefined;
+    }[] | undefined;
     truths?: {
         id: string;
         text: string;
@@ -2811,6 +2971,7 @@ export type Duration = z.infer<typeof DurationSchema>;
 export type Focalization = z.infer<typeof FocalizationSchema>;
 export type Setting = z.infer<typeof SettingSchema>;
 export type SettingSummary = z.infer<typeof SettingSummarySchema>;
+export type Anachrony = z.infer<typeof AnachronySchema>;
 export type Truth = z.infer<typeof TruthSchema>;
 export type Knowledge = z.infer<typeof KnowledgeSchema>;
 export type StoryEvent = z.infer<typeof StoryEventSchema>;

@@ -28,6 +28,23 @@ const until = (over: Partial<NonNullable<Until>> = {}): Until => ({
   ...over
 })
 
+// Anachronies for tests only: the example carries none (no fixture paragraph clearly jumps in story time).
+type Anachrony = NonNullable<NarrativeLayer['anachronies']>[number]
+const anachrony = (over: Partial<Anachrony> = {}): Anachrony => ({
+  id: 'an-001',
+  start: 'capitulo-07#p-012',
+  end: 'capitulo-07#p-013',
+  kind: 'analepsis',
+  reach: 'una noche, después del día que vuestra merced de aquí se partió',
+  basis: 'inferred',
+  evidence: ['capitulo-07#p-012', 'capitulo-07#p-013'],
+  quote: 'vino sobre una nube una noche',
+  status: 'verified',
+  visibility: 'public',
+  ...over
+})
+const withAnachronies = (...spans: Anachrony[]): NarrativeLayer => ({ ...fresh(), anachronies: spans })
+
 describe('address order', () => {
   it('orders within a chapter by paragraph number and across chapters by manifest order', () => {
     expect(compareAddresses('capitulo-08#p-002', 'capitulo-08#p-010')).toBeLessThan(0)
@@ -116,6 +133,45 @@ describe('setting spans: semantic rules', () => {
   })
 })
 
+describe('anachronies: semantic rules', () => {
+  it('a layer with anachronies that neither overlap nor reverse has no issues', () => {
+    const { end: _end, reach: _reach, ...single } = anachrony({ id: 'an-002', start: 'capitulo-08#p-026', kind: 'prolepsis' })
+    expect(codes(withAnachronies(anachrony(), single))).toEqual([])
+  })
+
+  it('the overlapping-spans example passes the schema and fails only for overlap', () => {
+    const layer = readJson('./v0.3/examples/narrative/narrative-layer-anachrony-overlap-semantic-invalid.json')
+    const issues = validateNarrativeLayer(layer, order)
+    expect(issues.map((i) => [i.code, i.path])).toEqual([['overlap', 'anachronies[1]']])
+  })
+
+  const cases: Array<[string, NarrativeLayer, string, string]> = [
+    ['overlapping spans', withAnachronies(anachrony(), anachrony({ id: 'an-002', start: 'capitulo-07#p-013', end: 'capitulo-07#p-014' })), 'overlap', 'anachronies[1]'],
+    ['a span that ends before it starts', withAnachronies(anachrony({ start: 'capitulo-07#p-013', end: 'capitulo-07#p-012' })), 'range_reversed', 'anachronies[0]'],
+    ['a span past the end of the chapter', withAnachronies(anachrony({ end: 'capitulo-07#p-099' })), 'unknown_address', 'anachronies[0].end'],
+    ['two spans with the same id', withAnachronies(anachrony(), anachrony({ start: 'capitulo-08#p-026', end: 'capitulo-08#p-026' })), 'duplicate_id', 'anachronies[1].id']
+  ]
+  for (const [name, layer, code, path] of cases) {
+    it(`reports ${code}: ${name}`, () => {
+      expect(validateNarrativeLayer(layer, order).map((i) => [i.code, i.path])).toContainEqual([code, path])
+    })
+  }
+
+  it('a span across chapters is compared only with the reading order', () => {
+    const layer = withAnachronies(anachrony({ start: 'capitulo-09#p-001', end: 'capitulo-08#p-050' }))
+    expect(codes(layer)).toContain('range_reversed')
+    expect(validateNarrativeLayer(layer).map((i) => i.code)).not.toContain('range_reversed')
+  })
+
+  it('a finding may name an anachrony, and an unknown one does not resolve', () => {
+    const layer = withAnachronies(anachrony())
+    layer.findings![0].refs = ['an-001']
+    expect(codes(layer)).toEqual([])
+    layer.findings![0].refs = ['an-002']
+    expect(validateNarrativeLayer(layer, order).map((i) => [i.code, i.path])).toEqual([['unknown_reference', 'findings[0].refs[0]']])
+  })
+})
+
 describe('until on a knowledge link: semantic rules', () => {
   it('a link that stops after it starts has no issues, and since before_text has nothing to compare', () => {
     const layer = fresh()
@@ -177,6 +233,13 @@ describe('public projection', () => {
     const layer = fresh()
     layer.setting!.forEach((st) => (st.visibility = 'author'))
     expect('setting' in publicProjection(layer)).toBe(false)
+  })
+
+  it('keeps public anachronies and drops the piece when none is public', () => {
+    const layer = withAnachronies(anachrony(), anachrony({ id: 'an-002', start: 'capitulo-08#p-026', end: 'capitulo-08#p-026', visibility: 'author' }))
+    expect(publicProjection(layer).anachronies).toEqual([anachrony()])
+    delete layer.anachronies![0].visibility
+    expect('anachronies' in publicProjection(layer)).toBe(false)
   })
 
   it('leaves no dangling reference', () => {
@@ -291,6 +354,40 @@ describe('spoiler-safe cut', () => {
     early.knowledge![4].until = until({ at: 'capitulo-08#p-021', revealed_at: 'capitulo-08#p-013', evidence: ['capitulo-08#p-013'] })
     expect('until' in k5(early, 'capitulo-08#p-014')).toBe(false)
     expect(k5(early, 'capitulo-08#p-021').until!.at).toBe('capitulo-08#p-021')
+  })
+
+  it('shows an anachrony from its start, with its reach, and its end only once passed', () => {
+    const layer = withAnachronies(anachrony())
+    expect(spoilerSafeCut(layer, 'capitulo-07#p-011', order).anachronies).toBeUndefined()
+    expect(spoilerSafeCut(layer, 'capitulo-07#p-012', order).anachronies).toEqual([{
+      id: 'an-001', start: 'capitulo-07#p-012', kind: 'analepsis', reach: 'una noche, después del día que vuestra merced de aquí se partió',
+      basis: 'inferred', evidence: ['capitulo-07#p-012'], status: 'verified', visibility: 'public'
+    }])
+    const after = spoilerSafeCut(layer, 'capitulo-07#p-013', order).anachronies![0]
+    expect(after.end).toBe('capitulo-07#p-013')
+    expect(after.evidence).toEqual(['capitulo-07#p-012', 'capitulo-07#p-013'])
+    expect('quote' in after).toBe(false)
+  })
+
+  it('shows a prolepsis like an analepsis: no gate beyond its start', () => {
+    const layer = withAnachronies(anachrony({ kind: 'prolepsis' }))
+    expect(spoilerSafeCut(layer, 'capitulo-07#p-012', order).anachronies!.map((an) => an.kind)).toEqual(['prolepsis'])
+  })
+
+  for (const position of ['capitulo-07#p-011', 'capitulo-07#p-012', 'capitulo-07#p-013', 'capitulo-20#p-001']) {
+    it(`with anachronies, at ${position} no address after the reader's position appears anywhere, and no quote`, () => {
+      const layer = withAnachronies(anachrony())
+      const json = JSON.stringify(spoilerSafeCut(layer, position, order))
+      for (const address of json.match(/[a-z0-9-]+#p-[0-9]{3,}/g) ?? []) {
+        expect(compareAddresses(address, position, order), `${address} leaks at ${position}`).toBeLessThanOrEqual(0)
+      }
+      expect(json).not.toContain('"quote"')
+    })
+  }
+
+  it('never shows a private anachrony', () => {
+    const layer = withAnachronies(anachrony({ visibility: 'author' }))
+    expect('anachronies' in spoilerSafeCut(layer, 'capitulo-20#p-001', order)).toBe(false)
   })
 
   it('never contains author-private items', () => {

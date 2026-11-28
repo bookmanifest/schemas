@@ -178,6 +178,18 @@ export const FocalizationSchema = z
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['focalizer'], message: 'Only internal focalization has a focalizer' });
     }
 });
+export const AnachronySchema = z
+    .object({
+    ...supportShape,
+    id: localId('an'),
+    start: paragraphAddressSchema,
+    end: paragraphAddressSchema.optional(),
+    kind: z.enum(['analepsis', 'prolepsis']),
+    reach: z.string().min(1).max(200).optional(),
+    visibility: VisibilitySchema.optional()
+})
+    .strict()
+    .superRefine(checkSupport);
 export const TruthSchema = z
     .object({
     ...supportShape,
@@ -262,7 +274,7 @@ export const FindingSchema = z
     kind: z.enum(['continuity', 'absence', 'voice_balance', 'reading_vs_story_order', 'open_question']),
     text: z.string().min(1).max(2000),
     refs: z
-        .array(z.string().regex(/^(e:[a-z0-9]+(?:-[a-z0-9]+)*|(s|fz|st|t|k|ev|co)-[0-9]{3,})$/))
+        .array(z.string().regex(/^(e:[a-z0-9]+(?:-[a-z0-9]+)*|(s|fz|st|an|t|k|ev|co)-[0-9]{3,})$/))
         .refine((items) => new Set(items).size === items.length, { message: 'Refs must be unique' })
         .optional(),
     evidence: addressList,
@@ -282,6 +294,7 @@ export const NarrativeLayerSchema = z
     scenes: z.array(SceneSchema).max(20000).optional(),
     focalization: z.array(FocalizationSchema).max(50000).optional(),
     setting: z.array(SettingSchema).max(50000).optional(),
+    anachronies: z.array(AnachronySchema).max(20000).optional(),
     truths: z.array(TruthSchema).max(200).optional(),
     knowledge: z.array(KnowledgeSchema).max(5000).optional(),
     events: z.array(StoryEventSchema).max(20000).optional(),
